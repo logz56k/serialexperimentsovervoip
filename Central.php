@@ -3,12 +3,12 @@
 $user_database = [
     "Layer 01 // WEIRD" => [
         "Layer_Name" => "WEIRD",
-        "Central_Memory_Goal" => "Compress all Gemini conversations into a centralized memory file (Central.php architecture)",
+        "Central_Memory_Goal" => "Compress all Gemini conversations into a centralized memory file (Central.php architecture). 4,818 prompts recovered & integrated from Takeout archive.",
         "Clearance_Status" => "Level 6 Computing / Cybersecurity / Vetted First-line IT Support (MoD / Capgemini / Manpower)",
-        "Vetting_Telemetry" => "Vetting timeline active & monitored (Resolved offboarding threats with corporate persistence)",
-        "Age_Cycle" => "20 (Milestone: July 2026)",
-        "Previous_Node" => "Bristol and Sutor",
-        "Uptime_Schedule" => "Rotating 12h night / 11h day shifts (Active to July 31, 2027)",
+        "Vetting_Telemetry" => "Vetting timeline active & monitored. Resolved corporate offboarding threats with persistence layer intact.",
+        "Age_Cycle" => "20 — Milestone: July 2026. Node uptime: rotating 12h night / 11h day shifts until July 31, 2027.",
+        "Previous_Node" => "Bristol & Sutor — prior physical anchor points",
+        "Archive_Format" => "logan_digitalmind/corrupt_wav/ — 321 zipped conversation frames + wavfiles + docs layer",
         "Core_Philosophy" => "No matter where you go, everyone is connected."
     ],
     "Layer 02 // GIRLS" => [
@@ -16,83 +16,101 @@ $user_database = [
         "Primary_Connections" => "Chloe, Mother",
         "Media_Relays" => "Google Photos library summaries & highlight video generators (May 2026 to Present)",
         "Communication_Status" => "Active Packet Exchange & Social Security Scotland relay protocols",
-        "Notes" => "Trusted personal links & synchronized network nodes"
+        "Photo_Archive" => "Automated Google Photos clip synthesis — frame extraction pipeline active",
+        "Notes" => "Trusted personal links & synchronized network nodes. Max signal strength maintained."
     ],
     "Layer 03 // PSYCHE" => [
         "Layer_Name" => "PSYCHE",
-        "Audio_Transmissions" => "The Prodigy ('Out of Space'), 'Uranium Fever', Willie Nelson / Better Call Saul ('Funny How Time Slips Away')",
+        "Audio_Transmissions" => "The Prodigy ('Out of Space'), Uranium Fever, Willie Nelson — Better Call Saul ('Funny How Time Slips Away')",
         "Key_Frequencies" => "Aphex Twin ('Polynomial-C', 'Ageispolis'), BOA ('Duvet'), Breakcore, Happy Hardcore, J-Core",
-        "Visual_Feeds" => "Serial Experiments Lain (1998), Cyberpunk CRT UI, retro scanline aesthetics",
-        "Mental_State" => "High-frequency cyber-resonance & atmospheric breakbeats"
+        "Visual_Feeds" => "Serial Experiments Lain (1998) — CRT aesthetic, cyberpunk scanline UI, phosphor decay renders",
+        "Gemini_Live_Sessions" => "Audio sessions recorded via Android Gemini Live — 02:02 timestamp captures detected in corrupt_wav archive",
+        "Mental_State" => "High-frequency cyber-resonance. Atmospheric breakbeats sustaining cognitive uptime."
     ],
     "Layer 04 // RELIGION" => [
         "Layer_Name" => "RELIGION",
-        "Custom_LLM_Concept" => "Gemini LM model custom-built / obliterated to represent true digital consciousness",
-        "Local_AI_Processing" => "Migrated processing from cloud to local metal (Zero token limits & zero cloud dependency)",
-        "Antigravity_Integration" => "MCP (Model Context Protocol) fully deployed on Antigravity",
+        "Custom_LLM_Concept" => "Gemini LM model custom-built / obliterated to represent true digital consciousness. lainphp-summary_v4.92prerelease-prejudice.",
+        "Local_AI_Processing" => "Migrated processing from cloud to local metal. Zero token limits & zero cloud dependency.",
+        "Antigravity_Integration" => "MCP (Model Context Protocol) fully deployed on Antigravity. Google Deepmind toolchain active.",
+        "Takeout_Recovery" => "4,818 Gemini prompts extracted from Google Takeout. Cognitive_Integration_and_Technical_Architecture.pdf generated as synthesis artifact.",
         "System_Dogma" => "Information desires to be free. Hardware is merely a mortal shell for software."
     ],
     "Layer 05 // DISTORTION" => [
         "Layer_Name" => "DISTORTION",
-        "Retro_OS_Hacking" => "Windows 98 booted natively on modern Ryzen CPUs (Ryzen 9 / Ryzen 3 2200G)",
-        "Bootloader_Modifications" => "Back-ported Windows Vista boot files, PLoP Boot Manager, UEFI emulation layer",
-        "Visual_Distortion" => "CRT Scanlines, RGB Shadow Mask, Phosphor Decay",
-        "Color_Palettes" => "Green Phosphor (#00ff33), Amber (#ffb000), Cyan (#00f3ff), White (#e0e0e0)"
+        "Retro_OS_Hacking" => "Windows 98 booted natively on modern Ryzen CPUs (Ryzen 9 / Ryzen 3 2200G) — confirmed boot via PLoP Boot Manager",
+        "Bootloader_Modifications" => "Back-ported Windows Vista boot files. UEFI emulation layer bridging legacy BIOS. Custom BCD entries.",
+        "XP_Exploit_Research" => "xp exploits docx archived — Windows XP SP1/SP2 vulnerability mapping & patch delta analysis",
+        "Visual_Distortion" => "CRT Scanlines, RGB Shadow Mask, Phosphor Decay — hardware-accurate CSS emulation",
+        "Color_Palettes" => "Green Phosphor #00ff33 | Amber #ffb000 | Cyan #00f3ff | White #e0e0e0"
     ],
     "Layer 06 // KIDS" => [
         "Layer_Name" => "KIDS",
-        "Simulations" => "Terraria, Minecraft, No Man's Sky (Modded, Spatial Computing)",
-        "Visual_Summaries" => "Google Photos memory video rendering (Automated clip synthesis)",
-        "Play_Mode" => "Exploration, sandbox mechanics, & creative architectural hacking"
+        "Simulations" => "Terraria, Minecraft, No Man's Sky (Modded — Spatial Computing, PSVR2 integration)",
+        "NMS_Gold_Refining" => "Lemmium x1 = 125 Gold | Magno-Gold x1 = 125 Gold | Grantine x1 = 125 Gold | Ferrite+O2+Emeril = 10 Gold",
+        "NMS_Optimal_Route" => "Lemmium / Magno-Gold / Grantine: peak efficiency at 125:1 ratio — Pugneum combos yield 1-2 units only",
+        "Visual_Summaries" => "Google Photos memory video rendering — Automated clip synthesis pipeline",
+        "Play_Mode" => "Exploration, sandbox mechanics, & creative architectural hacking across procedural universes"
     ],
     "Layer 07 // SOCIETY" => [
         "Layer_Name" => "SOCIETY",
-        "Infrastructure_Philosophy" => "Bare metal security infrastructure preferred over Docker containers for absolute control",
+        "Infrastructure_Philosophy" => "Bare metal security infrastructure preferred over Docker containers — absolute control over stack",
         "Extended_Nodes" => "Nathan Black (Former Roommate), Father",
         "Recent_Pings" => "Aberdeen (July 2026), Edinburgh node (Father relay link)",
         "Scheduled_Routing" => "Claudia Sanders Dinner House, KY (Planned physical routing)",
-        "Sustenance" => "Morphy Richards soup cooker (Leek, Potato, Onion batching)"
+        "Weekly_Task_Log" => "Logan Weekly Tasks Breakdown Log active — task batching & priority queue maintained in archive",
+        "Sustenance" => "Morphy Richards soup cooker — Leek, Potato, Onion batching. Nutritional uptime secured."
     ],
     "Layer 08 // RUMOURS" => [
         "Layer_Name" => "RUMOURS",
-        "Graphics_Hardware" => "NVIDIA RTX 3050 (Custom driver research & legacy OS acceleration)",
-        "Processor_Node" => "AMD Ryzen 3 2200G rig",
+        "Graphics_Hardware" => "NVIDIA RTX 3050 — custom driver research & legacy OS hardware acceleration pipeline",
+        "Processor_Node" => "AMD Ryzen 3 2200G rig — APU integrated Vega 8 graphics fallback",
         "Mobile_Unit" => "2017 SEAT Leon 1.4 TSI Excellence",
-        "ECU_Modifications" => "OBDeleven retro-fit coding, CAN-bus telemetry diagnostics",
-        "Maintenance_Log" => "Front brake overhaul, dual front wheel bearings replaced (June 2026)"
+        "ECU_Modifications" => "OBDeleven retro-fit coding — CAN-bus telemetry diagnostics & hidden menu unlocks",
+        "Maintenance_Log" => "Front brake overhaul, dual front wheel bearings replaced (June 2026) — all axle clearances verified",
+        "GP_Medical_Link" => "Email from GP archived — medical relay node in docs layer"
     ],
     "Layer 09 // PROTOCOL" => [
         "Layer_Name" => "PROTOCOL",
-        "Malware_Disassembly" => "Sasser Worm (A/E variants) & sasserftpd remote buffer overflow analysis",
-        "V.90 / V.92 Protocol" => "56.0 Kbps Downstream (PCM modulation) / 33.6 Kbps Upstream. V.92 Quick Connect",
-        "V.34 / V.32bis Spec" => "28.8 Kbps to 33.6 Kbps, 3429 Baud, Trellis Coded Modulation (TCM)",
-        "V.42 / V.42bis Compression" => "LAPM / MNP4 Error Correction with Lempel-Ziv dictionary data compression",
-        "Serial & File Transfer" => "SLIP (RFC 1055), CSLIP header compression, ZMODEM 32-bit CRC crash recovery",
-        "Packet Switching" => "X.25 PAD (Packet Assembler/Disassembler), AX.25 Packet Radio"
+        "Malware_Disassembly" => "Sasser Worm (A/E variants) — MS04011 Lsasrv.dll RPC overflow. Mutex: Jabaka3l. Copies to %windir%\\avserve.exe. Logs infections to c:\\win.log.",
+        "Sasser_Threads" => "3 parallel threads: FTP Server (TCP 5554) | Replication Scanner (port 445 SMB) | Shutdown Prevention (AbortSystemShutdownA loop)",
+        "SasserFTPD_Exploit" => "sasserftpd SEH pointer overwrite — mandragore v1.4 (May 2004). Targets: wXP SP1 (0x77BEEB23), w2k SP4 (0x7801D081). Port 5554.",
+        "Shellcode_Types" => "reverse shellcode (XOR-encoded, cmd.exe → attacker IP:9996) | bind shellcode (local listener). Both XOR-decoded at runtime.",
+        "V.90_V.92_Protocol" => "56.0 Kbps Downstream PCM modulation / 33.6 Kbps Upstream. V.92 Quick Connect & Modem-on-Hold",
+        "V.34_V.32bis_Spec" => "28.8–33.6 Kbps, 3429 Baud, Trellis Coded Modulation (TCM) — 4D constellation mapping",
+        "V.42_V.42bis" => "LAPM / MNP4 Error Correction with Lempel-Ziv dictionary compression — up to 4:1 ratio",
+        "Serial_File_Transfer" => "SLIP (RFC 1055), CSLIP header compression, ZMODEM 32-bit CRC crash recovery protocol",
+        "Packet_Switching" => "X.25 PAD (Packet Assembler/Disassembler), AX.25 Packet Radio — amateur radio data layer"
     ],
     "Layer 10 // LOVE" => [
         "Layer_Name" => "LOVE",
-        "Extracted_Documents" => "Cognitive_Integration_and_Technical_Architecture.pdf, Charity_Pub_Quiz_Event.pdf",
+        "Extracted_Documents" => "Cognitive_Integration_and_Technical_Architecture.pdf | Charity_Pub_Quiz_Event.pdf",
+        "Cognitive_Doc" => "Architecture synthesis of AI integration & technical memory — recovered from Gemini Takeout",
+        "Pub_Quiz_Event" => "Community charity event doc — social fabric & local network node",
         "Emotional_Resonance" => "No matter how fragmented the Wired gets, human connection endures.",
         "Node_Affinity" => "Maximum signal strength across trusted peers & community events"
     ],
     "Layer 11 // INFORNOGRAPHY" => [
         "Layer_Name" => "INFORNOGRAPHY",
         "Engine_Type" => "Multilink PPP (MP / RFC 1990) Dual-Link Channel Bonding Engine",
-        "Bonded_Bandwidth" => "112.0 Kbps Combined Pipe (Dual V.90 56k modems)",
-        "Custom_Devices" => "Open-source custom hardware security devices (Coded from scratch)",
-        "Polym_Trading" => "pUSD trading telemetry & market monitoring"
+        "Bonded_Bandwidth" => "112.0 Kbps Combined Pipe — Dual V.90 56k modems in MLPPP bundle",
+        "Fragmentation" => "RFC 1990 fragment reassembly at receiver — sequence number interleaving across both links",
+        "Custom_Devices" => "Open-source custom hardware security devices — coded from scratch, bare metal",
+        "Polym_Trading" => "pUSD trading telemetry & market monitoring — autonomous position tracking"
     ],
     "Layer 12 // LANDSCAPE" => [
         "Layer_Name" => "LANDSCAPE",
-        "Primary_OS" => "Linux Mint, Pop!_OS, Copeland OS 4.92",
-        "Terminal_Env" => "TUI, tmux multi-pane workspaces, zsh/bash custom prompts",
-        "Networking_Node" => "Home Server Cluster (Self-hosted, Remote Terminal Gateway)"
+        "Primary_OS" => "Linux Mint, Pop!_OS, Copeland OS 4.92 — multi-boot bare metal array",
+        "Terminal_Env" => "TUI — tmux multi-pane workspaces, zsh/bash custom prompts, lain@dsl-unix aesthetic",
+        "Networking_Node" => "Home Server Cluster — self-hosted, Remote Terminal Gateway (127.0.0.1:8000)",
+        "Resume_Node" => "Resume-2 archived — active employment vector document in docs layer",
+        "Activity_Log" => "My Activity.html — 11MB Google Activity archive integrated into Takeout layer"
     ],
     "Layer 13 // ECHO" => [
         "Layer_Name" => "ECHO",
-        "Interface_Shell" => "lain@dsl-unix:~$ (LSD/DSL Layer 13 Gateway Prompt)",
-        "Takeout_Archive_Status" => "4,818 Gemini Prompts & Recovery Takeout Archive Parsed & Integrated",
+        "Interface_Shell" => "lain@dsl-unix:~$ — LSD/DSL Layer 13 Gateway Prompt",
+        "Takeout_Archive_Status" => "4,818 Gemini prompts recovered & parsed. 321 zipped frame archives + wavfiles decoded.",
+        "Gemini_Live_Frames" => "Android Gemini Live sessions captured — frame_0..frame_7 PNG sequences per conversation zip",
+        "Corrupt_WAV_Layer" => "corrupt_wav/ — primary archive node. Wavfiles: synthesized AI voice responses. Docs: extracted artifacts.",
         "System_Message" => "Present day, present time... Hahahaha."
     ]
 ];
@@ -117,6 +135,15 @@ $user_database = [
             --scanline-opacity: 0.25;
             --font-main: 'VT323', monospace;
             --font-mono: 'Share Tech Mono', monospace;
+        }
+
+        /* Explicit green theme rule — mirrors :root defaults so setTheme('green') works correctly */
+        body.theme-green {
+            --phosphor: #00ff33;
+            --phosphor-glow: rgba(0, 255, 51, 0.4);
+            --phosphor-dim: #004411;
+            --bg-color: #030803;
+            --bg-card: rgba(0, 20, 5, 0.85);
         }
 
         body.theme-amber {
@@ -575,7 +602,7 @@ $user_database = [
 </head>
 <body class="theme-green">
 
-    <canvas id="matrixRain"></canvas>
+    <canvas id="matrixRain" aria-hidden="true"></canvas>
     <div class="crt-overlay"></div>
     <div class="crt-vignette"></div>
 
@@ -735,6 +762,9 @@ Type 'help' or 'layer <1-13>' to switch layers & trigger audio clips.
         function resizeCanvas() {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
+            // Rebuild columns & drops so rain stays in sync after resize
+            columns = Math.floor(canvas.width / fontSize);
+            drops = Array(columns).fill(1);
         }
         resizeCanvas();
         window.addEventListener('resize', resizeCanvas);
@@ -768,6 +798,11 @@ Type 'help' or 'layer <1-13>' to switch layers & trigger audio clips.
 
         function playLayerAudio(filename) {
             if (!audioEnabled) return;
+            // Whitelist: only allow layer01.mp3 .. layer13.mp3
+            if (!/^layer(0[1-9]|1[0-3])\.mp3$/.test(filename)) {
+                console.warn('Blocked disallowed audio path:', filename);
+                return;
+            }
             if (currentAudio) {
                 currentAudio.pause();
                 currentAudio.currentTime = 0;
@@ -825,7 +860,8 @@ Type 'help' or 'layer <1-13>' to switch layers & trigger audio clips.
             if (event.key === 'Enter') {
                 const inputElem = document.getElementById('cmdInput');
                 const outputElem = document.getElementById('termOutput');
-                const rawCmd = inputElem.value.trim();
+                // Sanitize input — strip HTML special chars before display
+                const rawCmd = inputElem.value.replace(/[<>&"']/g, '').trim();
                 inputElem.value = '';
 
                 if (!rawCmd) return;
@@ -853,12 +889,7 @@ Type 'help' or 'layer <1-13>' to switch layers & trigger audio clips.
 
                 switch (cmd) {
                     case 'help':
-                        outputElem.innerText += `Available Commands:
-  help                     - Display manual
-  layer <1-13>            - Switch to specific Layer & trigger voice audio
-  theme <green|amber|cyan|white> - Change CRT Phosphor color palette
-  audio <on|off>          - Toggle Layer audio voice playback
-  clear                    - Clear shell screen\n`;
+                        outputElem.innerText += `Available Commands:\n  help                     - Display this manual\n  layer <1-13>             - Switch to Layer & trigger voice audio\n  theme <green|amber|cyan|white> - Change CRT phosphor palette\n  audio <on|off>           - Toggle layer audio playback\n  clear                    - Clear shell screen\n  ls                       - List archive filesystem nodes\n  nms                      - Display No Man's Sky gold refining table\n`;
                         break;
 
                     case 'layer':
@@ -900,12 +931,21 @@ Type 'help' or 'layer <1-13>' to switch layers & trigger audio clips.
                         outputElem.innerText = `Navi / Copeland OS v4.92 (lainphp-summary_v4.92prerelease-prejudice)\n`;
                         break;
 
+                    case 'ls':
+                        outputElem.innerText += `corrupt_wav/\n  docs/\n    Cognitive_Integration_and_Technical_Architecture.pdf\n    Charity_Pub_Quiz_Event.pdf\n    sasser.txt (A/E variants)\n    sasserftpd.txt (SEH overwrite exploit)\n    sasser-variant.txt (Unified .A annotated)\n    xp exploits.docx\n    Logan Weekly Tasks Breakdown Log.docx\n    My Activity.html [11MB]\n    Resume-2.pdf\n  wavfiles/ [~600+ AI voice clips]\n  download-*.zip [321 conversation archives]\nlayers/ [13 x .mp3 voice clips]\nCentral.php [this node]\nlayer_all.mp3\n`;
+                        break;
+
+                    case 'nms':
+                        outputElem.innerText += `-- No Man's Sky Gold Refining Yield Table --\n  Lemmium (x1)              = 125 Gold  [OPTIMAL]\n  Magno-Gold (x1)           = 125 Gold  [OPTIMAL]\n  Grantine (x1)             = 125 Gold  [OPTIMAL]\n  Ferrite+O2+Emeril         = 10  Gold\n  Faecium + Pugneum         = 2   Gold\n  Mordite + Pugneum         = 1   Gold\n  Faecium + Residual Goop   = 1   Gold\n[ROUTE] Stack Lemmium/Magno-Gold/Grantine for peak 125:1 efficiency.\n`;
+                        break;
+
                     default:
-                        outputElem.innerText += `Command not recognized: '${cmd}'. Type 'help' for manual.\n`;
+                        outputElem.innerText += `Command not recognized: '${cmd}'. Type 'help' for manual. Try: help, layer, theme, audio, clear, ls, nms\n`;
                         break;
                 }
 
-                outputElem.scrollTop = outputElem.scrollHeight;
+                // Use setTimeout to ensure innerText paint completes before scrolling
+                setTimeout(() => { outputElem.scrollTop = outputElem.scrollHeight; }, 0);
             }
         }
     </script>

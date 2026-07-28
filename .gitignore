@@ -1,0 +1,11 @@
+# Exclude the raw Gemini Takeout archive — too large for GitHub (hundreds of MBs of zips/wavs)
+logan_digitalmind/
+
+# OS junk
+Thumbs.db
+.DS_Store
+desktop.ini
+
+# Editor
+.vscode/
+*.swp
