@@ -1212,6 +1212,11 @@ Type 'help' or 'layer <1-13>' to switch layers<?= $is_su ? ' & trigger audio cli
     <script>
         const canvas = document.getElementById('matrixRain');
         const ctx = canvas.getContext('2d');
+        const fontSize = 15;
+        let columns;
+        let drops;
+        const katakana = 'ｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜﾝABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+
         function resizeCanvas() {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
@@ -1221,11 +1226,6 @@ Type 'help' or 'layer <1-13>' to switch layers<?= $is_su ? ' & trigger audio cli
         }
         resizeCanvas();
         window.addEventListener('resize', resizeCanvas);
-
-        const katakana = 'ｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜﾝABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-        const fontSize = 15;
-        let columns = Math.floor(canvas.width / fontSize);
-        let drops = Array(columns).fill(1);
 
         function drawRain() {
             ctx.fillStyle = 'rgba(0, 0, 0, 0.06)';
