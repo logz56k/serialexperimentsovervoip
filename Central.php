@@ -1,8 +1,8 @@
 <?php
-// --- NAVI / COPELAND OS DATABASE (PHP Backend) ---
-// Categorized in Serial Experiments Lain "Layer" Architecture
+// --- NAVI / COPELAND OS DATABASE (13 Serial Experiments Lain Layers) ---
 $user_database = [
-    "Layer 01 // IDENTITY_CORE" => [
+    "Layer 01 // WEIRD" => [
+        "Layer_Name" => "WEIRD",
         "Status" => "Connected to The Wired",
         "Clearance" => "Level 6 Computing / Cybersecurity / Dial-Up Specialist",
         "Age_Cycle" => "20 (Milestone: July 2026)",
@@ -11,38 +11,85 @@ $user_database = [
         "Uptime_Schedule" => "Rotating 12h night / 11h day shifts (Active to July 31, 2027)",
         "Core_Philosophy" => "No matter where you go, everyone is connected."
     ],
-    "Layer 02 // SYSTEM_ENVIRONMENT" => [
-        "Primary_OS" => "Linux Mint, Pop!_OS, Copeland OS 4.92",
-        "Terminal_Env" => "TUI, tmux multi-pane workspaces, zsh/bash custom prompts",
-        "Protocols_Active" => "SSH Tunnels, SLIP/PPP, MPPP (RFC 1990), Package Debugging",
-        "Networking_Node" => "Home Server Cluster (Self-hosted, Remote Terminal Gateway)",
-        "Shell_Identifier" => "lain@dsl-unix:~$ (LSD/DSL Layer 07 Bridge)"
+    "Layer 02 // GIRLS" => [
+        "Layer_Name" => "GIRLS",
+        "Primary_Connections" => "Chloe, Mother",
+        "Node_Relationship" => "Trusted Inner Circle / Relay Communications",
+        "Communication_Status" => "Active Packet Exchange",
+        "Notes" => "Key personal links & synchronized network nodes"
     ],
-    "Layer 03 // RETRO_NETWORKING & DIALUP_LAB" => [
-        "V.90 / V.92 Protocol" => "56.0 Kbps Downstream (PCM modulation) / 33.6 Kbps Upstream (V.34 Annex A). V.92 Quick Connect & Modem-On-Hold support",
-        "V.34 / V.32bis Protocol" => "28.8 Kbps to 33.6 Kbps, 3429 Baud symbol rate, Trellis Coded Modulation (TCM), adaptive line probing",
-        "V.42 / V.42bis Error & Comp" => "LAPM / MNP4 Error Correction with Lempel-Ziv dictionary data compression (Up to 4:1 compression ratio)",
-        "Multilink PPP (RFC 1990)" => "Bundling multiple physical links (Dual V.90 56k = 112Kbps or Dual ISDN 64k B-Channels = 128Kbps). Fragment sequencing & reassembly",
-        "Legacy Transfer Protocols" => "ZMODEM (Auto-start, Crash Recovery, 32-bit CRC), XMODEM-1K, YMODEM-G, Kermit sliding windows",
-        "Packet Switching & Serial" => "SLIP (RFC 1055), CSLIP header compression, X.25 PAD (Packet Assembler/Disassembler), AX.25 Packet Radio"
-    ],
-    "Layer 04 // HARDWARE_LINK" => [
-        "Mobile_Unit" => "2017 SEAT Leon 1.4 TSI Excellence",
-        "ECU_Modifications" => "OBDeleven retro-fit coding, CAN-bus telemetry diagnostics",
-        "Maintenance_Log" => "Front brake overhaul, dual front wheel bearings replaced (June 2026)",
-        "Hardware_Rigs" => "Custom Cyberia Workstation, CRT Phosphor Monitor (100Hz vertical refresh)"
-    ],
-    "Layer 05 // MEDIA_STREAM" => [
+    "Layer 03 // PSYCHE" => [
+        "Layer_Name" => "PSYCHE",
         "Audio_Frequencies" => "Breakcore, Happy Hardcore, Web-Core, J-Core, Synthwave",
         "Key_Transmissions" => "Aphex Twin ('Polynomial-C', 'Ageispolis'), BOA ('Duvet')",
         "Visual_Feeds" => "Serial Experiments Lain (1998), Cyberpunk aesthetics, retro CRT UI",
-        "Simulations" => "Terraria, Minecraft, No Man's Sky (Modded, VR/MR spatial computing)"
+        "Mental_State" => "High-frequency cyber-resonance & atmospheric breakbeats"
     ],
-    "Layer 06 // EXTERNAL_NODES" => [
+    "Layer 04 // RELIGION" => [
+        "Layer_Name" => "RELIGION",
+        "Protocol_Doctrine" => "The Wired is not an upper layer to the real world... it is where God resides.",
+        "System_Dogma" => "Information desires to be free. Hardware is merely a mortal shell for software.",
+        "Network_Omnipresence" => "Every node linked, every brain connected via global wireless resonance."
+    ],
+    "Layer 05 // DISTORTION" => [
+        "Layer_Name" => "DISTORTION",
+        "Visual_Distortion" => "CRT Scanlines, RGB Shadow Mask, Phosphor Decay",
+        "Color_Palettes" => "Green Phosphor (#00ff33), Amber (#ffb000), Cyan (#00f3ff), White (#e0e0e0)",
+        "Glitch_Protocol" => "Vignette curvature & active screen flicker enabled"
+    ],
+    "Layer 06 // KIDS" => [
+        "Layer_Name" => "KIDS",
+        "Simulations" => "Terraria, Minecraft, No Man's Sky (Modded, Spatial Computing)",
+        "Environment" => "Virtual worlds, sandbox mechanics, mixed reality experiments",
+        "Play_Mode" => "Exploration & creative architectural hacking"
+    ],
+    "Layer 07 // SOCIETY" => [
+        "Layer_Name" => "SOCIETY",
+        "Extended_Nodes" => "Nathan Black (Former Roommate), Father",
         "Recent_Pings" => "Aberdeen (July 2026), Edinburgh node (Father relay link)",
         "Scheduled_Routing" => "Claudia Sanders Dinner House, KY (Planned physical routing)",
-        "Network_Nodes" => "Chloe, Nathan Black (Former Roommate), Mother, Father",
-        "Life_Sustenance" => "Morphy Richards soup cooker (Leek, Potato, Onion batching)"
+        "Sustenance" => "Morphy Richards soup cooker (Leek, Potato, Onion batching)"
+    ],
+    "Layer 08 // RUMOURS" => [
+        "Layer_Name" => "RUMOURS",
+        "Mobile_Rig" => "2017 SEAT Leon 1.4 TSI Excellence",
+        "ECU_Modifications" => "OBDeleven retro-fit coding, CAN-bus telemetry diagnostics",
+        "Maintenance_Log" => "Front brake overhaul, dual front wheel bearings replaced (June 2026)",
+        "Telemetry" => "Engine & brake sensors operational"
+    ],
+    "Layer 09 // PROTOCOL" => [
+        "Layer_Name" => "PROTOCOL",
+        "V.90 / V.92 Protocol" => "56.0 Kbps Downstream (PCM modulation) / 33.6 Kbps Upstream. V.92 Quick Connect",
+        "V.34 / V.32bis Spec" => "28.8 Kbps to 33.6 Kbps, 3429 Baud, Trellis Coded Modulation (TCM)",
+        "V.42 / V.42bis Compression" => "LAPM / MNP4 Error Correction with Lempel-Ziv dictionary data compression",
+        "Serial & File Transfer" => "SLIP (RFC 1055), CSLIP header compression, ZMODEM 32-bit CRC crash recovery",
+        "Packet Switching" => "X.25 PAD (Packet Assembler/Disassembler), AX.25 Packet Radio"
+    ],
+    "Layer 10 // LOVE" => [
+        "Layer_Name" => "LOVE",
+        "Emotional_Resonance" => "No matter how fragmented the Wired gets, human connection endures.",
+        "Synchronized_Hearts" => "Empathy through data streams & voice logs.",
+        "Node_Affinity" => "Maximum signal strength across trusted peers."
+    ],
+    "Layer 11 // INFORNOGRAPHY" => [
+        "Layer_Name" => "INFORNOGRAPHY",
+        "Engine_Type" => "Multilink PPP (MP / RFC 1990) Dual-Link Channel Bonding Engine",
+        "Link_A" => "V.90 Modem 1 (56.0 Kbps)",
+        "Link_B" => "V.90 Modem 2 (56.0 Kbps)",
+        "Bonded_Bandwidth" => "112.0 Kbps Combined Pipe",
+        "Packet_Handling" => "Real-time fragment sequencing, reassembly buffer, zero drop rate"
+    ],
+    "Layer 12 // LANDSCAPE" => [
+        "Layer_Name" => "LANDSCAPE",
+        "Primary_OS" => "Linux Mint, Pop!_OS, Copeland OS 4.92",
+        "Terminal_Env" => "TUI, tmux multi-pane workspaces, zsh/bash custom prompts",
+        "Networking_Node" => "Home Server Cluster (Self-hosted, Remote Terminal Gateway)"
+    ],
+    "Layer 13 // ECHO" => [
+        "Layer_Name" => "ECHO",
+        "Interface_Shell" => "lain@dsl-unix:~$ (LSD/DSL Layer 13 Gateway Prompt)",
+        "Protocol_Echo" => "Command interface with audio feedback and automated layer navigation.",
+        "System_Message" => "Present day, present time... Hahahaha."
     ]
 ];
 ?>
@@ -51,7 +98,7 @@ $user_database = [
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Navi / Copeland OS 4.92 // lainphp-summary_v4.92prerelease-prejudice</title>
+    <title>Navi / Copeland OS 4.92 // 13 Layers of Lain</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=VT323&display=swap" rel="stylesheet">
@@ -63,13 +110,11 @@ $user_database = [
             --bg-color: #030803;
             --bg-card: rgba(0, 20, 5, 0.85);
             --accent: #ffffff;
-            --alert-red: #ff3344;
             --scanline-opacity: 0.25;
             --font-main: 'VT323', monospace;
             --font-mono: 'Share Tech Mono', monospace;
         }
 
-        /* Color Themes */
         body.theme-amber {
             --phosphor: #ffb000;
             --phosphor-glow: rgba(255, 176, 0, 0.4);
@@ -106,11 +151,10 @@ $user_database = [
             color: var(--phosphor);
             font-family: var(--font-main);
             overflow-x: hidden;
-            font-size: 1.25rem;
+            font-size: 1.2rem;
             transition: background-color 0.3s ease, color 0.3s ease;
         }
 
-        /* Canvas background */
         #matrixRain {
             position: fixed;
             top: 0;
@@ -118,11 +162,10 @@ $user_database = [
             width: 100vw;
             height: 100vh;
             z-index: 1;
-            opacity: 0.25;
+            opacity: 0.22;
             pointer-events: none;
         }
 
-        /* CRT Overlay Effects */
         .crt-overlay {
             position: fixed;
             top: 0;
@@ -147,11 +190,10 @@ $user_database = [
             pointer-events: none;
         }
 
-        /* Main Container */
         .viewport {
             position: relative;
             z-index: 10;
-            max-width: 1100px;
+            max-width: 1150px;
             min-height: 92vh;
             margin: 3vh auto;
             border: 2px solid var(--phosphor);
@@ -163,7 +205,6 @@ $user_database = [
             border-radius: 4px;
         }
 
-        /* Top System Banner & LED Indicators */
         .system-bar {
             display: flex;
             justify-content: space-between;
@@ -176,7 +217,7 @@ $user_database = [
         }
 
         .brand-title h1 {
-            font-size: 2.2rem;
+            font-size: 2.1rem;
             letter-spacing: 3px;
             text-transform: uppercase;
             text-shadow: 0 0 8px var(--phosphor);
@@ -192,10 +233,10 @@ $user_database = [
 
         .led-panel {
             display: flex;
-            gap: 12px;
+            gap: 10px;
             align-items: center;
             font-family: var(--font-mono);
-            font-size: 0.85rem;
+            font-size: 0.82rem;
         }
 
         .led-item {
@@ -209,11 +250,10 @@ $user_database = [
         }
 
         .led-light {
-            width: 9px;
-            height: 9px;
+            width: 8px;
+            height: 8px;
             border-radius: 50%;
             background: #222;
-            box-shadow: 0 0 2px #000;
         }
 
         .led-light.active {
@@ -230,7 +270,6 @@ $user_database = [
             100% { opacity: 1; box-shadow: 0 0 10px var(--phosphor); }
         }
 
-        /* Controls Panel (CRT Adjustments) */
         .crt-controls {
             display: flex;
             justify-content: space-between;
@@ -239,7 +278,7 @@ $user_database = [
             border: 1px dashed var(--phosphor);
             padding: 8px 14px;
             margin-bottom: 15px;
-            font-size: 1rem;
+            font-size: 0.95rem;
             flex-wrap: wrap;
             gap: 10px;
         }
@@ -247,7 +286,7 @@ $user_database = [
         .control-group {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
         }
 
         .theme-btn {
@@ -256,7 +295,7 @@ $user_database = [
             color: var(--phosphor);
             padding: 2px 8px;
             font-family: var(--font-main);
-            font-size: 1rem;
+            font-size: 0.95rem;
             cursor: pointer;
             transition: all 0.2s;
         }
@@ -273,7 +312,7 @@ $user_database = [
             color: var(--phosphor);
             padding: 2px 10px;
             font-family: var(--font-main);
-            font-size: 1rem;
+            font-size: 0.95rem;
             cursor: pointer;
         }
 
@@ -282,47 +321,55 @@ $user_database = [
             color: #000;
         }
 
-        /* Layer Navigation Bar (Tabs) */
-        .layer-tabs {
-            display: flex;
-            flex-wrap: wrap;
+        /* 13 Layers Grid / Navigation Bar */
+        .layers-nav {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
             gap: 6px;
             border-bottom: 2px solid var(--phosphor);
-            padding-bottom: 10px;
+            padding-bottom: 12px;
             margin-bottom: 20px;
         }
 
-        .tab-btn {
-            background: rgba(0, 0, 0, 0.7);
-            border: 1px solid var(--phosphor);
+        .layer-nav-btn {
+            background: rgba(0, 0, 0, 0.75);
+            border: 1px solid var(--phosphor-dim);
             color: var(--phosphor);
-            padding: 6px 12px;
+            padding: 6px 8px;
             font-family: var(--font-mono);
-            font-size: 0.95rem;
+            font-size: 0.85rem;
             cursor: pointer;
             transition: all 0.2s ease;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            text-align: left;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        .tab-btn:hover {
+        .layer-nav-btn:hover {
+            border-color: var(--phosphor);
             background: var(--phosphor-dim);
             box-shadow: 0 0 8px var(--phosphor-glow);
         }
 
-        .tab-btn.active {
+        .layer-nav-btn.active {
             background: var(--phosphor);
             color: #000;
-            font-weight: bold;
-            box-shadow: 0 0 12px var(--phosphor);
             border-color: var(--phosphor);
+            font-weight: bold;
+            box-shadow: 0 0 10px var(--phosphor);
         }
 
-        /* Layer Content Sections */
+        .audio-indicator {
+            font-size: 0.75rem;
+            opacity: 0.7;
+        }
+
+        /* Layer Display Sections */
         .layer-content {
             display: none;
             flex: 1;
-            animation: fadeIn 0.4s ease-in-out;
+            animation: fadeIn 0.35s ease-in-out;
         }
 
         .layer-content.active {
@@ -334,11 +381,13 @@ $user_database = [
             to { opacity: 1; transform: translateY(0); }
         }
 
-        .layer-header {
-            display: inline-block;
+        .layer-header-banner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             background: var(--phosphor);
             color: #000;
-            padding: 3px 12px;
+            padding: 4px 12px;
             font-size: 1.3rem;
             margin-bottom: 15px;
             font-weight: bold;
@@ -357,7 +406,6 @@ $user_database = [
             border: 1px solid var(--phosphor-dim);
             border-left: 3px solid var(--phosphor);
             padding: 12px 15px;
-            transition: border-color 0.2s;
         }
 
         .data-card:hover {
@@ -368,7 +416,7 @@ $user_database = [
         .card-label {
             color: var(--accent);
             font-family: var(--font-mono);
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             text-transform: uppercase;
             margin-bottom: 4px;
             letter-spacing: 1px;
@@ -380,7 +428,6 @@ $user_database = [
             word-break: break-word;
         }
 
-        /* Interactive Dial-Up Lab Components */
         .lab-box {
             background: rgba(0, 0, 0, 0.7);
             border: 1px solid var(--phosphor);
@@ -390,14 +437,13 @@ $user_database = [
 
         .lab-title {
             font-family: var(--font-mono);
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             color: var(--accent);
             margin-bottom: 10px;
             border-bottom: 1px solid var(--phosphor-dim);
             padding-bottom: 5px;
         }
 
-        /* Multilink PPP Visualizer */
         .mppp-diagram {
             display: flex;
             flex-direction: column;
@@ -419,7 +465,7 @@ $user_database = [
 
         .packet-stream {
             flex: 1;
-            height: 24px;
+            height: 22px;
             background: #000;
             border: 1px solid var(--phosphor-dim);
             position: relative;
@@ -428,7 +474,7 @@ $user_database = [
 
         .packet-dot {
             position: absolute;
-            top: 3px;
+            top: 2px;
             width: 18px;
             height: 18px;
             background: var(--phosphor);
@@ -445,38 +491,11 @@ $user_database = [
         .mppp-stats {
             margin-top: 10px;
             font-family: var(--font-mono);
-            font-size: 1rem;
+            font-size: 0.95rem;
             color: var(--accent);
             text-align: right;
         }
 
-        /* Sound Synth & Modem Audio Button */
-        .sound-lab-bar {
-            display: flex;
-            gap: 10px;
-            margin-top: 10px;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-
-        .action-btn {
-            background: transparent;
-            border: 1px solid var(--phosphor);
-            color: var(--phosphor);
-            padding: 6px 14px;
-            font-family: var(--font-mono);
-            font-size: 0.95rem;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .action-btn:hover {
-            background: var(--phosphor);
-            color: #000;
-            box-shadow: 0 0 10px var(--phosphor);
-        }
-
-        /* Interactive Terminal CLI */
         .terminal-window {
             background: #000;
             border: 1px solid var(--phosphor);
@@ -517,12 +536,22 @@ $user_database = [
             font-size: 1rem;
         }
 
-        /* Footer & Cursor */
+        .play-layer-sound-btn {
+            background: transparent;
+            border: 1px solid #000;
+            color: #000;
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            padding: 2px 8px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
         .footer-note {
             margin-top: auto;
             padding-top: 15px;
             border-top: 1px dashed var(--phosphor-dim);
-            font-size: 1rem;
+            font-size: 0.95rem;
             opacity: 0.85;
             display: flex;
             justify-content: space-between;
@@ -532,24 +561,19 @@ $user_database = [
 
         .blinking-cursor {
             display: inline-block;
-            width: 9px;
+            width: 8px;
             height: 1.1rem;
             background: var(--phosphor);
             animation: blink 0.8s step-end infinite;
             vertical-align: bottom;
         }
 
-        @keyframes blink {
-            50% { opacity: 0; }
-        }
+        @keyframes blink { 50% { opacity: 0; } }
     </style>
 </head>
 <body class="theme-green">
 
-    <!-- Matrix Background Rain -->
     <canvas id="matrixRain"></canvas>
-    
-    <!-- CRT Overlay & Vignette -->
     <div class="crt-overlay"></div>
     <div class="crt-vignette"></div>
 
@@ -559,29 +583,25 @@ $user_database = [
         <div class="system-bar">
             <div class="brand-title">
                 <h1>NAVI // COPELAND OS 4.92</h1>
-                <div class="brand-subtitle">SYSTEM IDENTIFIER: lainphp-summary_v4.92prerelease-prejudice</div>
+                <div class="brand-subtitle">13 LAYERS ARCHITECTURE // lainphp-summary_v4.92prerelease-prejudice</div>
             </div>
 
             <div class="led-panel">
                 <div class="led-item">
-                    <div class="led-light active blink" id="ledCarrier"></div>
-                    <span>CARRIER</span>
+                    <div class="led-light active blink"></div>
+                    <span>WIRED</span>
                 </div>
                 <div class="led-item">
-                    <div class="led-light active blink" id="ledData"></div>
-                    <span>DATA</span>
+                    <div class="led-light active blink"></div>
+                    <span>VOICE SFX: READY</span>
                 </div>
                 <div class="led-item">
-                    <div class="led-light active" id="ledMppp"></div>
-                    <span>MPPP BONDED</span>
-                </div>
-                <div class="led-item">
-                    <span style="color:var(--accent);">56.0k V.92</span>
+                    <span style="color:var(--accent);" id="activeLayerStatus">LAYER 01 WEIRD</span>
                 </div>
             </div>
         </div>
 
-        <!-- CRT Control Adjustments Panel -->
+        <!-- CRT Controls -->
         <div class="crt-controls">
             <div class="control-group">
                 <span>[PHOSPHOR COLOR]:</span>
@@ -592,173 +612,130 @@ $user_database = [
             </div>
             <div class="control-group">
                 <button class="toggle-btn active" id="scanlineToggle" onclick="toggleScanlines()">SCANLINES: ON</button>
-                <button class="toggle-btn" id="audioToggle" onclick="toggleAudio()">AUDIO SFX: MUTED</button>
+                <button class="toggle-btn active" id="audioToggle" onclick="toggleAudio()">LAYER AUDIO: ACTIVE</button>
             </div>
         </div>
 
-        <!-- Navigation Tabs ("Layer" Format) -->
-        <div class="layer-tabs">
-            <button class="tab-btn active" onclick="switchLayer('layer-1', this)">Layer 01 // IDENTITY</button>
-            <button class="tab-btn" onclick="switchLayer('layer-2', this)">Layer 02 // SYSTEM</button>
-            <button class="tab-btn" onclick="switchLayer('layer-3', this)">Layer 03 // DIALUP_LAB</button>
-            <button class="tab-btn" onclick="switchLayer('layer-4', this)">Layer 04 // HARDWARE</button>
-            <button class="tab-btn" onclick="switchLayer('layer-5', this)">Layer 05 // MEDIA</button>
-            <button class="tab-btn" onclick="switchLayer('layer-6', this)">Layer 06 // NODES</button>
-            <button class="tab-btn" onclick="switchLayer('layer-7', this)">Layer 07 // DSL_UNIX</button>
+        <!-- 13 LAYERS NAVIGATION BAR -->
+        <div class="layers-nav">
+            <?php 
+            $layer_index = 1;
+            $mp3_files = [
+                1 => "01_layer_01_weird.mp3",
+                2 => "02_layer_02_girls.mp3",
+                3 => "03_layer_03_psyche.mp3",
+                4 => "04_layer_04_religion.mp3",
+                5 => "05_layer_05_distortion.mp3",
+                6 => "06_layer_06_kids.mp3",
+                7 => "07_layer_07_society.mp3",
+                8 => "08_layer_08_rumours.mp3",
+                9 => "09_layer_09_protocol.mp3",
+                10 => "10_layer_10_love.mp3",
+                11 => "11_layer_11_infornography.mp3",
+                12 => "12_layer_12_landscape.mp3",
+                13 => "13_layer_13_echo.mp3"
+            ];
+            foreach ($user_database as $layer_key => $data): 
+                $pad = str_pad($layer_index, 2, "0", STR_PAD_LEFT);
+                $name = htmlspecialchars($data['Layer_Name']);
+                $mp3 = $mp3_files[$layer_index];
+                $active_class = ($layer_index === 1) ? "active" : "";
+            ?>
+                <button class="layer-nav-btn <?= $active_class ?>" onclick="selectLayer(<?= $layer_index ?>, '<?= $mp3 ?>', this)">
+                    <span>[L<?= $pad ?>] <?= $name ?></span>
+                    <span class="audio-indicator">🔊</span>
+                </button>
+            <?php 
+                $layer_index++;
+            endforeach; 
+            ?>
         </div>
 
-        <!-- LAYER 01 -->
-        <div class="layer-content active" id="layer-1">
-            <div class="layer-header">[LAYER 01 // IDENTITY_CORE]</div>
-            <div class="data-grid">
-                <?php foreach ($user_database["Layer 01 // IDENTITY_CORE"] as $key => $val): ?>
-                    <div class="data-card">
-                        <div class="card-label"><?= htmlspecialchars($key) ?></div>
-                        <div class="card-val"><?= htmlspecialchars($val) ?></div>
-                    </div>
-                <?php endforeach; ?>
-            </div>
-        </div>
+        <!-- 13 LAYER CONTENT PANELS -->
+        <?php 
+        $idx = 1;
+        foreach ($user_database as $layer_key => $data): 
+            $active_panel = ($idx === 1) ? "active" : "";
+            $mp3 = $mp3_files[$idx];
+        ?>
+            <div class="layer-content <?= $active_panel ?>" id="layer-panel-<?= $idx ?>">
+                <div class="layer-header-banner">
+                    <span>[<?= htmlspecialchars($layer_key) ?>]</span>
+                    <button class="play-layer-sound-btn" onclick="playLayerAudio('<?= $mp3 ?>')">▶ PLAY LAYER VOICE CLIP</button>
+                </div>
 
-        <!-- LAYER 02 -->
-        <div class="layer-content" id="layer-2">
-            <div class="layer-header">[LAYER 02 // SYSTEM_ENVIRONMENT]</div>
-            <div class="data-grid">
-                <?php foreach ($user_database["Layer 02 // SYSTEM_ENVIRONMENT"] as $key => $val): ?>
-                    <div class="data-card">
-                        <div class="card-label"><?= htmlspecialchars($key) ?></div>
-                        <div class="card-val"><?= htmlspecialchars($val) ?></div>
-                    </div>
-                <?php endforeach; ?>
-            </div>
-        </div>
-
-        <!-- LAYER 03 // DIALUP & RETRO NETWORKING LAB -->
-        <div class="layer-content" id="layer-3">
-            <div class="layer-header">[LAYER 03 // RETRO_NETWORKING & DIALUP_LAB]</div>
-            
-            <div class="data-grid">
-                <?php foreach ($user_database["Layer 03 // RETRO_NETWORKING & DIALUP_LAB"] as $key => $val): ?>
-                    <div class="data-card">
-                        <div class="card-label"><?= htmlspecialchars($key) ?></div>
-                        <div class="card-val"><?= htmlspecialchars($val) ?></div>
-                    </div>
-                <?php endforeach; ?>
-            </div>
-
-            <!-- Multilink PPP Visualizer Widget -->
-            <div class="lab-box">
-                <div class="lab-title">> MULTILINK PPP (MP / RFC 1990) DUAL-LINK BONDING ENGINE</div>
-                <p style="font-size:1rem; opacity:0.9;">Multilink PPP distributes data packet fragments across multiple physical serial/modem connections simultaneously, combining bandwidth into a single logical pipe with sequence numbers and reassembly controls.</p>
-                
-                <div class="mppp-diagram">
-                    <div class="channel-row">
-                        <div class="channel-label">LINK A (V.90 Mod):</div>
-                        <div class="packet-stream">
-                            <div class="packet-dot" style="animation-delay: 0s;"></div>
-                            <div class="packet-dot" style="animation-delay: 0.8s;"></div>
+                <div class="data-grid">
+                    <?php foreach ($data as $key => $val): ?>
+                        <?php if ($key === 'Layer_Name') continue; ?>
+                        <div class="data-card">
+                            <div class="card-label"><?= htmlspecialchars($key) ?></div>
+                            <div class="card-val"><?= htmlspecialchars($val) ?></div>
                         </div>
-                        <span>56.0 Kbps [ACTIVE]</span>
-                    </div>
+                    <?php endforeach; ?>
+                </div>
 
-                    <div class="channel-row">
-                        <div class="channel-label">LINK B (V.90 Mod):</div>
-                        <div class="packet-stream">
-                            <div class="packet-dot" style="animation-delay: 0.4s;"></div>
-                            <div class="packet-dot" style="animation-delay: 1.2s;"></div>
+                <!-- Custom Interactive Widgets embedded in specific layers -->
+                <?php if ($idx === 9): // PROTOCOL ?>
+                    <div class="lab-box">
+                        <div class="lab-title">> RETRO V. SERIES MODULATION LAB</div>
+                        <p style="font-size:0.95rem;">V.90/V.92 56,000 bps Downstream PCM, V.34 Trellis Modulation, and V.42bis Compression Dictionary stats.</p>
+                    </div>
+                <?php elseif ($idx === 11): // INFORNOGRAPHY ?>
+                    <div class="lab-box">
+                        <div class="lab-title">> MULTILINK PPP (MP / RFC 1990) DUAL-LINK BONDING ENGINE</div>
+                        <div class="mppp-diagram">
+                            <div class="channel-row">
+                                <div class="channel-label">LINK A (V.90 Mod):</div>
+                                <div class="packet-stream">
+                                    <div class="packet-dot" style="animation-delay: 0s;"></div>
+                                    <div class="packet-dot" style="animation-delay: 0.8s;"></div>
+                                </div>
+                                <span>56.0 Kbps [ACTIVE]</span>
+                            </div>
+                            <div class="channel-row">
+                                <div class="channel-label">LINK B (V.90 Mod):</div>
+                                <div class="packet-stream">
+                                    <div class="packet-dot" style="animation-delay: 0.4s;"></div>
+                                    <div class="packet-dot" style="animation-delay: 1.2s;"></div>
+                                </div>
+                                <span>56.0 Kbps [ACTIVE]</span>
+                            </div>
                         </div>
-                        <span>56.0 Kbps [ACTIVE]</span>
+                        <div class="mppp-stats">
+                            AGGREGATED BANDWIDTH: <span style="color:var(--phosphor); font-weight:bold;">112.0 Kbps</span> | REASSEMBLY: SYNCED
+                        </div>
                     </div>
-                </div>
-
-                <div class="mppp-stats">
-                    BONDED THROUGHPUT: <span style="color:var(--phosphor); font-weight:bold;">112.0 Kbps</span> | REASSEMBLY BUFFER: SYNCED (0 DROP)
-                </div>
-            </div>
-
-            <!-- Web Audio Modem Handshake Synthesizer -->
-            <div class="lab-box">
-                <div class="lab-title">> SYNTHESIZED V.90 / V.92 MODEM HANDSHAKE AUDIO GENERATOR</div>
-                <p style="font-size:1rem; opacity:0.9;">Synthesizes real-time DTMF touch-tones, V.8 bis carrier negotiation, and V.34/V.90 constellation training white noise using pure Web Audio API oscillators.</p>
-                
-                <div class="sound-lab-bar">
-                    <button class="action-btn" onclick="playModemSound('v90')">▶ INITIATE V.90 MODEM HANDSHAKE (56k)</button>
-                    <button class="action-btn" onclick="playModemSound('dtmf')">▶ DIAL DTMF TOUCH-TONES</button>
-                    <button class="action-btn" onclick="playModemSound('zmodem')">▶ SIMULATE ZMODEM BURST</button>
-                    <span id="modemAudioStatus" style="font-family:var(--font-mono); font-size:0.9rem;">[STATUS: IDLE]</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- LAYER 04 -->
-        <div class="layer-content" id="layer-4">
-            <div class="layer-header">[LAYER 04 // HARDWARE_LINK]</div>
-            <div class="data-grid">
-                <?php foreach ($user_database["Layer 04 // HARDWARE_LINK"] as $key => $val): ?>
-                    <div class="data-card">
-                        <div class="card-label"><?= htmlspecialchars($key) ?></div>
-                        <div class="card-val"><?= htmlspecialchars($val) ?></div>
-                    </div>
-                <?php endforeach; ?>
-            </div>
-        </div>
-
-        <!-- LAYER 05 -->
-        <div class="layer-content" id="layer-5">
-            <div class="layer-header">[LAYER 05 // MEDIA_STREAM]</div>
-            <div class="data-grid">
-                <?php foreach ($user_database["Layer 05 // MEDIA_STREAM"] as $key => $val): ?>
-                    <div class="data-card">
-                        <div class="card-label"><?= htmlspecialchars($key) ?></div>
-                        <div class="card-val"><?= htmlspecialchars($val) ?></div>
-                    </div>
-                <?php endforeach; ?>
-            </div>
-        </div>
-
-        <!-- LAYER 06 -->
-        <div class="layer-content" id="layer-6">
-            <div class="layer-header">[LAYER 06 // EXTERNAL_NODES]</div>
-            <div class="data-grid">
-                <?php foreach ($user_database["Layer 06 // EXTERNAL_NODES"] as $key => $val): ?>
-                    <div class="data-card">
-                        <div class="card-label"><?= htmlspecialchars($key) ?></div>
-                        <div class="card-val"><?= htmlspecialchars($val) ?></div>
-                    </div>
-                <?php endforeach; ?>
-            </div>
-        </div>
-
-        <!-- LAYER 07 // INTERACTIVE INTERNET/CLI SHELL -->
-        <div class="layer-content" id="layer-7">
-            <div class="layer-header">[LAYER 07 // DSL_UNIX COMMAND INTERFACE]</div>
-            
-            <div class="terminal-window">
-                <div class="terminal-output" id="termOutput">Navi / Copeland OS v4.92 (lainphp-summary_v4.92prerelease-prejudice)
-Type 'help' for available commands.
-Connected to Wired Gateway (127.0.0.1:8000 via Multilink PPP).
+                <?php elseif ($idx === 13): // ECHO ?>
+                    <div class="terminal-window">
+                        <div class="terminal-output" id="termOutput">Navi / Copeland OS v4.92 (lainphp-summary_v4.92prerelease-prejudice)
+Connected to 13-Layer Wired Gateway (127.0.0.1:8000).
+Type 'help' or 'layer <1-13>' to switch layers & trigger audio clips.
 </div>
-                <div class="cmd-line">
-                    <span class="prompt">lain@dsl-unix:~$</span>
-                    <input type="text" class="cmd-input" id="cmdInput" autofocus placeholder="Type command here..." onkeydown="handleCmd(event)">
-                </div>
+                        <div class="cmd-line">
+                            <span class="prompt">lain@dsl-unix:~$</span>
+                            <input type="text" class="cmd-input" id="cmdInput" autofocus placeholder="Type command here..." onkeydown="handleCmd(event)">
+                        </div>
+                    </div>
+                <?php endif; ?>
+
             </div>
-        </div>
+        <?php 
+            $idx++;
+        endforeach; 
+        ?>
 
         <!-- Footer -->
         <div class="footer-note">
-            <span>> WIRED GATEWAY // SYSTEM STABLE <span class="blinking-cursor"></span></span>
-            <span>Navi OS 4.92 | Multilink PPP Active</span>
+            <span>> ALL 13 LAYERS OPERATIONAL <span class="blinking-cursor"></span></span>
+            <span>Navi OS 4.92 | Wired Resonance Active</span>
         </div>
 
     </div>
 
-    <!-- JavaScript logic -->
     <script>
-        /* --- 1. MATRIX DIGITAL RAIN CANVAS --- */
+        /* Matrix Rain Background */
         const canvas = document.getElementById('matrixRain');
         const ctx = canvas.getContext('2d');
-
         function resizeCanvas() {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
@@ -767,7 +744,7 @@ Connected to Wired Gateway (127.0.0.1:8000 via Multilink PPP).
         window.addEventListener('resize', resizeCanvas);
 
         const katakana = 'ｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜﾝABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-        const fontSize = 16;
+        const fontSize = 15;
         let columns = Math.floor(canvas.width / fontSize);
         let drops = Array(columns).fill(1);
 
@@ -782,7 +759,6 @@ Connected to Wired Gateway (127.0.0.1:8000 via Multilink PPP).
             for (let i = 0; i < drops.length; i++) {
                 const char = katakana.charAt(Math.floor(Math.random() * katakana.length));
                 ctx.fillText(char, i * fontSize, drops[i] * fontSize);
-
                 if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
                     drops[i] = 0;
                 }
@@ -791,29 +767,49 @@ Connected to Wired Gateway (127.0.0.1:8000 via Multilink PPP).
         }
         setInterval(drawRain, 33);
 
-        /* --- 2. LAYER TAB SWITCHING --- */
-        function switchLayer(layerId, btnElem) {
-            playKeySound();
-            document.querySelectorAll('.layer-content').forEach(el => el.classList.remove('active'));
-            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
-            
-            document.getElementById(layerId).classList.add('active');
-            if(btnElem) btnElem.classList.add('active');
+        /* Audio & Layer Switching Manager */
+        let currentAudio = null;
+        let audioEnabled = true;
+
+        function playLayerAudio(filename) {
+            if (!audioEnabled) return;
+            if (currentAudio) {
+                currentAudio.pause();
+                currentAudio.currentTime = 0;
+            }
+            currentAudio = new Audio('layers/' + filename);
+            currentAudio.play().catch(err => {
+                console.log("Audio play deferred until user interaction: ", err);
+            });
         }
 
-        /* --- 3. CRT THEME & SCANLINE CONTROLS --- */
+        function selectLayer(layerIndex, mp3Filename, btnElem) {
+            document.querySelectorAll('.layer-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.layer-nav-btn').forEach(el => el.classList.remove('active'));
+
+            const targetPanel = document.getElementById('layer-panel-' + layerIndex);
+            if (targetPanel) targetPanel.classList.add('active');
+
+            if (btnElem) btnElem.classList.add('active');
+
+            const statusElem = document.getElementById('activeLayerStatus');
+            if (statusElem && btnElem) {
+                statusElem.innerText = btnElem.innerText.replace('🔊', '').trim();
+            }
+
+            playLayerAudio(mp3Filename);
+        }
+
+        /* CRT Theme & Controls */
         function setTheme(themeName, btnElem) {
-            playKeySound();
             document.body.className = '';
             document.body.classList.add('theme-' + themeName);
-            
             document.querySelectorAll('.theme-btn').forEach(el => el.classList.remove('active'));
             if(btnElem) btnElem.classList.add('active');
         }
 
         let scanlinesOn = true;
         function toggleScanlines() {
-            playKeySound();
             scanlinesOn = !scanlinesOn;
             document.documentElement.style.setProperty('--scanline-opacity', scanlinesOn ? '0.25' : '0');
             const btn = document.getElementById('scanlineToggle');
@@ -821,129 +817,19 @@ Connected to Wired Gateway (127.0.0.1:8000 via Multilink PPP).
             btn.innerText = scanlinesOn ? 'SCANLINES: ON' : 'SCANLINES: OFF';
         }
 
-        let audioEnabled = false;
         function toggleAudio() {
             audioEnabled = !audioEnabled;
             const btn = document.getElementById('audioToggle');
             btn.classList.toggle('active', audioEnabled);
-            btn.innerText = audioEnabled ? 'AUDIO SFX: ENABLED' : 'AUDIO SFX: MUTED';
-            if (audioEnabled) {
-                initAudioContext();
-                playKeySound();
+            btn.innerText = audioEnabled ? 'LAYER AUDIO: ACTIVE' : 'LAYER AUDIO: MUTED';
+            if (!audioEnabled && currentAudio) {
+                currentAudio.pause();
             }
         }
 
-        /* --- 4. WEB AUDIO SYNTHESIZER (MODEM HANDSHAKE & CLICK SFX) --- */
-        let audioCtx = null;
-        function initAudioContext() {
-            if (!audioCtx) {
-                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-            }
-            if (audioCtx.state === 'suspended') {
-                audioCtx.resume();
-            }
-        }
-
-        function playKeySound() {
-            if (!audioEnabled) return;
-            initAudioContext();
-            try {
-                const osc = audioCtx.createOscillator();
-                const gain = audioCtx.createGain();
-                osc.type = 'triangle';
-                osc.frequency.setValueAtTime(800 + Math.random() * 200, audioCtx.currentTime);
-                gain.gain.setValueAtTime(0.03, audioCtx.currentTime);
-                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.04);
-                osc.connect(gain);
-                gain.connect(audioCtx.destination);
-                osc.start();
-                osc.stop(audioCtx.currentTime + 0.04);
-            } catch(e) {}
-        }
-
-        function playModemSound(type) {
-            initAudioContext();
-            const statusElem = document.getElementById('modemAudioStatus');
-            statusElem.innerText = '[STATUS: GENERATING SYNTH AUDIO...]';
-
-            const now = audioCtx.currentTime;
-
-            if (type === 'dtmf') {
-                // Dial tone + 4 DTMF tones
-                const freqs = [[941, 1336], [697, 1209], [770, 1336], [852, 1477]];
-                freqs.forEach((pair, idx) => {
-                    const startTime = now + idx * 0.12;
-                    pair.forEach(f => {
-                        const osc = audioCtx.createOscillator();
-                        const gain = audioCtx.createGain();
-                        osc.frequency.value = f;
-                        gain.gain.setValueAtTime(0.06, startTime);
-                        gain.gain.exponentialRampToValueAtTime(0.001, startTime + 0.08);
-                        osc.connect(gain);
-                        gain.connect(audioCtx.destination);
-                        osc.start(startTime);
-                        osc.stop(startTime + 0.08);
-                    });
-                });
-                setTimeout(() => statusElem.innerText = '[STATUS: DTMF DIAL COMPLETE]', 600);
-            } 
-            else if (type === 'v90' || type === 'zmodem') {
-                // Synthesize classic Modem Handshake sequence
-                // 1. Dial Tone
-                const osc1 = audioCtx.createOscillator();
-                const gain1 = audioCtx.createGain();
-                osc1.frequency.setValueAtTime(350, now);
-                gain1.gain.setValueAtTime(0.05, now);
-                gain1.gain.exponentialRampToValueAtTime(0.001, now + 0.4);
-                osc1.connect(gain1);
-                gain1.connect(audioCtx.destination);
-                osc1.start(now);
-                osc1.stop(now + 0.4);
-
-                // 2. High Carrier Whistle (2100 Hz V.8 bis Answer Tone)
-                const osc2 = audioCtx.createOscillator();
-                const gain2 = audioCtx.createGain();
-                osc2.frequency.setValueAtTime(2100, now + 0.45);
-                gain2.gain.setValueAtTime(0.08, now + 0.45);
-                gain2.gain.exponentialRampToValueAtTime(0.001, now + 1.2);
-                osc2.connect(gain2);
-                gain2.connect(audioCtx.destination);
-                osc2.start(now + 0.45);
-                osc2.stop(now + 1.2);
-
-                // 3. Trellis & Constellation Noise Burst (Filtered Noise)
-                const bufferSize = audioCtx.sampleRate * 1.5;
-                const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
-                const data = buffer.getChannelData(0);
-                for (let i = 0; i < bufferSize; i++) {
-                    data[i] = Math.random() * 2 - 1;
-                }
-                const noise = audioCtx.createBufferSource();
-                noise.buffer = buffer;
-
-                const filter = audioCtx.createBiquadFilter();
-                filter.type = 'bandpass';
-                filter.frequency.setValueAtTime(1800, now + 1.2);
-                filter.Q.setValueAtTime(3, now + 1.2);
-
-                const noiseGain = audioCtx.createGain();
-                noiseGain.gain.setValueAtTime(0.07, now + 1.2);
-                noiseGain.gain.exponentialRampToValueAtTime(0.001, now + 2.5);
-
-                noise.connect(filter);
-                filter.connect(noiseGain);
-                noiseGain.connect(audioCtx.destination);
-                noise.start(now + 1.2);
-                noise.stop(now + 2.5);
-
-                setTimeout(() => statusElem.innerText = type === 'v90' ? '[STATUS: V.90 56K CARRIER LOCKED]' : '[STATUS: ZMODEM CRC-32 BLOCK VERIFIED]', 2600);
-            }
-        }
-
-        /* --- 5. INTERACTIVE TERMINAL CLI (`lain@dsl-unix:~$`) --- */
+        /* Terminal Shell Commands */
         function handleCmd(event) {
             if (event.key === 'Enter') {
-                playKeySound();
                 const inputElem = document.getElementById('cmdInput');
                 const outputElem = document.getElementById('termOutput');
                 const rawCmd = inputElem.value.trim();
@@ -956,40 +842,42 @@ Connected to Wired Gateway (127.0.0.1:8000 via Multilink PPP).
                 const cmd = parts[0].toLowerCase();
                 const arg = parts[1] ? parts[1].toLowerCase() : '';
 
+                const mp3Map = {
+                    1: "01_layer_01_weird.mp3",
+                    2: "02_layer_02_girls.mp3",
+                    3: "03_layer_03_psyche.mp3",
+                    4: "04_layer_04_religion.mp3",
+                    5: "05_layer_05_distortion.mp3",
+                    6: "06_layer_06_kids.mp3",
+                    7: "07_layer_07_society.mp3",
+                    8: "08_layer_08_rumours.mp3",
+                    9: "09_layer_09_protocol.mp3",
+                    10: "10_layer_10_love.mp3",
+                    11: "11_layer_11_infornography.mp3",
+                    12: "12_layer_12_landscape.mp3",
+                    13: "13_layer_13_echo.mp3"
+                };
+
                 switch (cmd) {
                     case 'help':
                         outputElem.innerText += `Available Commands:
-  help                     - Show command manual
-  layer <1-7>             - Switch active UI Layer (e.g. layer 3)
-  dial <v90|v92|v34>       - Trigger V. Series modem handshake
-  mppp status              - View Multilink PPP channel status
-  theme <green|amber|cyan|white> - Change CRT Phosphor color theme
-  sound <on|off>          - Toggle audio SFX
-  zmodem download          - Simulate ZMODEM protocol file transfer
-  cat identity             - Output Layer 01 Identity summary
-  clear                    - Clear terminal screen\n`;
+  help                     - Display manual
+  layer <1-13>            - Switch to specific Layer & trigger voice audio
+  theme <green|amber|cyan|white> - Change CRT Phosphor color palette
+  audio <on|off>          - Toggle Layer audio voice playback
+  clear                    - Clear shell screen\n`;
                         break;
 
                     case 'layer':
-                        if (arg >= 1 && arg <= 7) {
-                            const btn = document.querySelectorAll('.tab-btn')[arg - 1];
-                            switchLayer('layer-' + arg, btn);
-                            outputElem.innerText += `[SUCCESS] Switched to Layer 0${arg}.\n`;
+                        const num = parseInt(arg, 10);
+                        if (num >= 1 && num <= 13) {
+                            const btns = document.querySelectorAll('.layer-nav-btn');
+                            const targetBtn = btns[num - 1];
+                            selectLayer(num, mp3Map[num], targetBtn);
+                            outputElem.innerText += `[SUCCESS] Switched to Layer ${num.toString().padStart(2, '0')}. Playing audio...\n`;
                         } else {
-                            outputElem.innerText += `Usage: layer <1-7>\n`;
+                            outputElem.innerText += `Usage: layer <1-13>\n`;
                         }
-                        break;
-
-                    case 'dial':
-                        playModemSound('v90');
-                        outputElem.innerText += `[DIAL] Negotiating V.Series PCM carrier handshake... Carrier lock at 56,000 bps.\n`;
-                        break;
-
-                    case 'mppp':
-                        outputElem.innerText += `[MPPP STATUS] Multilink PPP (RFC 1990) Bundle:
-  Link A: 56.0 Kbps (V.90 Serial 1) - Fragment TX: OK
-  Link B: 56.0 Kbps (V.90 Serial 2) - Fragment RX: OK
-  Aggregated Throughput: 112.0 Kbps | Packet Loss: 0.00%\n`;
                         break;
 
                     case 'theme':
@@ -997,37 +885,22 @@ Connected to Wired Gateway (127.0.0.1:8000 via Multilink PPP).
                             const btns = document.querySelectorAll('.theme-btn');
                             const targetBtn = Array.from(btns).find(b => b.innerText.toLowerCase() === arg);
                             setTheme(arg, targetBtn);
-                            outputElem.innerText += `[THEME] Switched phosphor palette to ${arg.toUpperCase()}.\n`;
+                            outputElem.innerText += `[THEME] Phosphor palette updated to ${arg.toUpperCase()}.\n`;
                         } else {
                             outputElem.innerText += `Usage: theme <green|amber|cyan|white>\n`;
                         }
                         break;
 
-                    case 'sound':
+                    case 'audio':
                         if (arg === 'on') {
                             if (!audioEnabled) toggleAudio();
-                            outputElem.innerText += `[AUDIO] Audio SFX Enabled.\n`;
+                            outputElem.innerText += `[AUDIO] Layer Audio voice playback enabled.\n`;
                         } else if (arg === 'off') {
                             if (audioEnabled) toggleAudio();
-                            outputElem.innerText += `[AUDIO] Audio SFX Muted.\n`;
+                            outputElem.innerText += `[AUDIO] Layer Audio muted.\n`;
                         } else {
-                            outputElem.innerText += `Usage: sound <on|off>\n`;
+                            outputElem.innerText += `Usage: audio <on|off>\n`;
                         }
-                        break;
-
-                    case 'zmodem':
-                        playModemSound('zmodem');
-                        outputElem.innerText += `[ZMODEM] Sending ZFILE packet...
-  Filename: copeland_os_v4.92.bin [1024 KB]
-  [=========================>] 100% | CRC-32: 0x8F92A1C4 | Transfer Complete.\n`;
-                        break;
-
-                    case 'cat':
-                        outputElem.innerText += `[IDENTITY SUMMARY]
-  Status: Connected to The Wired
-  Clearance: Level 6 Computing / Cybersecurity / Dial-Up Specialist
-  Designation: First-line IT Support
-  Philosophy: No matter where you go, everyone is connected.\n`;
                         break;
 
                     case 'clear':
