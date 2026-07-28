@@ -1,7 +1,10 @@
 <?php
+session_start();
+
 // --- 2006 ERA PERSISTENCE NODES ---
 $hit_counter_file = __DIR__ . '/hit_counter.txt';
 $guestbook_file = __DIR__ . '/guestbook_entries.json';
+const SU_PASSWORD_HASH = '$2y$12$t0u19jcfXdn.BuUiz18uVuSdX9M7V5agwlMCtXnUhPmzB/yK7It3y';
 
 function read_counter($path) {
     if (!file_exists($path)) {
@@ -32,6 +35,29 @@ function read_guestbook($path) {
 }
 
 $guestbook_status = '';
+$login_status = '';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'su_login') {
+    $username = trim((string) ($_POST['username'] ?? ''));
+    $password = (string) ($_POST['password'] ?? '');
+
+    if ($username === 'su' && password_verify($password, SU_PASSWORD_HASH)) {
+        session_regenerate_id(true);
+        $_SESSION['su_authenticated'] = true;
+        $login_status = 'SU ACCESS GRANTED';
+    } else {
+        $_SESSION['su_authenticated'] = false;
+        $login_status = 'ACCESS DENIED';
+    }
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'su_logout') {
+    $_SESSION['su_authenticated'] = false;
+    $login_status = 'SU SESSION CLOSED';
+}
+
+$is_su = !empty($_SESSION['su_authenticated']);
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'sign_guestbook') {
     $name = trim(strip_tags((string) ($_POST['guest_name'] ?? 'anonymous@wired')));
     $message = trim(strip_tags((string) ($_POST['guest_message'] ?? '')));
@@ -171,6 +197,20 @@ $user_database = [
         "System_Message" => "Present day, present time... Hahahaha."
     ]
 ];
+
+$public_database = [];
+foreach ($user_database as $layer_key => $data) {
+    $public_database[$layer_key] = [
+        'Layer_Name' => $data['Layer_Name'],
+        'Public_Signal' => 'Filtered public mirror for ' . $data['Layer_Name'] . '. Full memory payload withheld.',
+        'Access_Level' => 'PUBLIC / PERSONAL DATA REDACTED',
+        'Redaction_Status' => 'Authenticate as su to unlock private layer fields, archive references, and audio clips.'
+    ];
+}
+$display_database = $is_su ? $user_database : $public_database;
+$private_ls_listing = "corrupt_wav/\n  docs/\n    Cognitive_Integration_and_Technical_Architecture.pdf\n    Charity_Pub_Quiz_Event.pdf\n    sasser.txt (A/E variants)\n    sasserftpd.txt (SEH overwrite exploit)\n    sasser-variant.txt (Unified .A annotated)\n    xp exploits.docx\n    Logan Weekly Tasks Breakdown Log.docx\n    My Activity.html [11MB]\n    Resume-2.pdf\n  wavfiles/ [~600+ AI voice clips]\n  download-*.zip [321 conversation archives]\nlayers/ [13 x .mp3 voice clips]\nCentral.php [this node]\nlayer_all.mp3\n";
+$public_ls_listing = "public_mirror.html\nwebring.html\nguestbook.cgi\nprivate_archive/ [LOCKED]\nlayer_audio/ [LOCKED]\n";
+$terminal_ls_listing = $is_su ? $private_ls_listing : $public_ls_listing;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -369,6 +409,54 @@ $user_database = [
             font-size: 0.95rem;
             flex-wrap: wrap;
             gap: 10px;
+        }
+
+        .auth-panel {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            border: 1px solid var(--phosphor-dim);
+            background: rgba(0, 0, 0, 0.62);
+            padding: 8px 12px;
+            margin-bottom: 15px;
+            font-family: var(--font-mono);
+            font-size: 0.82rem;
+            flex-wrap: wrap;
+        }
+
+        .auth-form {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .auth-form input {
+            background: #000;
+            border: 1px solid var(--phosphor-dim);
+            color: var(--phosphor);
+            font-family: var(--font-mono);
+            padding: 4px 6px;
+            width: 150px;
+        }
+
+        .auth-form button {
+            background: transparent;
+            border: 1px solid var(--phosphor);
+            color: var(--phosphor);
+            font-family: var(--font-main);
+            padding: 3px 9px;
+            cursor: pointer;
+        }
+
+        .auth-form button:hover {
+            background: var(--phosphor);
+            color: #000;
+        }
+
+        .auth-status {
+            color: var(--accent);
         }
 
         .control-group {
@@ -870,12 +958,34 @@ $user_database = [
                 </div>
                 <div class="led-item">
                     <div class="led-light active blink"></div>
-                    <span>TAKEOUT: 4818 PROMPTS</span>
+                    <span><?= $is_su ? 'TAKEOUT: 4818 PROMPTS' : 'PUBLIC MIRROR' ?></span>
                 </div>
                 <div class="led-item">
-                    <span style="color:var(--accent);" id="activeLayerStatus">LAYER 01 WEIRD</span>
+                    <span style="color:var(--accent);" id="activeLayerStatus"><?= $is_su ? 'LAYER 01 WEIRD' : 'LAYER 01 WEIRD [FILTERED]' ?></span>
                 </div>
             </div>
+        </div>
+
+        <div class="auth-panel">
+            <div>
+                ACCESS: <span class="auth-status"><?= $is_su ? 'SU / FULL ARCHIVE' : 'PUBLIC / HEAVILY FILTERED' ?></span>
+                <?php if ($login_status): ?>
+                    // <?= htmlspecialchars($login_status) ?>
+                <?php endif; ?>
+            </div>
+            <?php if ($is_su): ?>
+                <form class="auth-form" method="post">
+                    <input type="hidden" name="action" value="su_logout">
+                    <button type="submit">LOG OUT SU</button>
+                </form>
+            <?php else: ?>
+                <form class="auth-form" method="post">
+                    <input type="hidden" name="action" value="su_login">
+                    <input type="text" name="username" placeholder="user" autocomplete="username">
+                    <input type="password" name="password" placeholder="password" autocomplete="current-password">
+                    <button type="submit">SU LOGIN</button>
+                </form>
+            <?php endif; ?>
         </div>
 
         <div class="crt-controls">
@@ -888,7 +998,7 @@ $user_database = [
             </div>
             <div class="control-group">
                 <button class="toggle-btn active" id="scanlineToggle" onclick="toggleScanlines()">SCANLINES: ON</button>
-                <button class="toggle-btn active" id="audioToggle" onclick="toggleAudio()">LAYER AUDIO: ACTIVE</button>
+                <button class="toggle-btn <?= $is_su ? 'active' : '' ?>" id="audioToggle" onclick="toggleAudio()"><?= $is_su ? 'LAYER AUDIO: ACTIVE' : 'LAYER AUDIO: LOCKED' ?></button>
                 <button class="toggle-btn active" id="cursorToggle" onclick="toggleCursorFx()">CURSOR FX: ON</button>
             </div>
         </div>
@@ -932,13 +1042,22 @@ $user_database = [
 
             <div class="retro-panel">
                 <div class="retro-title">Index of /wired/archive/</div>
-                <div class="archive-index">Name                         Size
+                <?php if ($is_su): ?>
+                    <div class="archive-index">Name                         Size
 download-001.zip             14M
 corrupt_wav/                 DIR
 docs/                        DIR
 layer_all.mp3                986K
 guestbook.cgi                LIVE
 webring.html                 4K</div>
+                <?php else: ?>
+                    <div class="archive-index">Name                         Size
+public_mirror.html           56K
+guestbook.cgi                LIVE
+webring.html                 4K
+private_archive/             LOCKED
+layer_audio/                 LOCKED</div>
+                <?php endif; ?>
             </div>
 
             <div class="retro-panel" id="guestbook">
@@ -980,7 +1099,7 @@ webring.html                 4K</div>
                 12 => "layer12.mp3",
                 13 => "layer13.mp3"
             ];
-            foreach ($user_database as $layer_key => $data): 
+            foreach ($display_database as $layer_key => $data): 
                 $pad = str_pad($layer_index, 2, "0", STR_PAD_LEFT);
                 $name = htmlspecialchars($data['Layer_Name']);
                 $mp3 = $mp3_files[$layer_index];
@@ -988,7 +1107,7 @@ webring.html                 4K</div>
             ?>
                 <button class="layer-nav-btn <?= $active_class ?>" onclick="selectLayer(<?= $layer_index ?>, '<?= $mp3 ?>', this)">
                     <span>[L<?= $pad ?>] <?= $name ?></span>
-                    <span class="audio-indicator">🔊</span>
+                    <span class="audio-indicator"><?= $is_su ? '🔊' : 'LOCK' ?></span>
                 </button>
             <?php 
                 $layer_index++;
@@ -998,14 +1117,14 @@ webring.html                 4K</div>
 
         <?php 
         $idx = 1;
-        foreach ($user_database as $layer_key => $data): 
+        foreach ($display_database as $layer_key => $data): 
             $active_panel = ($idx === 1) ? "active" : "";
             $mp3 = $mp3_files[$idx];
         ?>
             <div class="layer-content <?= $active_panel ?>" id="layer-panel-<?= $idx ?>">
                 <div class="layer-header-banner">
                     <span>[<?= htmlspecialchars($layer_key) ?>]</span>
-                    <button class="play-layer-sound-btn" onclick="playLayerAudio('<?= $mp3 ?>')">▶ PLAY LAYER VOICE CLIP</button>
+                    <button class="play-layer-sound-btn" onclick="playLayerAudio('<?= $mp3 ?>')"><?= $is_su ? '▶ PLAY LAYER VOICE CLIP' : 'AUDIO LOCKED' ?></button>
                 </div>
 
                 <div class="data-grid">
@@ -1021,7 +1140,7 @@ webring.html                 4K</div>
                 <?php if ($idx === 9): // PROTOCOL ?>
                     <div class="lab-box">
                         <div class="lab-title">> MALWARE DISASSEMBLY & RETRO V. SERIES LAB</div>
-                        <p style="font-size:0.95rem;">Extracted Sasser worm disassembly, remote FTP buffer overflow analyses, V.90/V.92 56,000 bps Downstream PCM, V.34 Trellis Modulation, & V.42bis Compression Dictionary stats.</p>
+                        <p style="font-size:0.95rem;"><?= $is_su ? 'Extracted Sasser worm disassembly, remote FTP buffer overflow analyses, V.90/V.92 56,000 bps Downstream PCM, V.34 Trellis Modulation, & V.42bis Compression Dictionary stats.' : 'Protocol lab details are redacted in the public mirror. Authenticate as su for full packet notes.' ?></p>
                     </div>
                 <?php elseif ($idx === 11): // INFORNOGRAPHY ?>
                     <div class="lab-box">
@@ -1052,8 +1171,8 @@ webring.html                 4K</div>
                     <div class="terminal-window">
                         <div class="terminal-output" id="termOutput">Navi / Copeland OS v4.92 (lainphp-summary_v4.92prerelease-prejudice)
 Connected to 13-Layer Wired Gateway (127.0.0.1:8000).
-Takeout Recovery Archive: 4,818 Gemini prompts integrated into 13 Layers.
-Type 'help' or 'layer <1-13>' to switch layers & trigger audio clips.
+<?= $is_su ? 'Takeout Recovery Archive: 4,818 Gemini prompts integrated into 13 Layers.' : 'Public mirror active. Personal payloads, archive paths, and audio are filtered.' ?>
+Type 'help' or 'layer <1-13>' to switch layers<?= $is_su ? ' & trigger audio clips' : '' ?>.
 </div>
                         <div class="cmd-line">
                             <span class="prompt">lain@dsl-unix:~$</span>
@@ -1128,7 +1247,9 @@ Type 'help' or 'layer <1-13>' to switch layers & trigger audio clips.
         setInterval(drawRain, 33);
 
         let currentAudio = null;
-        let audioEnabled = true;
+        const suUnlocked = <?= $is_su ? 'true' : 'false' ?>;
+        const terminalLsListing = <?= json_encode($terminal_ls_listing) ?>;
+        let audioEnabled = suUnlocked;
         let cursorFxOn = true;
         let winampLayer = 1;
         const layerNames = ['WEIRD', 'GIRLS', 'PSYCHE', 'RELIGION', 'DISTORTION', 'KIDS', 'SOCIETY', 'RUMOURS', 'PROTOCOL', 'LOVE', 'INFORNOGRAPHY', 'LANDSCAPE', 'ECHO'];
@@ -1186,6 +1307,10 @@ Type 'help' or 'layer <1-13>' to switch layers & trigger audio clips.
         });
 
         function playLayerAudio(filename) {
+            if (!suUnlocked) {
+                appendTerminal('\n[AUDIO] Layer voice clips are locked in public mirror mode. Login as su.\n');
+                return;
+            }
             if (!audioEnabled) return;
             // Whitelist: only allow layer01.mp3 .. layer13.mp3
             if (!/^layer(0[1-9]|1[0-3])\.mp3$/.test(filename)) {
@@ -1243,6 +1368,10 @@ Type 'help' or 'layer <1-13>' to switch layers & trigger audio clips.
         }
 
         function toggleAudio() {
+            if (!suUnlocked) {
+                appendTerminal('\n[AUDIO] Authentication required. Login as su to enable layer audio.\n');
+                return;
+            }
             audioEnabled = !audioEnabled;
             const btn = document.getElementById('audioToggle');
             btn.classList.toggle('active', audioEnabled);
@@ -1320,7 +1449,7 @@ Type 'help' or 'layer <1-13>' to switch layers & trigger audio clips.
                             const btns = document.querySelectorAll('.layer-nav-btn');
                             const targetBtn = btns[num - 1];
                             selectLayer(num, mp3Map[num], targetBtn);
-                            outputElem.innerText += `[SUCCESS] Switched to Layer ${num.toString().padStart(2, '0')}. Playing audio...\n`;
+                            outputElem.innerText += suUnlocked ? `[SUCCESS] Switched to Layer ${num.toString().padStart(2, '0')}. Playing audio...\n` : `[SUCCESS] Switched to filtered Layer ${num.toString().padStart(2, '0')}.\n`;
                         } else {
                             outputElem.innerText += `Usage: layer <1-13>\n`;
                         }
@@ -1354,7 +1483,7 @@ Type 'help' or 'layer <1-13>' to switch layers & trigger audio clips.
                         break;
 
                     case 'ls':
-                        outputElem.innerText += `corrupt_wav/\n  docs/\n    Cognitive_Integration_and_Technical_Architecture.pdf\n    Charity_Pub_Quiz_Event.pdf\n    sasser.txt (A/E variants)\n    sasserftpd.txt (SEH overwrite exploit)\n    sasser-variant.txt (Unified .A annotated)\n    xp exploits.docx\n    Logan Weekly Tasks Breakdown Log.docx\n    My Activity.html [11MB]\n    Resume-2.pdf\n  wavfiles/ [~600+ AI voice clips]\n  download-*.zip [321 conversation archives]\nlayers/ [13 x .mp3 voice clips]\nCentral.php [this node]\nlayer_all.mp3\n`;
+                        outputElem.innerText += terminalLsListing;
                         break;
 
                     case 'nms':
