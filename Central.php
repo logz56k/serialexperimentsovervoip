@@ -621,19 +621,19 @@ $user_database = [
             <?php 
             $layer_index = 1;
             $mp3_files = [
-                1 => "01_layer_01_weird.mp3",
-                2 => "02_layer_02_girls.mp3",
-                3 => "03_layer_03_psyche.mp3",
-                4 => "04_layer_04_religion.mp3",
-                5 => "05_layer_05_distortion.mp3",
-                6 => "06_layer_06_kids.mp3",
-                7 => "07_layer_07_society.mp3",
-                8 => "08_layer_08_rumours.mp3",
-                9 => "09_layer_09_protocol.mp3",
-                10 => "10_layer_10_love.mp3",
-                11 => "11_layer_11_infornography.mp3",
-                12 => "12_layer_12_landscape.mp3",
-                13 => "13_layer_13_echo.mp3"
+                1 => "layer01.mp3",
+                2 => "layer02.mp3",
+                3 => "layer03.mp3",
+                4 => "layer04.mp3",
+                5 => "layer05.mp3",
+                6 => "layer06.mp3",
+                7 => "layer07.mp3",
+                8 => "layer08.mp3",
+                9 => "layer09.mp3",
+                10 => "layer10.mp3",
+                11 => "layer11.mp3",
+                12 => "layer12.mp3",
+                13 => "layer13.mp3"
             ];
             foreach ($user_database as $layer_key => $data): 
                 $pad = str_pad($layer_index, 2, "0", STR_PAD_LEFT);
@@ -843,19 +843,19 @@ Type 'help' or 'layer <1-13>' to switch layers & trigger audio clips.
                 const arg = parts[1] ? parts[1].toLowerCase() : '';
 
                 const mp3Map = {
-                    1: "01_layer_01_weird.mp3",
-                    2: "02_layer_02_girls.mp3",
-                    3: "03_layer_03_psyche.mp3",
-                    4: "04_layer_04_religion.mp3",
-                    5: "05_layer_05_distortion.mp3",
-                    6: "06_layer_06_kids.mp3",
-                    7: "07_layer_07_society.mp3",
-                    8: "08_layer_08_rumours.mp3",
-                    9: "09_layer_09_protocol.mp3",
-                    10: "10_layer_10_love.mp3",
-                    11: "11_layer_11_infornography.mp3",
-                    12: "12_layer_12_landscape.mp3",
-                    13: "13_layer_13_echo.mp3"
+                    1: "layer01.mp3",
+                    2: "layer02.mp3",
+                    3: "layer03.mp3",
+                    4: "layer04.mp3",
+                    5: "layer05.mp3",
+                    6: "layer06.mp3",
+                    7: "layer07.mp3",
+                    8: "layer08.mp3",
+                    9: "layer09.mp3",
+                    10: "layer10.mp3",
+                    11: "layer11.mp3",
+                    12: "layer12.mp3",
+                    13: "layer13.mp3"
                 };
 
                 switch (cmd) {
