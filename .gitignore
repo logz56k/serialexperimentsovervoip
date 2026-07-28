@@ -9,3 +9,7 @@ desktop.ini
 # Editor
 .vscode/
 *.swp
+
+# Runtime local PHP data
+hit_counter.txt
+guestbook_entries.json

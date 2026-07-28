@@ -1,4 +1,61 @@
 <?php
+// --- 2006 ERA PERSISTENCE NODES ---
+$hit_counter_file = __DIR__ . '/hit_counter.txt';
+$guestbook_file = __DIR__ . '/guestbook_entries.json';
+
+function read_counter($path) {
+    if (!file_exists($path)) {
+        return 1336;
+    }
+    $value = (int) trim((string) file_get_contents($path));
+    return $value > 0 ? $value : 1336;
+}
+
+function read_guestbook($path) {
+    if (!file_exists($path)) {
+        return [
+            [
+                'name' => 'anonymous@wired',
+                'message' => 'Present day, present time. The guestbook node is alive.',
+                'time' => '2006-04-19 23:42:00'
+            ],
+            [
+                'name' => 'sysop',
+                'message' => 'Leave a transmission. HTML stripped, signal preserved.',
+                'time' => '2006-04-20 00:13:37'
+            ]
+        ];
+    }
+
+    $decoded = json_decode((string) file_get_contents($path), true);
+    return is_array($decoded) ? array_slice($decoded, 0, 20) : [];
+}
+
+$guestbook_status = '';
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'sign_guestbook') {
+    $name = trim(strip_tags((string) ($_POST['guest_name'] ?? 'anonymous@wired')));
+    $message = trim(strip_tags((string) ($_POST['guest_message'] ?? '')));
+    $name = substr($name !== '' ? $name : 'anonymous@wired', 0, 32);
+    $message = substr($message, 0, 280);
+
+    if ($message !== '') {
+        $entries = read_guestbook($guestbook_file);
+        array_unshift($entries, [
+            'name' => $name,
+            'message' => $message,
+            'time' => date('Y-m-d H:i:s')
+        ]);
+        file_put_contents($guestbook_file, json_encode(array_slice($entries, 0, 20), JSON_PRETTY_PRINT));
+        $guestbook_status = 'TRANSMISSION SAVED';
+    } else {
+        $guestbook_status = 'EMPTY TRANSMISSION DROPPED';
+    }
+}
+
+$visitor_count = read_counter($hit_counter_file) + 1;
+file_put_contents($hit_counter_file, (string) $visitor_count);
+$guestbook_entries = read_guestbook($guestbook_file);
+
 // --- NAVI / COPELAND OS DATABASE (Populated from Gemini Recovery Takeout Archive) ---
 $user_database = [
     "Layer 01 // WEIRD" => [
@@ -588,6 +645,191 @@ $user_database = [
             flex-wrap: wrap;
         }
 
+        .boot-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 150;
+            background: #000;
+            color: var(--phosphor);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-mono);
+            transition: opacity 0.45s ease, visibility 0.45s ease;
+        }
+
+        .boot-overlay.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .boot-console {
+            width: min(680px, calc(100vw - 28px));
+            border: 1px solid var(--phosphor);
+            padding: 18px;
+            box-shadow: 0 0 20px var(--phosphor-glow);
+            background: rgba(0, 12, 2, 0.92);
+        }
+
+        .boot-title {
+            color: var(--accent);
+            margin-bottom: 12px;
+            border-bottom: 1px dashed var(--phosphor-dim);
+            padding-bottom: 8px;
+        }
+
+        .widgets-grid, .retro-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .desktop-widget, .retro-panel {
+            border: 1px solid var(--phosphor-dim);
+            background: rgba(0, 0, 0, 0.62);
+            padding: 10px;
+            min-height: 74px;
+        }
+
+        .widget-title, .retro-title {
+            font-family: var(--font-mono);
+            color: var(--accent);
+            font-size: 0.82rem;
+            text-transform: uppercase;
+            border-bottom: 1px dotted var(--phosphor-dim);
+            padding-bottom: 4px;
+            margin-bottom: 6px;
+        }
+
+        .widget-value {
+            font-size: 1.35rem;
+            text-shadow: 0 0 8px var(--phosphor);
+        }
+
+        .winamp-player {
+            border: 2px ridge var(--phosphor-dim);
+            background: #050505;
+        }
+
+        .winamp-screen {
+            display: grid;
+            grid-template-columns: 1fr 130px;
+            gap: 10px;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .spectrum {
+            height: 46px;
+            display: flex;
+            align-items: end;
+            gap: 3px;
+            border: 1px inset var(--phosphor-dim);
+            padding: 4px;
+            background: #000;
+        }
+
+        .spectrum span {
+            flex: 1;
+            background: var(--phosphor);
+            box-shadow: 0 0 5px var(--phosphor);
+            animation: equalize 0.8s infinite alternate;
+        }
+
+        .spectrum span:nth-child(2n) { animation-delay: 0.15s; }
+        .spectrum span:nth-child(3n) { animation-delay: 0.3s; }
+
+        @keyframes equalize {
+            from { height: 20%; opacity: 0.55; }
+            to { height: 95%; opacity: 1; }
+        }
+
+        .mini-btn, .guestbook-form button {
+            background: transparent;
+            border: 1px solid var(--phosphor);
+            color: var(--phosphor);
+            font-family: var(--font-main);
+            font-size: 0.95rem;
+            padding: 3px 8px;
+            cursor: pointer;
+        }
+
+        .mini-btn:hover, .guestbook-form button:hover {
+            background: var(--phosphor);
+            color: #000;
+        }
+
+        .archive-index {
+            font-family: var(--font-mono);
+            font-size: 0.82rem;
+            line-height: 1.35;
+            white-space: pre-wrap;
+        }
+
+        .guestbook-form {
+            display: grid;
+            gap: 6px;
+            margin-bottom: 8px;
+        }
+
+        .guestbook-form input, .guestbook-form textarea {
+            width: 100%;
+            background: #000;
+            border: 1px solid var(--phosphor-dim);
+            color: var(--phosphor);
+            font-family: var(--font-mono);
+            padding: 6px;
+        }
+
+        .guestbook-form textarea {
+            min-height: 72px;
+            resize: vertical;
+        }
+
+        .guest-entry {
+            border-top: 1px dashed var(--phosphor-dim);
+            padding-top: 6px;
+            margin-top: 6px;
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+        }
+
+        .badge-row, .webring {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            align-items: center;
+            justify-content: center;
+            margin-top: 10px;
+            font-family: var(--font-mono);
+            font-size: 0.74rem;
+        }
+
+        .pixel-badge, .webring a {
+            border: 1px solid var(--phosphor);
+            background: #000;
+            color: var(--phosphor);
+            padding: 2px 6px;
+            text-decoration: none;
+            box-shadow: inset 0 0 0 1px var(--phosphor-dim);
+        }
+
+        .cursor-spark {
+            position: fixed;
+            width: 5px;
+            height: 5px;
+            pointer-events: none;
+            z-index: 120;
+            background: var(--phosphor);
+            box-shadow: 0 0 8px var(--phosphor);
+            animation: sparkFade 0.65s linear forwards;
+        }
+
+        @keyframes sparkFade {
+            to { opacity: 0; transform: translateY(12px) scale(0.2); }
+        }
+
         .blinking-cursor {
             display: inline-block;
             width: 8px;
@@ -601,6 +843,13 @@ $user_database = [
     </style>
 </head>
 <body class="theme-green">
+
+    <div class="boot-overlay" id="bootOverlay">
+        <div class="boot-console">
+            <div class="boot-title">NAVI DIAL-UP GATEWAY // V.92 HANDSHAKE</div>
+            <div id="bootLog">Initializing modem...</div>
+        </div>
+    </div>
 
     <canvas id="matrixRain" aria-hidden="true"></canvas>
     <div class="crt-overlay"></div>
@@ -640,10 +889,80 @@ $user_database = [
             <div class="control-group">
                 <button class="toggle-btn active" id="scanlineToggle" onclick="toggleScanlines()">SCANLINES: ON</button>
                 <button class="toggle-btn active" id="audioToggle" onclick="toggleAudio()">LAYER AUDIO: ACTIVE</button>
+                <button class="toggle-btn active" id="cursorToggle" onclick="toggleCursorFx()">CURSOR FX: ON</button>
             </div>
         </div>
 
-        <div class="layers-nav">
+        <div class="widgets-grid">
+            <div class="desktop-widget">
+                <div class="widget-title">Visitor Counter</div>
+                <div class="widget-value">#<?= str_pad((string) $visitor_count, 8, "0", STR_PAD_LEFT) ?></div>
+            </div>
+            <div class="desktop-widget">
+                <div class="widget-title">Local Time</div>
+                <div class="widget-value" id="localClock">--:--:--</div>
+            </div>
+            <div class="desktop-widget">
+                <div class="widget-title">System Uptime</div>
+                <div class="widget-value" id="uptimeClock">00:00:00</div>
+            </div>
+            <div class="desktop-widget">
+                <div class="widget-title">Modem Telemetry</div>
+                <div>RX <span id="rxRate">49.3</span> Kbps // TX <span id="txRate">31.2</span> Kbps</div>
+                <div>PACKET LOSS: <span id="packetLoss">0.3</span>%</div>
+            </div>
+        </div>
+
+        <div class="retro-grid">
+            <div class="retro-panel winamp-player" id="winamp">
+                <div class="retro-title">NAVI AMP 2.91 // Layer Playlist</div>
+                <div class="winamp-screen">
+                    <div>
+                        <div id="winampTrack">01 - WEIRD.mp3</div>
+                        <div>[44kHz] [STEREO] [PHOSPHOR]</div>
+                    </div>
+                    <div class="spectrum" aria-hidden="true">
+                        <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+                    </div>
+                </div>
+                <button class="mini-btn" onclick="playLayerAudio('layer01.mp3')">PLAY</button>
+                <button class="mini-btn" onclick="toggleAudio()">MUTE</button>
+                <button class="mini-btn" onclick="cycleWinampTrack()">NEXT</button>
+            </div>
+
+            <div class="retro-panel">
+                <div class="retro-title">Index of /wired/archive/</div>
+                <div class="archive-index">Name                         Size
+download-001.zip             14M
+corrupt_wav/                 DIR
+docs/                        DIR
+layer_all.mp3                986K
+guestbook.cgi                LIVE
+webring.html                 4K</div>
+            </div>
+
+            <div class="retro-panel" id="guestbook">
+                <div class="retro-title">Wired Guestbook</div>
+                <form class="guestbook-form" method="post">
+                    <input type="hidden" name="action" value="sign_guestbook">
+                    <input type="text" name="guest_name" maxlength="32" placeholder="anonymous@wired">
+                    <textarea name="guest_message" maxlength="280" placeholder="Leave a transmission..."></textarea>
+                    <button type="submit">SIGN GUESTBOOK</button>
+                </form>
+                <?php if ($guestbook_status): ?>
+                    <div><?= htmlspecialchars($guestbook_status) ?></div>
+                <?php endif; ?>
+                <?php foreach (array_slice($guestbook_entries, 0, 3) as $entry): ?>
+                    <div class="guest-entry">
+                        FROM: <?= htmlspecialchars($entry['name'] ?? 'anonymous@wired') ?><br>
+                        TIME: <?= htmlspecialchars($entry['time'] ?? '') ?><br>
+                        <?= htmlspecialchars($entry['message'] ?? '') ?>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        </div>
+
+        <div class="layers-nav" id="layers-nav">
             <?php 
             $layer_index = 1;
             $mp3_files = [
@@ -754,6 +1073,21 @@ Type 'help' or 'layer <1-13>' to switch layers & trigger audio clips.
             <span>Navi OS 4.92 | Wired Resonance Active</span>
         </div>
 
+        <div class="webring">
+            <a href="#layers-nav" onclick="return false;">&lt; PREV</a>
+            <span class="pixel-badge">LAINRING.NET</span>
+            <a href="#guestbook">RANDOM NODE</a>
+            <a href="#winamp">NEXT &gt;</a>
+        </div>
+
+        <div class="badge-row">
+            <span class="pixel-badge">BEST VIEWED 1024x768</span>
+            <span class="pixel-badge">POWERED BY PHP</span>
+            <span class="pixel-badge">56K WARNING</span>
+            <span class="pixel-badge">NAVI OS CERTIFIED</span>
+            <span class="pixel-badge">NO FRAMES REQUIRED</span>
+        </div>
+
     </div>
 
     <script>
@@ -795,6 +1129,61 @@ Type 'help' or 'layer <1-13>' to switch layers & trigger audio clips.
 
         let currentAudio = null;
         let audioEnabled = true;
+        let cursorFxOn = true;
+        let winampLayer = 1;
+        const layerNames = ['WEIRD', 'GIRLS', 'PSYCHE', 'RELIGION', 'DISTORTION', 'KIDS', 'SOCIETY', 'RUMOURS', 'PROTOCOL', 'LOVE', 'INFORNOGRAPHY', 'LANDSCAPE', 'ECHO'];
+        const bootLines = [
+            'Dialing 0845-WIRED...',
+            'Carrier detected.',
+            'Handshake V.92 Quick Connect accepted.',
+            'Authenticating lain@dsl-unix...',
+            'Connected at 49,333 bps.',
+            'Mounting /wired/archive...',
+            'Launching Copeland OS 4.92.'
+        ];
+
+        function runBootSequence() {
+            const bootLog = document.getElementById('bootLog');
+            const overlay = document.getElementById('bootOverlay');
+            let idx = 0;
+            const timer = setInterval(() => {
+                bootLog.innerText += '\n' + bootLines[idx];
+                idx++;
+                if (idx >= bootLines.length) {
+                    clearInterval(timer);
+                    setTimeout(() => overlay.classList.add('hidden'), 650);
+                }
+            }, 320);
+        }
+        runBootSequence();
+
+        const startedAt = Date.now();
+        function updateWidgets() {
+            const now = new Date();
+            const localClock = document.getElementById('localClock');
+            if (localClock) localClock.innerText = now.toLocaleTimeString();
+
+            const elapsed = Math.floor((Date.now() - startedAt) / 1000);
+            const h = String(Math.floor(elapsed / 3600)).padStart(2, '0');
+            const m = String(Math.floor((elapsed % 3600) / 60)).padStart(2, '0');
+            const s = String(elapsed % 60).padStart(2, '0');
+            document.getElementById('uptimeClock').innerText = `${h}:${m}:${s}`;
+            document.getElementById('rxRate').innerText = (46 + Math.random() * 7).toFixed(1);
+            document.getElementById('txRate').innerText = (28 + Math.random() * 5).toFixed(1);
+            document.getElementById('packetLoss').innerText = (Math.random() * 1.2).toFixed(1);
+        }
+        updateWidgets();
+        setInterval(updateWidgets, 1000);
+
+        document.addEventListener('mousemove', event => {
+            if (!cursorFxOn || Math.random() > 0.45) return;
+            const spark = document.createElement('span');
+            spark.className = 'cursor-spark';
+            spark.style.left = event.clientX + 'px';
+            spark.style.top = event.clientY + 'px';
+            document.body.appendChild(spark);
+            setTimeout(() => spark.remove(), 700);
+        });
 
         function playLayerAudio(filename) {
             if (!audioEnabled) return;
@@ -811,6 +1200,11 @@ Type 'help' or 'layer <1-13>' to switch layers & trigger audio clips.
             currentAudio.play().catch(err => {
                 console.log("Audio play deferred until user interaction: ", err);
             });
+            const match = filename.match(/layer(\d{2})\.mp3/);
+            if (match) {
+                winampLayer = parseInt(match[1], 10);
+                updateWinampTrack();
+            }
         }
 
         function selectLayer(layerIndex, mp3Filename, btnElem) {
@@ -828,6 +1222,8 @@ Type 'help' or 'layer <1-13>' to switch layers & trigger audio clips.
             }
 
             playLayerAudio(mp3Filename);
+            winampLayer = layerIndex;
+            updateWinampTrack();
         }
 
         function setTheme(themeName, btnElem) {
@@ -854,6 +1250,32 @@ Type 'help' or 'layer <1-13>' to switch layers & trigger audio clips.
             if (!audioEnabled && currentAudio) {
                 currentAudio.pause();
             }
+        }
+
+        function toggleCursorFx() {
+            cursorFxOn = !cursorFxOn;
+            const btn = document.getElementById('cursorToggle');
+            btn.classList.toggle('active', cursorFxOn);
+            btn.innerText = cursorFxOn ? 'CURSOR FX: ON' : 'CURSOR FX: OFF';
+        }
+
+        function updateWinampTrack() {
+            const target = document.getElementById('winampTrack');
+            if (!target) return;
+            target.innerText = String(winampLayer).padStart(2, '0') + ' - ' + layerNames[winampLayer - 1] + '.mp3';
+        }
+
+        function cycleWinampTrack() {
+            winampLayer = winampLayer >= 13 ? 1 : winampLayer + 1;
+            const filename = 'layer' + String(winampLayer).padStart(2, '0') + '.mp3';
+            playLayerAudio(filename);
+        }
+
+        function appendTerminal(text) {
+            const outputElem = document.getElementById('termOutput');
+            if (!outputElem) return;
+            outputElem.innerText += text;
+            setTimeout(() => { outputElem.scrollTop = outputElem.scrollHeight; }, 0);
         }
 
         function handleCmd(event) {
@@ -889,7 +1311,7 @@ Type 'help' or 'layer <1-13>' to switch layers & trigger audio clips.
 
                 switch (cmd) {
                     case 'help':
-                        outputElem.innerText += `Available Commands:\n  help                     - Display this manual\n  layer <1-13>             - Switch to Layer & trigger voice audio\n  theme <green|amber|cyan|white> - Change CRT phosphor palette\n  audio <on|off>           - Toggle layer audio playback\n  clear                    - Clear shell screen\n  ls                       - List archive filesystem nodes\n  nms                      - Display No Man's Sky gold refining table\n`;
+                        outputElem.innerText += `Available Commands:\n  help                     - Display this manual\n  layer <1-13>             - Switch to Layer & trigger voice audio\n  theme <green|amber|cyan|white> - Change CRT phosphor palette\n  audio <on|off>           - Toggle layer audio playback\n  clear                    - Clear shell screen\n  ls                       - List archive filesystem nodes\n  nms                      - Display No Man's Sky gold refining table\n  whois lain               - Query Wired identity records\n  ping wired               - Send ICMP packets through the terminal\n  traceroute psyche        - Trace route across the 13 layers\n  fortune                  - Print a recovered fortune cookie\n  guestbook                - Jump to guestbook node\n  winamp                   - Jump to NAVI AMP playlist\n  screensaver              - Toggle scanline darkness pulse\n  reboot                   - Replay dial-up boot sequence\n`;
                         break;
 
                     case 'layer':
@@ -939,8 +1361,64 @@ Type 'help' or 'layer <1-13>' to switch layers & trigger audio clips.
                         outputElem.innerText += `-- No Man's Sky Gold Refining Yield Table --\n  Lemmium (x1)              = 125 Gold  [OPTIMAL]\n  Magno-Gold (x1)           = 125 Gold  [OPTIMAL]\n  Grantine (x1)             = 125 Gold  [OPTIMAL]\n  Ferrite+O2+Emeril         = 10  Gold\n  Faecium + Pugneum         = 2   Gold\n  Mordite + Pugneum         = 1   Gold\n  Faecium + Residual Goop   = 1   Gold\n[ROUTE] Stack Lemmium/Magno-Gold/Grantine for peak 125:1 efficiency.\n`;
                         break;
 
+                    case 'whois':
+                        if (arg === 'lain') {
+                            outputElem.innerText += `Domain: lain.wired\nRegistrar: Copeland OS Network Solutions\nStatus: EVERYONE IS CONNECTED\nUpdated: present day, present time\n`;
+                        } else {
+                            outputElem.innerText += `Usage: whois lain\n`;
+                        }
+                        break;
+
+                    case 'ping':
+                        if (arg === 'wired') {
+                            outputElem.innerText += `PING wired (127.0.0.13): 56 data bytes\n64 bytes from wired: icmp_seq=0 ttl=64 time=13.37 ms\n64 bytes from wired: icmp_seq=1 ttl=64 time=9.92 ms\n64 bytes from wired: icmp_seq=2 ttl=64 time=4.92 ms\n--- wired ping statistics ---\n3 packets transmitted, 3 received, 0.0% packet loss\n`;
+                        } else {
+                            outputElem.innerText += `Usage: ping wired\n`;
+                        }
+                        break;
+
+                    case 'traceroute':
+                        if (arg === 'psyche') {
+                            outputElem.innerText += `traceroute to psyche.layer03 (13 hops max)\n 1  weird.gateway       4.818 ms\n 2  girls.relay         7.026 ms\n 3  psyche.layer03      13.000 ms\nTrace complete. Signal resonance nominal.\n`;
+                        } else {
+                            outputElem.innerText += `Usage: traceroute psyche\n`;
+                        }
+                        break;
+
+                    case 'fortune':
+                        const fortunes = [
+                            'No matter where you go, everyone is connected.',
+                            'A modem handshake is just a spell with a baud rate.',
+                            'The archive remembers what the browser forgot.',
+                            'Best viewed in 1024x768, but still alive in the Wired.'
+                        ];
+                        outputElem.innerText += fortunes[Math.floor(Math.random() * fortunes.length)] + `\n`;
+                        break;
+
+                    case 'guestbook':
+                        document.getElementById('guestbook').scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        outputElem.innerText += `[GUESTBOOK] Jumping to wired transmission log.\n`;
+                        break;
+
+                    case 'winamp':
+                        document.getElementById('winamp').scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        outputElem.innerText += `[NAVI AMP] Playlist panel focused.\n`;
+                        break;
+
+                    case 'screensaver':
+                        toggleScanlines();
+                        outputElem.innerText += `[SCREENSAVER] CRT scanline state toggled.\n`;
+                        break;
+
+                    case 'reboot':
+                        document.getElementById('bootLog').innerText = 'Initializing modem...';
+                        document.getElementById('bootOverlay').classList.remove('hidden');
+                        runBootSequence();
+                        outputElem.innerText += `[REBOOT] Dial-up gateway sequence replaying.\n`;
+                        break;
+
                     default:
-                        outputElem.innerText += `Command not recognized: '${cmd}'. Type 'help' for manual. Try: help, layer, theme, audio, clear, ls, nms\n`;
+                        outputElem.innerText += `Command not recognized: '${cmd}'. Type 'help' for manual. Try: help, layer, theme, audio, clear, ls, nms, fortune\n`;
                         break;
                 }
 
