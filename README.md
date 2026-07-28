@@ -34,6 +34,21 @@ php -S localhost:8000
 # open http://localhost:8000/Central.php
 ```
 
+## Deploy to InfinityFree
+
+GitHub Actions will upload the site over FTP on every push to `master`.
+
+Add these repository secrets in GitHub:
+
+| Secret | Value |
+|--------|-------|
+| `FTP_SERVER` | InfinityFree FTP host, usually `ftpupload.net` |
+| `FTP_USERNAME` | InfinityFree FTP username |
+| `FTP_PASSWORD` | InfinityFree FTP password |
+| `FTP_SERVER_DIR` | Target folder, usually `/htdocs/` or `/yourdomain/htdocs/` |
+
+The workflow excludes `.git`, GitHub workflow files, local runtime files, and the raw `logan_digitalmind/` archive.
+
 ## Terminal Commands
 
 | Command | Description |
