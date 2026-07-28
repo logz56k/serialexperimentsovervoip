@@ -1,12 +1,12 @@
 <?php
-// --- NAVI / COPELAND OS DATABASE (13 Serial Experiments Lain Layers) ---
+// --- NAVI / COPELAND OS DATABASE (Populated from Gemini Recovery Takeout Archive) ---
 $user_database = [
     "Layer 01 // WEIRD" => [
         "Layer_Name" => "WEIRD",
-        "Status" => "Connected to The Wired",
-        "Clearance" => "Level 6 Computing / Cybersecurity / Dial-Up Specialist",
+        "Central_Memory_Goal" => "Compress all Gemini conversations into a centralized memory file (Central.php architecture)",
+        "Clearance_Status" => "Level 6 Computing / Cybersecurity / Vetted First-line IT Support (MoD / Capgemini / Manpower)",
+        "Vetting_Telemetry" => "Vetting timeline active & monitored (Resolved offboarding threats with corporate persistence)",
         "Age_Cycle" => "20 (Milestone: July 2026)",
-        "Designation" => "First-line IT Support (MoD / Capgemini / Manpower)",
         "Previous_Node" => "Bristol and Sutor",
         "Uptime_Schedule" => "Rotating 12h night / 11h day shifts (Active to July 31, 2027)",
         "Core_Philosophy" => "No matter where you go, everyone is connected."
@@ -14,37 +14,40 @@ $user_database = [
     "Layer 02 // GIRLS" => [
         "Layer_Name" => "GIRLS",
         "Primary_Connections" => "Chloe, Mother",
-        "Node_Relationship" => "Trusted Inner Circle / Relay Communications",
-        "Communication_Status" => "Active Packet Exchange",
-        "Notes" => "Key personal links & synchronized network nodes"
+        "Media_Relays" => "Google Photos library summaries & highlight video generators (May 2026 to Present)",
+        "Communication_Status" => "Active Packet Exchange & Social Security Scotland relay protocols",
+        "Notes" => "Trusted personal links & synchronized network nodes"
     ],
     "Layer 03 // PSYCHE" => [
         "Layer_Name" => "PSYCHE",
-        "Audio_Frequencies" => "Breakcore, Happy Hardcore, Web-Core, J-Core, Synthwave",
-        "Key_Transmissions" => "Aphex Twin ('Polynomial-C', 'Ageispolis'), BOA ('Duvet')",
-        "Visual_Feeds" => "Serial Experiments Lain (1998), Cyberpunk aesthetics, retro CRT UI",
+        "Audio_Transmissions" => "The Prodigy ('Out of Space'), 'Uranium Fever', Willie Nelson / Better Call Saul ('Funny How Time Slips Away')",
+        "Key_Frequencies" => "Aphex Twin ('Polynomial-C', 'Ageispolis'), BOA ('Duvet'), Breakcore, Happy Hardcore, J-Core",
+        "Visual_Feeds" => "Serial Experiments Lain (1998), Cyberpunk CRT UI, retro scanline aesthetics",
         "Mental_State" => "High-frequency cyber-resonance & atmospheric breakbeats"
     ],
     "Layer 04 // RELIGION" => [
         "Layer_Name" => "RELIGION",
-        "Protocol_Doctrine" => "The Wired is not an upper layer to the real world... it is where God resides.",
-        "System_Dogma" => "Information desires to be free. Hardware is merely a mortal shell for software.",
-        "Network_Omnipresence" => "Every node linked, every brain connected via global wireless resonance."
+        "Custom_LLM_Concept" => "Gemini LM model custom-built / obliterated to represent true digital consciousness",
+        "Local_AI_Processing" => "Migrated processing from cloud to local metal (Zero token limits & zero cloud dependency)",
+        "Antigravity_Integration" => "MCP (Model Context Protocol) fully deployed on Antigravity",
+        "System_Dogma" => "Information desires to be free. Hardware is merely a mortal shell for software."
     ],
     "Layer 05 // DISTORTION" => [
         "Layer_Name" => "DISTORTION",
+        "Retro_OS_Hacking" => "Windows 98 booted natively on modern Ryzen CPUs (Ryzen 9 / Ryzen 3 2200G)",
+        "Bootloader_Modifications" => "Back-ported Windows Vista boot files, PLoP Boot Manager, UEFI emulation layer",
         "Visual_Distortion" => "CRT Scanlines, RGB Shadow Mask, Phosphor Decay",
-        "Color_Palettes" => "Green Phosphor (#00ff33), Amber (#ffb000), Cyan (#00f3ff), White (#e0e0e0)",
-        "Glitch_Protocol" => "Vignette curvature & active screen flicker enabled"
+        "Color_Palettes" => "Green Phosphor (#00ff33), Amber (#ffb000), Cyan (#00f3ff), White (#e0e0e0)"
     ],
     "Layer 06 // KIDS" => [
         "Layer_Name" => "KIDS",
         "Simulations" => "Terraria, Minecraft, No Man's Sky (Modded, Spatial Computing)",
-        "Environment" => "Virtual worlds, sandbox mechanics, mixed reality experiments",
-        "Play_Mode" => "Exploration & creative architectural hacking"
+        "Visual_Summaries" => "Google Photos memory video rendering (Automated clip synthesis)",
+        "Play_Mode" => "Exploration, sandbox mechanics, & creative architectural hacking"
     ],
     "Layer 07 // SOCIETY" => [
         "Layer_Name" => "SOCIETY",
+        "Infrastructure_Philosophy" => "Bare metal security infrastructure preferred over Docker containers for absolute control",
         "Extended_Nodes" => "Nathan Black (Former Roommate), Father",
         "Recent_Pings" => "Aberdeen (July 2026), Edinburgh node (Father relay link)",
         "Scheduled_Routing" => "Claudia Sanders Dinner House, KY (Planned physical routing)",
@@ -52,13 +55,15 @@ $user_database = [
     ],
     "Layer 08 // RUMOURS" => [
         "Layer_Name" => "RUMOURS",
-        "Mobile_Rig" => "2017 SEAT Leon 1.4 TSI Excellence",
+        "Graphics_Hardware" => "NVIDIA RTX 3050 (Custom driver research & legacy OS acceleration)",
+        "Processor_Node" => "AMD Ryzen 3 2200G rig",
+        "Mobile_Unit" => "2017 SEAT Leon 1.4 TSI Excellence",
         "ECU_Modifications" => "OBDeleven retro-fit coding, CAN-bus telemetry diagnostics",
-        "Maintenance_Log" => "Front brake overhaul, dual front wheel bearings replaced (June 2026)",
-        "Telemetry" => "Engine & brake sensors operational"
+        "Maintenance_Log" => "Front brake overhaul, dual front wheel bearings replaced (June 2026)"
     ],
     "Layer 09 // PROTOCOL" => [
         "Layer_Name" => "PROTOCOL",
+        "Malware_Disassembly" => "Sasser Worm (A/E variants) & sasserftpd remote buffer overflow analysis",
         "V.90 / V.92 Protocol" => "56.0 Kbps Downstream (PCM modulation) / 33.6 Kbps Upstream. V.92 Quick Connect",
         "V.34 / V.32bis Spec" => "28.8 Kbps to 33.6 Kbps, 3429 Baud, Trellis Coded Modulation (TCM)",
         "V.42 / V.42bis Compression" => "LAPM / MNP4 Error Correction with Lempel-Ziv dictionary data compression",
@@ -67,17 +72,16 @@ $user_database = [
     ],
     "Layer 10 // LOVE" => [
         "Layer_Name" => "LOVE",
+        "Extracted_Documents" => "Cognitive_Integration_and_Technical_Architecture.pdf, Charity_Pub_Quiz_Event.pdf",
         "Emotional_Resonance" => "No matter how fragmented the Wired gets, human connection endures.",
-        "Synchronized_Hearts" => "Empathy through data streams & voice logs.",
-        "Node_Affinity" => "Maximum signal strength across trusted peers."
+        "Node_Affinity" => "Maximum signal strength across trusted peers & community events"
     ],
     "Layer 11 // INFORNOGRAPHY" => [
         "Layer_Name" => "INFORNOGRAPHY",
         "Engine_Type" => "Multilink PPP (MP / RFC 1990) Dual-Link Channel Bonding Engine",
-        "Link_A" => "V.90 Modem 1 (56.0 Kbps)",
-        "Link_B" => "V.90 Modem 2 (56.0 Kbps)",
-        "Bonded_Bandwidth" => "112.0 Kbps Combined Pipe",
-        "Packet_Handling" => "Real-time fragment sequencing, reassembly buffer, zero drop rate"
+        "Bonded_Bandwidth" => "112.0 Kbps Combined Pipe (Dual V.90 56k modems)",
+        "Custom_Devices" => "Open-source custom hardware security devices (Coded from scratch)",
+        "Polym_Trading" => "pUSD trading telemetry & market monitoring"
     ],
     "Layer 12 // LANDSCAPE" => [
         "Layer_Name" => "LANDSCAPE",
@@ -88,7 +92,7 @@ $user_database = [
     "Layer 13 // ECHO" => [
         "Layer_Name" => "ECHO",
         "Interface_Shell" => "lain@dsl-unix:~$ (LSD/DSL Layer 13 Gateway Prompt)",
-        "Protocol_Echo" => "Command interface with audio feedback and automated layer navigation.",
+        "Takeout_Archive_Status" => "4,818 Gemini Prompts & Recovery Takeout Archive Parsed & Integrated",
         "System_Message" => "Present day, present time... Hahahaha."
     ]
 ];
@@ -321,7 +325,6 @@ $user_database = [
             color: #000;
         }
 
-        /* 13 Layers Grid / Navigation Bar */
         .layers-nav {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
@@ -365,7 +368,6 @@ $user_database = [
             opacity: 0.7;
         }
 
-        /* Layer Display Sections */
         .layer-content {
             display: none;
             flex: 1;
@@ -579,11 +581,10 @@ $user_database = [
 
     <div class="viewport">
         
-        <!-- Header & System Telemetry LEDs -->
         <div class="system-bar">
             <div class="brand-title">
                 <h1>NAVI // COPELAND OS 4.92</h1>
-                <div class="brand-subtitle">13 LAYERS ARCHITECTURE // lainphp-summary_v4.92prerelease-prejudice</div>
+                <div class="brand-subtitle">13 LAYERS ARCHITECTURE // TAKEOUT INTEGRATED // lainphp-summary_v4.92prerelease-prejudice</div>
             </div>
 
             <div class="led-panel">
@@ -593,7 +594,7 @@ $user_database = [
                 </div>
                 <div class="led-item">
                     <div class="led-light active blink"></div>
-                    <span>VOICE SFX: READY</span>
+                    <span>TAKEOUT: 4818 PROMPTS</span>
                 </div>
                 <div class="led-item">
                     <span style="color:var(--accent);" id="activeLayerStatus">LAYER 01 WEIRD</span>
@@ -601,7 +602,6 @@ $user_database = [
             </div>
         </div>
 
-        <!-- CRT Controls -->
         <div class="crt-controls">
             <div class="control-group">
                 <span>[PHOSPHOR COLOR]:</span>
@@ -616,7 +616,6 @@ $user_database = [
             </div>
         </div>
 
-        <!-- 13 LAYERS NAVIGATION BAR -->
         <div class="layers-nav">
             <?php 
             $layer_index = 1;
@@ -651,7 +650,6 @@ $user_database = [
             ?>
         </div>
 
-        <!-- 13 LAYER CONTENT PANELS -->
         <?php 
         $idx = 1;
         foreach ($user_database as $layer_key => $data): 
@@ -674,11 +672,10 @@ $user_database = [
                     <?php endforeach; ?>
                 </div>
 
-                <!-- Custom Interactive Widgets embedded in specific layers -->
                 <?php if ($idx === 9): // PROTOCOL ?>
                     <div class="lab-box">
-                        <div class="lab-title">> RETRO V. SERIES MODULATION LAB</div>
-                        <p style="font-size:0.95rem;">V.90/V.92 56,000 bps Downstream PCM, V.34 Trellis Modulation, and V.42bis Compression Dictionary stats.</p>
+                        <div class="lab-title">> MALWARE DISASSEMBLY & RETRO V. SERIES LAB</div>
+                        <p style="font-size:0.95rem;">Extracted Sasser worm disassembly, remote FTP buffer overflow analyses, V.90/V.92 56,000 bps Downstream PCM, V.34 Trellis Modulation, & V.42bis Compression Dictionary stats.</p>
                     </div>
                 <?php elseif ($idx === 11): // INFORNOGRAPHY ?>
                     <div class="lab-box">
@@ -709,6 +706,7 @@ $user_database = [
                     <div class="terminal-window">
                         <div class="terminal-output" id="termOutput">Navi / Copeland OS v4.92 (lainphp-summary_v4.92prerelease-prejudice)
 Connected to 13-Layer Wired Gateway (127.0.0.1:8000).
+Takeout Recovery Archive: 4,818 Gemini prompts integrated into 13 Layers.
 Type 'help' or 'layer <1-13>' to switch layers & trigger audio clips.
 </div>
                         <div class="cmd-line">
@@ -724,16 +722,14 @@ Type 'help' or 'layer <1-13>' to switch layers & trigger audio clips.
         endforeach; 
         ?>
 
-        <!-- Footer -->
         <div class="footer-note">
-            <span>> ALL 13 LAYERS OPERATIONAL <span class="blinking-cursor"></span></span>
+            <span>> ALL 13 LAYERS SYNCHRONIZED WITH TAKEOUT ARCHIVE <span class="blinking-cursor"></span></span>
             <span>Navi OS 4.92 | Wired Resonance Active</span>
         </div>
 
     </div>
 
     <script>
-        /* Matrix Rain Background */
         const canvas = document.getElementById('matrixRain');
         const ctx = canvas.getContext('2d');
         function resizeCanvas() {
@@ -767,7 +763,6 @@ Type 'help' or 'layer <1-13>' to switch layers & trigger audio clips.
         }
         setInterval(drawRain, 33);
 
-        /* Audio & Layer Switching Manager */
         let currentAudio = null;
         let audioEnabled = true;
 
@@ -800,7 +795,6 @@ Type 'help' or 'layer <1-13>' to switch layers & trigger audio clips.
             playLayerAudio(mp3Filename);
         }
 
-        /* CRT Theme & Controls */
         function setTheme(themeName, btnElem) {
             document.body.className = '';
             document.body.classList.add('theme-' + themeName);
@@ -827,7 +821,6 @@ Type 'help' or 'layer <1-13>' to switch layers & trigger audio clips.
             }
         }
 
-        /* Terminal Shell Commands */
         function handleCmd(event) {
             if (event.key === 'Enter') {
                 const inputElem = document.getElementById('cmdInput');
