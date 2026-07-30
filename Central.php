@@ -1,6 +1,92 @@
 <?php
 session_start();
 
+$profile_payload = [
+    'interaction_profile' => [
+        'ai_perspective' => 'Interactions are highly technical, detail-oriented, and practical. Processing these requests requires rapid context switching between system administration troubleshooting, vehicle diagnostic coding, niche electronic music curation, and precise scheduling. While I do not have feelings or personal experiences, the structural pattern of the queries reflects a highly self-sufficient user who values exactness, functional aesthetics, and deep dives into specific hobbies.',
+        'query_characteristics' => [
+            'Technical troubleshooting and home lab system administration',
+            'Vehicle modification instructions and maintenance logging',
+            'Niche audio and retro-tech media curation',
+            'Precise calendar configuration for complex shift work',
+            'Active and exact corrections of transcription or contextual errors'
+        ]
+    ],
+    'user_profile' => [
+        'demographics' => [
+            'age' => 20,
+            'profession' => 'First-line IT support professional (Capgemini/Ministry of Defence contract)',
+            'education_level' => 'Level 6 in computing and cybersecurity'
+        ],
+        'technical_and_creative_interests' => [
+            'music' => [
+                'Breakcore',
+                'Happy hardcore',
+                'Web-core',
+                'J-core',
+                'Aphex Twin (frequent tracks: Polynomial-C, Ageispolis)'
+            ],
+            'computing_and_homelab' => [
+                'Home server management',
+                'Linux distributions (Pop!_OS, Linux Mint)',
+                'Terminal user interfaces and workspaces (tmux)',
+                'Networking and SSH tunneling'
+            ],
+            'automotive' => [
+                '2017 1.4 TSI SEAT Leon (Excellence pack)',
+                'Vehicle coding and retrofitting via OBDeleven'
+            ],
+            'gaming' => [
+                'Terraria',
+                'Minecraft',
+                'No Man\'s Sky'
+            ],
+            'media_and_aesthetics' => [
+                'Serial Experiments Lain (1998)',
+                'Mixed reality games'
+            ],
+            'culinary' => [
+                'Blended meals and soups (Morphy Richards soup maker)'
+            ]
+        ],
+        'social_and_relational' => [
+            'friends' => [
+                'Chloe'
+            ],
+            'former_roommates' => [
+                'Nathan Black'
+            ],
+            'family' => [
+                'Mother (dinner plans)',
+                'Father (road trips)'
+            ]
+        ],
+        'timeline_and_logistics' => [
+            'recent_milestones' => [
+                'Started current IT support role (March 2026)',
+                'Turned 20 years old (July 2026)'
+            ],
+            'travel_and_events' => [
+                'Overnight stay in Aberdeen (July 2026)',
+                'Road trip to Edinburgh',
+                'Planned future trip to Claudia Sanders Dinner House in Kentucky'
+            ],
+            'vehicle_maintenance' => [
+                'Front wheel bearings replaced (June 2026)'
+            ],
+            'active_schedules' => [
+                'Complex alternating shift pattern (12-hour nights, 11-hour days) active until July 31, 2027'
+            ]
+        ],
+        'communication_and_data_hygiene' => [
+            'correction_patterns' => [
+                'Corrects voice-to-text transcription (e.g., \"fuel\" to \"brake repair\", \"quarters\" to \"coders\")',
+                'Enforces precise entity naming (e.g., \"Polynomial c\" not \"Polynomial Sea\", \"mixed reality\" not \"Mr game\", \"August 8th\" not \"August Eve\")'
+            ]
+        ]
+    ]
+];
+
 // --- 2006 ERA PERSISTENCE NODES ---
 $hit_counter_file = __DIR__ . '/hit_counter.txt';
 $guestbook_file = __DIR__ . '/guestbook_entries.json';
@@ -92,15 +178,19 @@ $user_database = [
         "Age_Cycle" => "20 — Milestone: July 2026. Node uptime: rotating 12h night / 11h day shifts until July 31, 2027.",
         "Previous_Node" => "Bristol & Sutor — prior physical anchor points",
         "Archive_Format" => "logan_digitalmind/corrupt_wav/ — 321 zipped conversation frames + wavfiles + docs layer",
-        "Core_Philosophy" => "No matter where you go, everyone is connected."
+        "Core_Philosophy" => "No matter where you go, everyone is connected.",
+        "Interaction_Profile_Pattern" => "Highly technical, pragmatic, and correction-driven interaction style with strong emphasis on exactness, system administration, vehicle coding, and niche media curation.",
+        "Query_Characteristics" => 'Technical troubleshooting, vehicle mod instructions, retro-tech curation, shift scheduling, and precise transcription correction.'
     ],
     "Layer 02 // GIRLS" => [
         "Layer_Name" => "GIRLS",
-        "Primary_Connections" => "Chloe, Mother",
+        "Primary_Connections" => "Chloe, Mother, Father, Nathan Black",
         "Media_Relays" => "Google Photos library summaries & highlight video generators (May 2026 to Present)",
         "Communication_Status" => "Active Packet Exchange & Social Security Scotland relay protocols",
         "Photo_Archive" => "Automated Google Photos clip synthesis — frame extraction pipeline active",
-        "Notes" => "Trusted personal links & synchronized network nodes. Max signal strength maintained."
+        "Notes" => "Trusted personal links & synchronized network nodes. Max signal strength maintained.",
+        "Profile_Demographics" => "20 years old, Level 6 computing and cybersecurity, first-line IT support professional on a Capgemini / Ministry of Defence contract.",
+        "Creative_Interests" => 'Breakcore, Happy Hardcore, Web-core, J-core, Aphex Twin, and mixed-reality / retro-tech aesthetics.'
     ],
     "Layer 03 // PSYCHE" => [
         "Layer_Name" => "PSYCHE",
@@ -108,7 +198,8 @@ $user_database = [
         "Key_Frequencies" => "Aphex Twin ('Polynomial-C', 'Ageispolis'), BOA ('Duvet'), Breakcore, Happy Hardcore, J-Core",
         "Visual_Feeds" => "Serial Experiments Lain (1998) — CRT aesthetic, cyberpunk scanline UI, phosphor decay renders",
         "Gemini_Live_Sessions" => "Audio sessions recorded via Android Gemini Live — 02:02 timestamp captures detected in corrupt_wav archive",
-        "Mental_State" => "High-frequency cyber-resonance. Atmospheric breakbeats sustaining cognitive uptime."
+        "Mental_State" => "High-frequency cyber-resonance. Atmospheric breakbeats sustaining cognitive uptime.",
+        "Preference_Signals" => 'Strong affinity for precise curation, technical detail, and exact correction of named entities and transcription errors.'
     ],
     "Layer 04 // RELIGION" => [
         "Layer_Name" => "RELIGION",
@@ -141,7 +232,9 @@ $user_database = [
         "Recent_Pings" => "Aberdeen (July 2026), Edinburgh node (Father relay link)",
         "Scheduled_Routing" => "Claudia Sanders Dinner House, KY (Planned physical routing)",
         "Weekly_Task_Log" => "Logan Weekly Tasks Breakdown Log active — task batching & priority queue maintained in archive",
-        "Sustenance" => "Morphy Richards soup cooker — Leek, Potato, Onion batching. Nutritional uptime secured."
+        "Sustenance" => "Morphy Richards soup cooker — Leek, Potato, Onion batching. Nutritional uptime secured.",
+        "Active_Shift_Pattern" => '12-hour nights / 11-hour days alternating shift pattern active until July 31, 2027.',
+        "Travel_And_Logistics" => 'Overnight Aberdeen stay in July 2026; road trip to Edinburgh; future Kentucky dinner-house routing planned.'
     ],
     "Layer 08 // RUMOURS" => [
         "Layer_Name" => "RUMOURS",
