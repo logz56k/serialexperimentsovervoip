@@ -1363,8 +1363,8 @@ Type 'help' or 'layer <1-14>' to switch layers & trigger audio clips.
                 return;
             }
             if (!audioEnabled) return;
-            // Whitelist: allow layer01.mp3 .. layer14.mp3 or online_persona.mp3
-            if (!/^(layer(0[1-9]|1[0-4])\.mp3|online_persona\.mp3)$/.test(filename)) {
+            // Whitelist the layer clips plus the root-level Layer 14 action tracks.
+            if (!/^(layer(0[1-9]|1[0-4])\.mp3|online_persona\.mp3|mini_nathan\.mp3)$/.test(filename)) {
                 console.warn('Blocked disallowed audio path:', filename);
                 return;
             }
@@ -1372,7 +1372,9 @@ Type 'help' or 'layer <1-14>' to switch layers & trigger audio clips.
                 currentAudio.pause();
                 currentAudio.currentTime = 0;
             }
-            const audioPath = (filename === 'online_persona.mp3') ? filename : 'layers/' + filename;
+            const audioPath = (filename === 'online_persona.mp3' || filename === 'mini_nathan.mp3')
+                ? filename
+                : 'layers/' + filename;
             currentAudio = new Audio(audioPath);
             currentAudio.play().catch(err => {
                 console.log("Audio play deferred until user interaction: ", err);
