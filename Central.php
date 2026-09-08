@@ -288,6 +288,14 @@ $user_database = [
         "Gemini_Live_Frames" => "Android Gemini Live sessions captured — frame_0..frame_7 PNG sequences per conversation zip",
         "Corrupt_WAV_Layer" => "corrupt_wav/ — primary archive node. Wavfiles: synthesized AI voice responses. Docs: extracted artifacts.",
         "System_Message" => "Present day, present time... Hahahaha."
+    ],
+    "Layer 14 // NATHAN" => [
+        "Layer_Name" => "NATHAN",
+        "Identity" => "Best Friend / Primary Tether",
+        "Aesthetic" => "GDI Breakcore // Rainbow Bleed Feedback Node",
+        "Track_Relay" => "online_persona.mp3",
+        "Visualizer_Gateway" => "understand.php",
+        "Message" => "Present day, present time... HEY."
     ]
 ];
 
@@ -310,7 +318,7 @@ $terminal_ls_listing = $is_su ? $private_ls_listing : $public_ls_listing;
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Navi / Copeland OS 4.92 // 13 Layers of Lain</title>
+    <title>Navi / Copeland OS 4.92 // 14 Layers of Lain</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=VT323&display=swap" rel="stylesheet">
@@ -1021,6 +1029,75 @@ $terminal_ls_listing = $is_su ? $private_ls_listing : $public_ls_listing;
         }
 
         @keyframes blink { 50% { opacity: 0; } }
+
+        .layer-14-container {
+            position: relative;
+            width: 100%;
+            min-height: 440px;
+            border: 2px solid var(--phosphor);
+            background: #000;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 30px;
+            box-shadow: inset 0 0 50px rgba(255, 0, 255, 0.4), inset 0 0 50px rgba(0, 255, 255, 0.4);
+            border-radius: 4px;
+        }
+
+        .rainbow-bleed-overlay {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            opacity: 0.35;
+            background: repeating-linear-gradient(
+                45deg,
+                #ff0055 0px,
+                #ffef00 20px,
+                #00ff85 40px,
+                #00d9ff 60px,
+                #8138ff 80px,
+                #ff00c8 100px
+            );
+            background-size: 300% 300%;
+            animation: rainbowBleedWarp 5s ease infinite alternate;
+            mix-blend-mode: screen;
+        }
+
+        @keyframes rainbowBleedWarp {
+            0% { background-position: 0% 0%; filter: hue-rotate(0deg) contrast(1.3); }
+            50% { background-position: 100% 100%; filter: hue-rotate(180deg) contrast(1.6); }
+            100% { background-position: 0% 100%; filter: hue-rotate(360deg) contrast(1.3); }
+        }
+
+        .layer-14-btn {
+            position: relative;
+            z-index: 10;
+            padding: 22px 64px;
+            font-family: Impact, "Arial Black", sans-serif;
+            font-size: 3rem;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            color: #000;
+            background: #fff;
+            border: 4px solid #000;
+            outline: 4px solid #fff;
+            cursor: pointer;
+            box-shadow: 10px 10px 0 #ff00ff, -10px -10px 0 #00ffff, 0 0 40px rgba(255, 255, 255, 0.5);
+            transition: all 0.1s ease;
+        }
+
+        .layer-14-btn:hover {
+            background: #fff200;
+            transform: translate(3px, 3px);
+            box-shadow: 7px 7px 0 #ff00ff, -7px -7px 0 #00ffff, 0 0 50px rgba(255, 242, 0, 0.8);
+        }
+
+        .layer-14-btn:active {
+            transform: translate(6px, 6px);
+            box-shadow: 3px 3px 0 #ff00ff, -3px -3px 0 #00ffff;
+        }
     </style>
 </head>
 <body class="theme-green">
@@ -1041,7 +1118,7 @@ $terminal_ls_listing = $is_su ? $private_ls_listing : $public_ls_listing;
         <div class="system-bar">
             <div class="brand-title">
                 <h1>NAVI // COPELAND OS 4.92</h1>
-                <div class="brand-subtitle">13 LAYERS ARCHITECTURE // TAKEOUT INTEGRATED // lainphp-summary_v4.92prerelease-prejudice</div>
+                <div class="brand-subtitle">14 LAYERS ARCHITECTURE // TAKEOUT INTEGRATED // lainphp-summary_v4.92prerelease-prejudice</div>
             </div>
 
             <div class="led-panel">
@@ -1190,7 +1267,8 @@ layer_audio/                 LOCKED</div>
                 10 => "layer10.mp3",
                 11 => "layer11.mp3",
                 12 => "layer12.mp3",
-                13 => "layer13.mp3"
+                13 => "layer13.mp3",
+                14 => "online_persona.mp3"
             ];
             foreach ($display_database as $layer_key => $data): 
                 $pad = str_pad($layer_index, 2, "0", STR_PAD_LEFT);
@@ -1263,13 +1341,22 @@ layer_audio/                 LOCKED</div>
                 <?php elseif ($idx === 13): // ECHO ?>
                     <div class="terminal-window">
                         <div class="terminal-output" id="termOutput">Navi / Copeland OS v4.92 (lainphp-summary_v4.92prerelease-prejudice)
-Connected to 13-Layer Wired Gateway (127.0.0.1:8000).
-<?= $is_su ? 'Takeout Recovery Archive: 4,818 Gemini prompts integrated into 13 Layers.' : 'Public mirror active. Personal payloads, archive paths, and audio are filtered.' ?>
-Type 'help' or 'layer <1-13>' to switch layers<?= $is_su ? ' & trigger audio clips' : '' ?>.
+Connected to 14-Layer Wired Gateway (127.0.0.1:8000).
+<?= $is_su ? 'Takeout Recovery Archive: 4,818 Gemini prompts integrated into 14 Layers.' : 'Public mirror active. Personal payloads, archive paths, and audio are filtered.' ?>
+Type 'help' or 'layer <1-14>' to switch layers<?= $is_su ? ' & trigger audio clips' : '' ?>.
 </div>
                         <div class="cmd-line">
                             <span class="prompt">lain@dsl-unix:~$</span>
                             <input type="text" class="cmd-input" id="cmdInput" autofocus placeholder="Type command here..." onkeydown="handleCmd(event)">
+                        </div>
+                    </div>
+                <?php elseif ($idx === 14): // NATHAN ?>
+                    <div class="layer-14-container">
+                        <canvas id="layer14Canvas" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1;"></canvas>
+                        <div class="rainbow-bleed-overlay"></div>
+                        <button class="layer-14-btn" onclick="triggerNathanAction()">hey</button>
+                        <div style="position:relative;z-index:10;margin-top:20px;font-family:var(--font-mono);font-size:0.95rem;color:#fff;text-shadow:2px 2px 0 #000;background:rgba(0,0,0,0.7);padding:6px 14px;border:1px solid #ff00ff;">
+                            [GDI // BREAKCORE // RAINBOW BLEED FEEDBACK NODE] &bull; CLICK HEY TO LAUNCH UNDERSTAND VISUALIZER
                         </div>
                     </div>
                 <?php endif; ?>
@@ -1281,7 +1368,7 @@ Type 'help' or 'layer <1-13>' to switch layers<?= $is_su ? ' & trigger audio cli
         ?>
 
         <div class="footer-note">
-            <span>> ALL 13 LAYERS SYNCHRONIZED WITH TAKEOUT ARCHIVE <span class="blinking-cursor"></span></span>
+            <span>> ALL 14 LAYERS SYNCHRONIZED WITH TAKEOUT ARCHIVE <span class="blinking-cursor"></span></span>
             <span>Navi OS 4.92 | Wired Resonance Active</span>
         </div>
 
@@ -1345,7 +1432,7 @@ Type 'help' or 'layer <1-13>' to switch layers<?= $is_su ? ' & trigger audio cli
         let audioEnabled = suUnlocked;
         let cursorFxOn = true;
         let winampLayer = 1;
-        const layerNames = ['WEIRD', 'GIRLS', 'PSYCHE', 'RELIGION', 'DISTORTION', 'KIDS', 'SOCIETY', 'RUMOURS', 'PROTOCOL', 'LOVE', 'INFORNOGRAPHY', 'LANDSCAPE', 'ECHO'];
+        const layerNames = ['WEIRD', 'GIRLS', 'PSYCHE', 'RELIGION', 'DISTORTION', 'KIDS', 'SOCIETY', 'RUMOURS', 'PROTOCOL', 'LOVE', 'INFORNOGRAPHY', 'LANDSCAPE', 'ECHO', 'NATHAN'];
         const bootLines = [
             'Dialing 0845-WIRED...',
             'Carrier detected.',
@@ -1405,8 +1492,8 @@ Type 'help' or 'layer <1-13>' to switch layers<?= $is_su ? ' & trigger audio cli
                 return;
             }
             if (!audioEnabled) return;
-            // Whitelist: only allow layer01.mp3 .. layer13.mp3
-            if (!/^layer(0[1-9]|1[0-3])\.mp3$/.test(filename)) {
+            // Whitelist: allow layer01.mp3 .. layer14.mp3 or online_persona.mp3
+            if (!/^(layer(0[1-9]|1[0-4])\.mp3|online_persona\.mp3)$/.test(filename)) {
                 console.warn('Blocked disallowed audio path:', filename);
                 return;
             }
@@ -1414,13 +1501,17 @@ Type 'help' or 'layer <1-13>' to switch layers<?= $is_su ? ' & trigger audio cli
                 currentAudio.pause();
                 currentAudio.currentTime = 0;
             }
-            currentAudio = new Audio('layers/' + filename);
+            const audioPath = (filename === 'online_persona.mp3') ? filename : 'layers/' + filename;
+            currentAudio = new Audio(audioPath);
             currentAudio.play().catch(err => {
                 console.log("Audio play deferred until user interaction: ", err);
             });
             const match = filename.match(/layer(\d{2})\.mp3/);
             if (match) {
                 winampLayer = parseInt(match[1], 10);
+                updateWinampTrack();
+            } else if (filename === 'online_persona.mp3') {
+                winampLayer = 14;
                 updateWinampTrack();
             }
         }
@@ -1488,8 +1579,8 @@ Type 'help' or 'layer <1-13>' to switch layers<?= $is_su ? ' & trigger audio cli
         }
 
         function cycleWinampTrack() {
-            winampLayer = winampLayer >= 13 ? 1 : winampLayer + 1;
-            const filename = 'layer' + String(winampLayer).padStart(2, '0') + '.mp3';
+            winampLayer = winampLayer >= 14 ? 1 : winampLayer + 1;
+            const filename = (winampLayer === 14) ? 'online_persona.mp3' : 'layer' + String(winampLayer).padStart(2, '0') + '.mp3';
             playLayerAudio(filename);
         }
 
@@ -1528,23 +1619,24 @@ Type 'help' or 'layer <1-13>' to switch layers<?= $is_su ? ' & trigger audio cli
                     10: "layer10.mp3",
                     11: "layer11.mp3",
                     12: "layer12.mp3",
-                    13: "layer13.mp3"
+                    13: "layer13.mp3",
+                    14: "online_persona.mp3"
                 };
 
                 switch (cmd) {
                     case 'help':
-                        outputElem.innerText += `Available Commands:\n  help                     - Display this manual\n  layer <1-13>             - Switch to Layer & trigger voice audio\n  theme <green|amber|cyan|white> - Change CRT phosphor palette\n  audio <on|off>           - Toggle layer audio playback\n  clear                    - Clear shell screen\n  ls                       - List archive filesystem nodes\n  nms                      - Display No Man's Sky gold refining table\n  whois lain               - Query Wired identity records\n  ping wired               - Send ICMP packets through the terminal\n  traceroute psyche        - Trace route across the 13 layers\n  fortune                  - Print a recovered fortune cookie\n  guestbook                - Jump to guestbook node\n  winamp                   - Jump to NAVI AMP playlist\n  screensaver              - Toggle scanline darkness pulse\n  reboot                   - Replay dial-up boot sequence\n`;
+                        outputElem.innerText += `Available Commands:\n  help                     - Display this manual\n  layer <1-14>             - Switch to Layer & trigger voice audio\n  theme <green|amber|cyan|white> - Change CRT phosphor palette\n  audio <on|off>           - Toggle layer audio playback\n  clear                    - Clear shell screen\n  ls                       - List archive filesystem nodes\n  nms                      - Display No Man's Sky gold refining table\n  whois lain               - Query Wired identity records\n  ping wired               - Send ICMP packets through the terminal\n  traceroute psyche        - Trace route across the 14 layers\n  fortune                  - Print a recovered fortune cookie\n  guestbook                - Jump to guestbook node\n  winamp                   - Jump to NAVI AMP playlist\n  screensaver              - Toggle scanline darkness pulse\n  reboot                   - Replay dial-up boot sequence\n`;
                         break;
 
                     case 'layer':
                         const num = parseInt(arg, 10);
-                        if (num >= 1 && num <= 13) {
+                        if (num >= 1 && num <= 14) {
                             const btns = document.querySelectorAll('.layer-nav-btn');
                             const targetBtn = btns[num - 1];
                             selectLayer(num, mp3Map[num], targetBtn);
                             outputElem.innerText += suUnlocked ? `[SUCCESS] Switched to Layer ${num.toString().padStart(2, '0')}. Playing audio...\n` : `[SUCCESS] Switched to filtered Layer ${num.toString().padStart(2, '0')}.\n`;
                         } else {
-                            outputElem.innerText += `Usage: layer <1-13>\n`;
+                            outputElem.innerText += `Usage: layer <1-14>\n`;
                         }
                         break;
 
@@ -1648,6 +1740,41 @@ Type 'help' or 'layer <1-13>' to switch layers<?= $is_su ? ' & trigger audio cli
                 setTimeout(() => { outputElem.scrollTop = outputElem.scrollHeight; }, 0);
             }
         }
+
+        function triggerNathanAction() {
+            playLayerAudio('online_persona.mp3');
+            setTimeout(() => {
+                window.location.href = 'understand.php';
+            }, 300);
+        }
+
+        // Layer 14 Canvas GDI Breakcore Visualizer
+        (function initLayer14Canvas() {
+            const canvas14 = document.getElementById('layer14Canvas');
+            if (!canvas14) return;
+            const ctx14 = canvas14.getContext('2d');
+            let t = 0;
+            function renderL14() {
+                requestAnimationFrame(renderL14);
+                if (!canvas14.parentElement || canvas14.parentElement.offsetParent === null) return;
+                canvas14.width = canvas14.clientWidth;
+                canvas14.height = canvas14.clientHeight;
+                t += 0.05;
+                ctx14.clearRect(0, 0, canvas14.width, canvas14.height);
+                const w = canvas14.width, h = canvas14.height;
+                const slices = 12;
+                ctx14.globalCompositeOperation = 'screen';
+                for (let i = 0; i < slices; i++) {
+                    const sy = (i / slices) * h;
+                    const sh = h / slices;
+                    const shift = Math.sin(t * 2 + i) * 24 + (Math.random() - 0.5) * 8;
+                    const hue = (i * 30 + t * 90) % 360;
+                    ctx14.fillStyle = `hsla(${hue}, 100%, 55%, 0.12)`;
+                    ctx14.fillRect(shift, sy, w, sh);
+                }
+            }
+            renderL14();
+        })();
     </script>
 </body>
 </html>

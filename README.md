@@ -1,26 +1,29 @@
 # Serial Experiments Over VoIP
-### Navi / Copeland OS 4.92 — 13 Layers of Lain
+### Navi / Copeland OS 4.92 — 14 Layers of Lain
 
 > *"Present day, present time... Hahahaha."*
 
-A CRT phosphor terminal dashboard built in PHP, integrating a full 13-layer personal OS architecture recovered from a 4,818-prompt Gemini Takeout archive.
+A CRT phosphor terminal dashboard built in PHP, integrating a 14-layer personal OS architecture recovered from a 4,818-prompt Gemini Takeout archive.
 
 ---
 
 ## Features
 
-- **13 Layer Architecture** — Each layer maps a domain of consciousness (WEIRD, PSYCHE, PROTOCOL, ECHO, etc.)
+- **14 Layer Architecture** — Each layer maps a domain of consciousness (WEIRD, PSYCHE, PROTOCOL, ECHO, NATHAN, etc.)
 - **CRT Phosphor Themes** — Green / Amber / Cyan / White with scanline overlay & vignette
 - **Matrix Rain Canvas** — Katakana/Latin rain, resize-safe, `aria-hidden`
 - **Layer Audio** — Per-layer MP3 voice clips, audio toggle, whitelist-validated paths
 - **Terminal Emulator** — Layer 13 ECHO shell with `help`, `layer`, `theme`, `audio`, `clear`, `ls`, `nms` commands
+- **GDI Breakcore Visualizer** — Layer 14 NATHAN & `understand.php` rainbow bleed engine
 - **No Man's Sky Gold Refining Table** — Pulled from archive data (`nms` command)
 - **Gemini Takeout Integrated** — 4,818 prompts parsed into layer data fields
 
 ## Structure
 
 ```
-Central.php          — Main PHP dashboard (all 13 layers)
+Central.php          — Main PHP dashboard (all 14 layers)
+understand.php       — GDI Breakcore Visualizer (Understand)
+online_persona.mp3   — Audio track & Layer 14 relay
 layers/              — 13 x per-layer MP3 voice clips
 layer_all.mp3        — Full combined audio track
 ```
@@ -53,7 +56,7 @@ The workflow excludes `.git`, GitHub workflow files, local runtime files, and th
 
 | Command | Description |
 |---------|-------------|
-| `layer <1-13>` | Switch layer & trigger voice clip |
+| `layer <1-14>` | Switch layer & trigger voice clip |
 | `theme <green\|amber\|cyan\|white>` | Change phosphor palette |
 | `audio <on\|off>` | Toggle layer audio |
 | `ls` | List archive filesystem nodes |
