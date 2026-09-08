@@ -1609,7 +1609,7 @@ Type 'help' or 'layer <1-14>' to switch layers & trigger audio clips.
         }
 
         function triggerNathanAction() {
-            playLayerAudio('online_persona.mp3');
+            playLayerAudio('mini_nathan.mp3');
             setTimeout(() => {
                 window.location.href = 'understand.php';
             }, 300);
