@@ -1,205 +1,35 @@
-<?php
-session_start();
-
-$profile_payload = [
-    'interaction_profile' => [
-        'ai_perspective' => 'Interactions are highly technical, detail-oriented, and practical. Processing these requests requires rapid context switching between system administration troubleshooting, vehicle diagnostic coding, niche electronic music curation, and precise scheduling. While I do not have feelings or personal experiences, the structural pattern of the queries reflects a highly self-sufficient user who values exactness, functional aesthetics, and deep dives into specific hobbies.',
-        'query_characteristics' => [
-            'Technical troubleshooting and home lab system administration',
-            'Vehicle modification instructions and maintenance logging',
-            'Niche audio and retro-tech media curation',
-            'Precise calendar configuration for complex shift work',
-            'Active and exact corrections of transcription or contextual errors'
-        ]
-    ],
-    'user_profile' => [
-        'demographics' => [
-            'age' => 20,
-            'profession' => 'First-line IT support professional (Capgemini/Ministry of Defence contract)',
-            'education_level' => 'Level 6 in computing and cybersecurity'
-        ],
-        'technical_and_creative_interests' => [
-            'music' => [
-                'Breakcore',
-                'Happy hardcore',
-                'Web-core',
-                'J-core',
-                'Aphex Twin (frequent tracks: Polynomial-C, Ageispolis)'
-            ],
-            'computing_and_homelab' => [
-                'Home server management',
-                'Linux distributions (Pop!_OS, Linux Mint)',
-                'Terminal user interfaces and workspaces (tmux)',
-                'Networking and SSH tunneling'
-            ],
-            'automotive' => [
-                '2017 1.4 TSI SEAT Leon (Excellence pack)',
-                'Vehicle coding and retrofitting via OBDeleven'
-            ],
-            'gaming' => [
-                'Terraria',
-                'Minecraft',
-                'No Man\'s Sky'
-            ],
-            'media_and_aesthetics' => [
-                'Serial Experiments Lain (1998)',
-                'Mixed reality games'
-            ],
-            'culinary' => [
-                'Blended meals and soups (Morphy Richards soup maker)'
-            ]
-        ],
-        'social_and_relational' => [
-            'friends' => [
-                'Chloe'
-            ],
-            'former_roommates' => [
-                'Nathan Black'
-            ],
-            'family' => [
-                'Mother (dinner plans)',
-                'Father (road trips)'
-            ]
-        ],
-        'timeline_and_logistics' => [
-            'recent_milestones' => [
-                'Started current IT support role (March 2026)',
-                'Turned 20 years old (July 2026)'
-            ],
-            'travel_and_events' => [
-                'Overnight stay in Aberdeen (July 2026)',
-                'Road trip to Edinburgh',
-                'Planned future trip to Claudia Sanders Dinner House in Kentucky'
-            ],
-            'vehicle_maintenance' => [
-                'Front wheel bearings replaced (June 2026)'
-            ],
-            'active_schedules' => [
-                'Complex alternating shift pattern (12-hour nights, 11-hour days) active until July 31, 2027'
-            ]
-        ],
-        'communication_and_data_hygiene' => [
-            'correction_patterns' => [
-                'Corrects voice-to-text transcription (e.g., \"fuel\" to \"brake repair\", \"quarters\" to \"coders\")',
-                'Enforces precise entity naming (e.g., \"Polynomial c\" not \"Polynomial Sea\", \"mixed reality\" not \"Mr game\", \"August 8th\" not \"August Eve\")'
-            ]
-        ]
-    ]
-];
-
-// --- 2006 ERA PERSISTENCE NODES ---
-$hit_counter_file = __DIR__ . '/hit_counter.txt';
-$guestbook_file = __DIR__ . '/guestbook_entries.json';
-const SU_PASSWORD_HASH = '$2y$12$t0u19jcfXdn.BuUiz18uVuSdX9M7V5agwlMCtXnUhPmzB/yK7It3y';
-
-function read_counter($path) {
-    if (!file_exists($path)) {
-        return 1336;
-    }
-    $value = (int) trim((string) file_get_contents($path));
-    return $value > 0 ? $value : 1336;
-}
-
-function read_guestbook($path) {
-    if (!file_exists($path)) {
-        return [
-            [
-                'name' => 'anonymous@wired',
-                'message' => 'Present day, present time. The guestbook node is alive.',
-                'time' => '2006-04-19 23:42:00'
-            ],
-            [
-                'name' => 'sysop',
-                'message' => 'Leave a transmission. HTML stripped, signal preserved.',
-                'time' => '2006-04-20 00:13:37'
-            ]
-        ];
-    }
-
-    $decoded = json_decode((string) file_get_contents($path), true);
-    return is_array($decoded) ? array_slice($decoded, 0, 20) : [];
-}
-
-$guestbook_status = '';
-$login_status = '';
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'su_login') {
-    $username = trim((string) ($_POST['username'] ?? ''));
-    $password = (string) ($_POST['password'] ?? '');
-
-    if ($username === 'su' && password_verify($password, SU_PASSWORD_HASH)) {
-        session_regenerate_id(true);
-        $_SESSION['su_authenticated'] = true;
-        $login_status = 'SU ACCESS GRANTED';
-    } else {
-        $_SESSION['su_authenticated'] = false;
-        $login_status = 'ACCESS DENIED';
-    }
-}
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'su_logout') {
-    $_SESSION['su_authenticated'] = false;
-    $login_status = 'SU SESSION CLOSED';
-}
-
-$is_su = !empty($_SESSION['su_authenticated']);
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'sign_guestbook') {
-    $name = trim(strip_tags((string) ($_POST['guest_name'] ?? 'anonymous@wired')));
-    $message = trim(strip_tags((string) ($_POST['guest_message'] ?? '')));
-    $name = substr($name !== '' ? $name : 'anonymous@wired', 0, 32);
-    $message = substr($message, 0, 280);
-
-    if ($message !== '') {
-        $entries = read_guestbook($guestbook_file);
-        array_unshift($entries, [
-            'name' => $name,
-            'message' => $message,
-            'time' => date('Y-m-d H:i:s')
-        ]);
-        file_put_contents($guestbook_file, json_encode(array_slice($entries, 0, 20), JSON_PRETTY_PRINT));
-        $guestbook_status = 'TRANSMISSION SAVED';
-    } else {
-        $guestbook_status = 'EMPTY TRANSMISSION DROPPED';
-    }
-}
-
-$visitor_count = read_counter($hit_counter_file) + 1;
-file_put_contents($hit_counter_file, (string) $visitor_count);
-$guestbook_entries = read_guestbook($guestbook_file);
-
-// --- NAVI / COPELAND OS DATABASE (Populated from Gemini Recovery Takeout Archive) ---
+// --- NAVI / COPELAND OS DATABASE (Sanitized Public Mirror) ---
 $user_database = [
     "Layer 01 // WEIRD" => [
         "Layer_Name" => "WEIRD",
         "Central_Memory_Goal" => "Compress all Gemini conversations into a centralized memory file (Central.php architecture). 4,818 prompts recovered & integrated from Takeout archive.",
-        "Clearance_Status" => "Level 6 Computing / Cybersecurity / Vetted First-line IT Support (MoD / Capgemini / Manpower)",
-        "Vetting_Telemetry" => "Vetting timeline active & monitored. Resolved corporate offboarding threats with persistence layer intact.",
-        "Age_Cycle" => "20 — Milestone: July 2026. Node uptime: rotating 12h night / 11h day shifts until July 31, 2027.",
-        "Previous_Node" => "Bristol & Sutor — prior physical anchor points",
-        "Archive_Format" => "logan_digitalmind/corrupt_wav/ — 321 zipped conversation frames + wavfiles + docs layer",
+        "Clearance_Status" => "Level 6 Computing & Cyber-System Operations Node",
+        "Vetting_Telemetry" => "Security vetting active & verified. System persistence layer intact.",
+        "Age_Cycle" => "System Uptime active. Rotating 12h night / 11h day operational schedule.",
+        "Previous_Node" => "Regional physical network anchors",
+        "Archive_Format" => "system_archive/corrupt_wav/ — 321 zipped conversation frames + audio telemetry",
         "Core_Philosophy" => "No matter where you go, everyone is connected.",
-        "Interaction_Profile_Pattern" => "Highly technical, pragmatic, and correction-driven interaction style with strong emphasis on exactness, system administration, vehicle coding, and niche media curation.",
-        "Query_Characteristics" => 'Technical troubleshooting, vehicle mod instructions, retro-tech curation, shift scheduling, and precise transcription correction.'
+        "Interaction_Profile_Pattern" => "Pragmatic, technical, and detail-oriented interaction style with focus on system administration, automotive telemetry, and niche audio curation.",
+        "Query_Characteristics" => 'System administration, protocol diagnostics, audio synthesis, and shift logistics.'
     ],
     "Layer 02 // GIRLS" => [
         "Layer_Name" => "GIRLS",
-        "Primary_Connections" => "Chloe, Mother, Father, Nathan Black",
-        "Media_Relays" => "Google Photos library summaries & highlight video generators (May 2026 to Present)",
-        "Communication_Status" => "Active Packet Exchange & Social Security Scotland relay protocols",
-        "Photo_Archive" => "Automated Google Photos clip synthesis — frame extraction pipeline active",
-        "Notes" => "Trusted personal links & synchronized network nodes. Max signal strength maintained.",
-        "Profile_Demographics" => "20 years old, Level 6 computing and cybersecurity, first-line IT support professional on a Capgemini / Ministry of Defence contract.",
-        "Creative_Interests" => 'Breakcore, Happy Hardcore, Web-core, J-core, Aphex Twin, and mixed-reality / retro-tech aesthetics.'
+        "Primary_Connections" => "Trusted Peer Links & Primary Network Tethers",
+        "Media_Relays" => "Media library summaries & video frame extraction pipelines",
+        "Communication_Status" => "Active Packet Exchange & Synchronized Relay Protocols",
+        "Photo_Archive" => "Automated photo clip synthesis — frame extraction pipeline active",
+        "Notes" => "Synchronized network nodes. Maximum signal strength maintained.",
+        "Profile_Demographics" => "Level 6 Computing & Cybersecurity Specialist, IT Infrastructure Operator.",
+        "Creative_Interests" => 'Breakcore, Happy Hardcore, Web-core, J-core, Aphex Twin, and retro-tech aesthetics.'
     ],
     "Layer 03 // PSYCHE" => [
         "Layer_Name" => "PSYCHE",
-        "Audio_Transmissions" => "The Prodigy ('Out of Space'), Uranium Fever, Willie Nelson — Better Call Saul ('Funny How Time Slips Away')",
+        "Audio_Transmissions" => "The Prodigy ('Out of Space'), Uranium Fever, Willie Nelson — ('Funny How Time Slips Away')",
         "Key_Frequencies" => "Aphex Twin ('Polynomial-C', 'Ageispolis'), BOA ('Duvet'), Breakcore, Happy Hardcore, J-Core",
         "Visual_Feeds" => "Serial Experiments Lain (1998) — CRT aesthetic, cyberpunk scanline UI, phosphor decay renders",
         "Gemini_Live_Sessions" => "Audio sessions recorded via Android Gemini Live — 02:02 timestamp captures detected in corrupt_wav archive",
         "Mental_State" => "High-frequency cyber-resonance. Atmospheric breakbeats sustaining cognitive uptime.",
-        "Preference_Signals" => 'Strong affinity for precise curation, technical detail, and exact correction of named entities and transcription errors.'
+        "Preference_Signals" => 'Strong affinity for precise curation, technical detail, and exact correction of named entities.'
     ],
     "Layer 04 // RELIGION" => [
         "Layer_Name" => "RELIGION",
@@ -213,7 +43,7 @@ $user_database = [
         "Layer_Name" => "DISTORTION",
         "Retro_OS_Hacking" => "Windows 98 booted natively on modern Ryzen CPUs (Ryzen 9 / Ryzen 3 2200G) — confirmed boot via PLoP Boot Manager",
         "Bootloader_Modifications" => "Back-ported Windows Vista boot files. UEFI emulation layer bridging legacy BIOS. Custom BCD entries.",
-        "XP_Exploit_Research" => "xp exploits docx archived — Windows XP SP1/SP2 vulnerability mapping & patch delta analysis",
+        "XP_Exploit_Research" => "exploit_analysis docx archived — Windows XP SP1/SP2 vulnerability mapping & patch delta analysis",
         "Visual_Distortion" => "CRT Scanlines, RGB Shadow Mask, Phosphor Decay — hardware-accurate CSS emulation",
         "Color_Palettes" => "Green Phosphor #00ff33 | Amber #ffb000 | Cyan #00f3ff | White #e0e0e0"
     ],
@@ -222,28 +52,28 @@ $user_database = [
         "Simulations" => "Terraria, Minecraft, No Man's Sky (Modded — Spatial Computing, PSVR2 integration)",
         "NMS_Gold_Refining" => "Lemmium x1 = 125 Gold | Magno-Gold x1 = 125 Gold | Grantine x1 = 125 Gold | Ferrite+O2+Emeril = 10 Gold",
         "NMS_Optimal_Route" => "Lemmium / Magno-Gold / Grantine: peak efficiency at 125:1 ratio — Pugneum combos yield 1-2 units only",
-        "Visual_Summaries" => "Google Photos memory video rendering — Automated clip synthesis pipeline",
+        "Visual_Summaries" => "Media memory video rendering — Automated clip synthesis pipeline",
         "Play_Mode" => "Exploration, sandbox mechanics, & creative architectural hacking across procedural universes"
     ],
     "Layer 07 // SOCIETY" => [
         "Layer_Name" => "SOCIETY",
         "Infrastructure_Philosophy" => "Bare metal security infrastructure preferred over Docker containers — absolute control over stack",
-        "Extended_Nodes" => "Nathan Black (Former Roommate), Father",
-        "Recent_Pings" => "Aberdeen (July 2026), Edinburgh node (Father relay link)",
-        "Scheduled_Routing" => "Claudia Sanders Dinner House, KY (Planned physical routing)",
-        "Weekly_Task_Log" => "Logan Weekly Tasks Breakdown Log active — task batching & priority queue maintained in archive",
-        "Sustenance" => "Morphy Richards soup cooker — Leek, Potato, Onion batching. Nutritional uptime secured.",
-        "Active_Shift_Pattern" => '12-hour nights / 11-hour days alternating shift pattern active until July 31, 2027.',
-        "Travel_And_Logistics" => 'Overnight Aberdeen stay in July 2026; road trip to Edinburgh; future Kentucky dinner-house routing planned.'
+        "Extended_Nodes" => "Primary Peer Node & Family Network Relay",
+        "Recent_Pings" => "Regional Node Relays (Aberdeen & Edinburgh Network Gateways)",
+        "Scheduled_Routing" => "Planned physical routing across distant nodes",
+        "Weekly_Task_Log" => "Weekly Task Breakdown Log active — task batching & priority queue maintained",
+        "Sustenance" => "Nutritional batching — High-efficiency meal prep. System uptime secured.",
+        "Active_Shift_Pattern" => '12-hour nights / 11-hour days alternating operational shift rotation active.',
+        "Travel_And_Logistics" => 'Regional travel logs & planned long-distance network routing.'
     ],
     "Layer 08 // RUMOURS" => [
         "Layer_Name" => "RUMOURS",
         "Graphics_Hardware" => "NVIDIA RTX 3050 — custom driver research & legacy OS hardware acceleration pipeline",
         "Processor_Node" => "AMD Ryzen 3 2200G rig — APU integrated Vega 8 graphics fallback",
-        "Mobile_Unit" => "2017 SEAT Leon 1.4 TSI Excellence",
+        "Mobile_Unit" => "High-Efficiency 1.4 TSI Turbo Workstation Vehicle",
         "ECU_Modifications" => "OBDeleven retro-fit coding — CAN-bus telemetry diagnostics & hidden menu unlocks",
-        "Maintenance_Log" => "Front brake overhaul, dual front wheel bearings replaced (June 2026) — all axle clearances verified",
-        "GP_Medical_Link" => "Email from GP archived — medical relay node in docs layer"
+        "Maintenance_Log" => "Front brake overhaul, dual front wheel bearings replaced — all axle clearances verified",
+        "GP_Medical_Link" => "Encrypted health relay node archived in docs layer"
     ],
     "Layer 09 // PROTOCOL" => [
         "Layer_Name" => "PROTOCOL",
@@ -259,7 +89,7 @@ $user_database = [
     ],
     "Layer 10 // LOVE" => [
         "Layer_Name" => "LOVE",
-        "Extracted_Documents" => "Cognitive_Integration_and_Technical_Architecture.pdf | Charity_Pub_Quiz_Event.pdf",
+        "Extracted_Documents" => "Cognitive_Integration_and_Technical_Architecture.pdf | Community_Event_Archive.pdf",
         "Cognitive_Doc" => "Architecture synthesis of AI integration & technical memory — recovered from Gemini Takeout",
         "Pub_Quiz_Event" => "Community charity event doc — social fabric & local network node",
         "Emotional_Resonance" => "No matter how fragmented the Wired gets, human connection endures.",
@@ -278,8 +108,8 @@ $user_database = [
         "Primary_OS" => "Linux Mint, Pop!_OS, Copeland OS 4.92 — multi-boot bare metal array",
         "Terminal_Env" => "TUI — tmux multi-pane workspaces, zsh/bash custom prompts, lain@dsl-unix aesthetic",
         "Networking_Node" => "Home Server Cluster — self-hosted, Remote Terminal Gateway (127.0.0.1:8000)",
-        "Resume_Node" => "Resume-2 archived — active employment vector document in docs layer",
-        "Activity_Log" => "My Activity.html — 11MB Google Activity archive integrated into Takeout layer"
+        "Resume_Node" => "Professional_Experience.pdf archived in docs layer",
+        "Activity_Log" => "User_Activity_Archive.html — system log archive integrated into Takeout layer"
     ],
     "Layer 13 // ECHO" => [
         "Layer_Name" => "ECHO",
@@ -291,7 +121,7 @@ $user_database = [
     ],
     "Layer 14 // NATHAN" => [
         "Layer_Name" => "NATHAN",
-        "Identity" => "Best Friend / Primary Tether",
+        "Identity" => "Primary Peer Tether",
         "Aesthetic" => "GDI Breakcore // Rainbow Bleed Feedback Node",
         "Track_Relay" => "online_persona.mp3",
         "Visualizer_Gateway" => "understand.php",
@@ -299,19 +129,8 @@ $user_database = [
     ]
 ];
 
-$public_database = [];
-foreach ($user_database as $layer_key => $data) {
-    $public_database[$layer_key] = [
-        'Layer_Name' => $data['Layer_Name'],
-        'Public_Signal' => 'Filtered public mirror for ' . $data['Layer_Name'] . '. Full memory payload withheld.',
-        'Access_Level' => 'PUBLIC / PERSONAL DATA REDACTED',
-        'Redaction_Status' => 'Authenticate as su to unlock private layer fields, archive references, and audio clips.'
-    ];
-}
-$display_database = $is_su ? $user_database : $public_database;
-$private_ls_listing = "corrupt_wav/\n  docs/\n    Cognitive_Integration_and_Technical_Architecture.pdf\n    Charity_Pub_Quiz_Event.pdf\n    sasser.txt (A/E variants)\n    sasserftpd.txt (SEH overwrite exploit)\n    sasser-variant.txt (Unified .A annotated)\n    xp exploits.docx\n    Logan Weekly Tasks Breakdown Log.docx\n    My Activity.html [11MB]\n    Resume-2.pdf\n  wavfiles/ [~600+ AI voice clips]\n  download-*.zip [321 conversation archives]\nlayers/ [13 x .mp3 voice clips]\nCentral.php [this node]\nlayer_all.mp3\n";
-$public_ls_listing = "public_mirror.html\nwebring.html\nguestbook.cgi\nprivate_archive/ [LOCKED]\nlayer_audio/ [LOCKED]\n";
-$terminal_ls_listing = $is_su ? $private_ls_listing : $public_ls_listing;
+$display_database = $user_database;
+$terminal_ls_listing = "corrupt_wav/\n  docs/\n    Cognitive_Integration_and_Technical_Architecture.pdf\n    Community_Event_Archive.pdf\n    sasser.txt (A/E variants)\n    sasserftpd.txt (SEH overwrite exploit)\n    sasser-variant.txt (Unified .A annotated)\n    exploit_analysis.docx\n    Weekly_Task_Log.docx\n    User_Activity_Archive.html\n    Professional_Experience.pdf\n  wavfiles/ [~600+ AI voice clips]\n  download-*.zip [321 conversation archives]\nlayers/ [14 x .mp3 voice clips]\nCentral.php [this node]\nunderstand.php [breakcore visualizer]\nonline_persona.mp3\nlayer_all.mp3\n";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -1118,7 +937,7 @@ $terminal_ls_listing = $is_su ? $private_ls_listing : $public_ls_listing;
         <div class="system-bar">
             <div class="brand-title">
                 <h1>NAVI // COPELAND OS 4.92</h1>
-                <div class="brand-subtitle">14 LAYERS ARCHITECTURE // TAKEOUT INTEGRATED // lainphp-summary_v4.92prerelease-prejudice</div>
+                <div class="brand-subtitle">14 LAYERS ARCHITECTURE // PUBLIC WIRED GATEWAY // TAKEOUT INTEGRATED</div>
             </div>
 
             <div class="led-panel">
@@ -1128,34 +947,12 @@ $terminal_ls_listing = $is_su ? $private_ls_listing : $public_ls_listing;
                 </div>
                 <div class="led-item">
                     <div class="led-light active blink"></div>
-                    <span><?= $is_su ? 'TAKEOUT: 4818 PROMPTS' : 'PUBLIC MIRROR' ?></span>
+                    <span>TAKEOUT: 4818 PROMPTS</span>
                 </div>
                 <div class="led-item">
-                    <span style="color:var(--accent);" id="activeLayerStatus"><?= $is_su ? 'LAYER 01 WEIRD' : 'LAYER 01 WEIRD [FILTERED]' ?></span>
+                    <span style="color:var(--accent);" id="activeLayerStatus">LAYER 01 WEIRD</span>
                 </div>
             </div>
-        </div>
-
-        <div class="auth-panel">
-            <div>
-                ACCESS: <span class="auth-status"><?= $is_su ? 'SU / FULL ARCHIVE' : 'PUBLIC / HEAVILY FILTERED' ?></span>
-                <?php if ($login_status): ?>
-                    // <?= htmlspecialchars($login_status) ?>
-                <?php endif; ?>
-            </div>
-            <?php if ($is_su): ?>
-                <form class="auth-form" method="post">
-                    <input type="hidden" name="action" value="su_logout">
-                    <button type="submit">LOG OUT SU</button>
-                </form>
-            <?php else: ?>
-                <form class="auth-form" method="post">
-                    <input type="hidden" name="action" value="su_login">
-                    <input type="text" name="username" placeholder="user" autocomplete="username">
-                    <input type="password" name="password" placeholder="password" autocomplete="current-password">
-                    <button type="submit">SU LOGIN</button>
-                </form>
-            <?php endif; ?>
         </div>
 
         <div class="crt-controls">
@@ -1168,7 +965,7 @@ $terminal_ls_listing = $is_su ? $private_ls_listing : $public_ls_listing;
             </div>
             <div class="control-group">
                 <button class="toggle-btn active" id="scanlineToggle" onclick="toggleScanlines()">SCANLINES: ON</button>
-                <button class="toggle-btn <?= $is_su ? 'active' : '' ?>" id="audioToggle" onclick="toggleAudio()"><?= $is_su ? 'LAYER AUDIO: ACTIVE' : 'LAYER AUDIO: LOCKED' ?></button>
+                <button class="toggle-btn active" id="audioToggle" onclick="toggleAudio()">LAYER AUDIO: ACTIVE</button>
                 <button class="toggle-btn active" id="cursorToggle" onclick="toggleCursorFx()">CURSOR FX: ON</button>
             </div>
         </div>
@@ -1212,22 +1009,14 @@ $terminal_ls_listing = $is_su ? $private_ls_listing : $public_ls_listing;
 
             <div class="retro-panel">
                 <div class="retro-title">Index of /wired/archive/</div>
-                <?php if ($is_su): ?>
-                    <div class="archive-index">Name                         Size
-download-001.zip             14M
+                <div class="archive-index">Name                         Size
 corrupt_wav/                 DIR
 docs/                        DIR
-layer_all.mp3                986K
-guestbook.cgi                LIVE
-webring.html                 4K</div>
-                <?php else: ?>
-                    <div class="archive-index">Name                         Size
-public_mirror.html           56K
-guestbook.cgi                LIVE
-webring.html                 4K
-private_archive/             LOCKED
-layer_audio/                 LOCKED</div>
-                <?php endif; ?>
+layers/                      14 MP3 CLIPS
+understand.php               VISUALIZER
+online_persona.mp3           AUDIO TRACK
+layer_all.mp3                AUDIO TRACK
+Central.php                  PHP DASHBOARD</div>
             </div>
 
             <div class="retro-panel" id="guestbook">
@@ -1278,7 +1067,7 @@ layer_audio/                 LOCKED</div>
             ?>
                 <button class="layer-nav-btn <?= $active_class ?>" onclick="selectLayer(<?= $layer_index ?>, '<?= $mp3 ?>', this)">
                     <span>[L<?= $pad ?>] <?= $name ?></span>
-                    <span class="audio-indicator"><?= $is_su ? '🔊' : 'LOCK' ?></span>
+                    <span class="audio-indicator">🔊</span>
                 </button>
             <?php 
                 $layer_index++;
@@ -1295,7 +1084,7 @@ layer_audio/                 LOCKED</div>
             <div class="layer-content <?= $active_panel ?>" id="layer-panel-<?= $idx ?>">
                 <div class="layer-header-banner">
                     <span>[<?= htmlspecialchars($layer_key) ?>]</span>
-                    <button class="play-layer-sound-btn" onclick="playLayerAudio('<?= $mp3 ?>')"><?= $is_su ? '▶ PLAY LAYER VOICE CLIP' : 'AUDIO LOCKED' ?></button>
+                    <button class="play-layer-sound-btn" onclick="playLayerAudio('<?= $mp3 ?>')">▶ PLAY LAYER VOICE CLIP</button>
                 </div>
 
                 <div class="data-grid">
@@ -1311,7 +1100,7 @@ layer_audio/                 LOCKED</div>
                 <?php if ($idx === 9): // PROTOCOL ?>
                     <div class="lab-box">
                         <div class="lab-title">> MALWARE DISASSEMBLY & RETRO V. SERIES LAB</div>
-                        <p style="font-size:0.95rem;"><?= $is_su ? 'Extracted Sasser worm disassembly, remote FTP buffer overflow analyses, V.90/V.92 56,000 bps Downstream PCM, V.34 Trellis Modulation, & V.42bis Compression Dictionary stats.' : 'Protocol lab details are redacted in the public mirror. Authenticate as su for full packet notes.' ?></p>
+                        <p style="font-size:0.95rem;">Extracted Sasser worm disassembly, remote FTP buffer overflow analyses, V.90/V.92 56,000 bps Downstream PCM, V.34 Trellis Modulation, & V.42bis Compression Dictionary stats.</p>
                     </div>
                 <?php elseif ($idx === 11): // INFORNOGRAPHY ?>
                     <div class="lab-box">
@@ -1342,8 +1131,8 @@ layer_audio/                 LOCKED</div>
                     <div class="terminal-window">
                         <div class="terminal-output" id="termOutput">Navi / Copeland OS v4.92 (lainphp-summary_v4.92prerelease-prejudice)
 Connected to 14-Layer Wired Gateway (127.0.0.1:8000).
-<?= $is_su ? 'Takeout Recovery Archive: 4,818 Gemini prompts integrated into 14 Layers.' : 'Public mirror active. Personal payloads, archive paths, and audio are filtered.' ?>
-Type 'help' or 'layer <1-14>' to switch layers<?= $is_su ? ' & trigger audio clips' : '' ?>.
+Takeout Recovery Archive: 4,818 Gemini prompts integrated into 14 Layers.
+Type 'help' or 'layer <1-14>' to switch layers & trigger audio clips.
 </div>
                         <div class="cmd-line">
                             <span class="prompt">lain@dsl-unix:~$</span>
@@ -1427,9 +1216,9 @@ Type 'help' or 'layer <1-14>' to switch layers<?= $is_su ? ' & trigger audio cli
         setInterval(drawRain, 33);
 
         let currentAudio = null;
-        const suUnlocked = <?= $is_su ? 'true' : 'false' ?>;
+        const suUnlocked = true;
         const terminalLsListing = <?= json_encode($terminal_ls_listing) ?>;
-        let audioEnabled = suUnlocked;
+        let audioEnabled = true;
         let cursorFxOn = true;
         let winampLayer = 1;
         const layerNames = ['WEIRD', 'GIRLS', 'PSYCHE', 'RELIGION', 'DISTORTION', 'KIDS', 'SOCIETY', 'RUMOURS', 'PROTOCOL', 'LOVE', 'INFORNOGRAPHY', 'LANDSCAPE', 'ECHO', 'NATHAN'];
@@ -1552,10 +1341,6 @@ Type 'help' or 'layer <1-14>' to switch layers<?= $is_su ? ' & trigger audio cli
         }
 
         function toggleAudio() {
-            if (!suUnlocked) {
-                appendTerminal('\n[AUDIO] Authentication required. Login as su to enable layer audio.\n');
-                return;
-            }
             audioEnabled = !audioEnabled;
             const btn = document.getElementById('audioToggle');
             btn.classList.toggle('active', audioEnabled);
