@@ -1,3 +1,63 @@
+<?php
+session_start();
+
+$hit_counter_file = __DIR__ . '/hit_counter.txt';
+$guestbook_file = __DIR__ . '/guestbook_entries.json';
+
+function read_counter($path) {
+    if (!file_exists($path)) {
+        return 1336;
+    }
+    $value = (int) trim((string) file_get_contents($path));
+    return $value > 0 ? $value : 1336;
+}
+
+function read_guestbook($path) {
+    if (!file_exists($path)) {
+        return [
+            [
+                'name' => 'anonymous@wired',
+                'message' => 'Present day, present time. The guestbook node is alive.',
+                'time' => '2006-04-19 23:42:00'
+            ],
+            [
+                'name' => 'sysop',
+                'message' => 'Leave a transmission. HTML stripped, signal preserved.',
+                'time' => '2006-04-20 00:13:37'
+            ]
+        ];
+    }
+
+    $decoded = json_decode((string) file_get_contents($path), true);
+    return is_array($decoded) ? array_slice($decoded, 0, 20) : [];
+}
+
+$guestbook_status = '';
+
+if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST' && ($_POST['action'] ?? '') === 'sign_guestbook') {
+    $name = trim(strip_tags((string) ($_POST['guest_name'] ?? 'anonymous@wired')));
+    $message = trim(strip_tags((string) ($_POST['guest_message'] ?? '')));
+    $name = substr($name !== '' ? $name : 'anonymous@wired', 0, 32);
+    $message = substr($message, 0, 280);
+
+    if ($message !== '') {
+        $entries = read_guestbook($guestbook_file);
+        array_unshift($entries, [
+            'name' => $name,
+            'message' => $message,
+            'time' => date('Y-m-d H:i:s')
+        ]);
+        file_put_contents($guestbook_file, json_encode(array_slice($entries, 0, 20), JSON_PRETTY_PRINT));
+        $guestbook_status = 'TRANSMISSION SAVED';
+    } else {
+        $guestbook_status = 'EMPTY TRANSMISSION DROPPED';
+    }
+}
+
+$visitor_count = read_counter($hit_counter_file) + 1;
+file_put_contents($hit_counter_file, (string) $visitor_count);
+$guestbook_entries = read_guestbook($guestbook_file);
+
 // --- NAVI / COPELAND OS DATABASE (Sanitized Public Mirror) ---
 $user_database = [
     "Layer 01 // WEIRD" => [
@@ -669,6 +729,8 @@ $terminal_ls_listing = "corrupt_wav/\n  docs/\n    Cognitive_Integration_and_Tec
         .boot-overlay.hidden {
             opacity: 0;
             visibility: hidden;
+            pointer-events: none;
+            display: none !important;
         }
 
         .boot-console {
@@ -1235,15 +1297,35 @@ Type 'help' or 'layer <1-14>' to switch layers & trigger audio clips.
         function runBootSequence() {
             const bootLog = document.getElementById('bootLog');
             const overlay = document.getElementById('bootOverlay');
+            if (!bootLog || !overlay) return;
+
+            function hideOverlay() {
+                overlay.classList.add('hidden');
+                overlay.style.display = 'none';
+                overlay.style.opacity = '0';
+                overlay.style.pointerEvents = 'none';
+            }
+
             let idx = 0;
             const timer = setInterval(() => {
-                bootLog.innerText += '\n' + bootLines[idx];
-                idx++;
-                if (idx >= bootLines.length) {
+                if (idx < bootLines.length) {
+                    bootLog.innerText += '\n' + bootLines[idx];
+                    idx++;
+                } else {
                     clearInterval(timer);
-                    setTimeout(() => overlay.classList.add('hidden'), 650);
+                    setTimeout(hideOverlay, 300);
                 }
-            }, 320);
+            }, 200);
+
+            // Fail-safe: guarantee overlay disappears after 2.5 seconds no matter what
+            setTimeout(hideOverlay, 2500);
+
+            // Immediate click/keypress bypass
+            overlay.addEventListener('click', () => {
+                clearInterval(timer);
+                hideOverlay();
+            });
+            window.addEventListener('keydown', hideOverlay, { once: true });
         }
         runBootSequence();
 
