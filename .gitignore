@@ -1,6 +1,9 @@
 # Exclude the raw Gemini Takeout archive — too large for GitHub (hundreds of MBs of zips/wavs)
 logan_digitalmind/
 
+# Local AI model store (GGUF assets and model config)
+LAIN_STORE/
+
 # OS junk
 Thumbs.db
 .DS_Store
@@ -8,7 +11,10 @@ desktop.ini
 
 # Editor
 .vscode/
+.continue/
 *.swp
+debug.log
+
 
 # Runtime local PHP data
 hit_counter.txt

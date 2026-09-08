@@ -1,0 +1,672 @@
+<?php
+// Copeland OS 4.92 - GDI Breakcore Visualizer (Understand)
+?>
+<!doctype html>
+
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8" />
+
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+  <title>hotcoffee // understand</title>
+
+  <style>
+    :root{
+      --acid-a:#00ffff;
+      --acid-b:#ff00ff;
+      --acid-c:#fff200;
+      --acid-d:#39ff14;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;background:#000;color:#fff;font-family:"Arial Black","Segoe UI",Impact,system-ui,sans-serif;overflow:hidden}
+    body{cursor:crosshair}
+    #canvas{position:fixed;inset:0;display:block;width:100%;height:100vh;background:#000;image-rendering:auto}
+    #overlay{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;z-index:10;background:
+      repeating-linear-gradient(0deg,rgba(255,255,255,.035) 0 1px,transparent 1px 3px),
+      radial-gradient(circle at 50% 50%,rgba(255,0,255,.11),transparent 45%)}
+    .panel{pointer-events:auto;position:relative;width:min(760px,calc(100vw - 34px));background:#050505;padding:22px;border:3px solid #fff;border-radius:0;text-align:left;box-shadow:10px 10px 0 #ff00ff,-10px -10px 0 #00ffff,0 0 50px rgba(255,255,255,.15);overflow:hidden}
+    .panel:before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.28;background:
+      repeating-linear-gradient(90deg,#ff004c 0 8px,#ffef00 8px 16px,#00ff85 16px 24px,#00d9ff 24px 32px,#8138ff 32px 40px,#ff00c8 40px 48px);mix-blend-mode:screen;transform:translateY(-96%)}
+    .panel h2{font-family:Impact,"Arial Black",sans-serif;letter-spacing:.06em;text-transform:uppercase;text-shadow:3px 0 #00ffff,-3px 0 #ff00ff,0 3px #fff200;transform:skewX(-5deg)}
+    .btn{display:inline-block;margin-top:12px;padding:12px 24px;background:#fff;color:#000;border:3px solid #000;outline:3px solid #fff;border-radius:0;font:900 15px/1 "Arial Black",sans-serif;cursor:pointer;text-transform:uppercase;box-shadow:7px 7px 0 #00ffff,-7px -7px 0 #ff00ff;transition:none}
+    .btn:hover{background:#fff200;transform:translate(2px,2px);box-shadow:5px 5px 0 #ff00ff,-5px -5px 0 #00ffff}
+    .muted{opacity:.9;color:#eee;font:600 13px/1.55 ui-monospace,SFMono-Regular,Consolas,monospace}
+    #status,#wordCounter,.word-badge{position:fixed;z-index:5;background:#000;color:#fff;border:2px solid #fff;border-radius:0;box-shadow:4px 4px 0 rgba(255,0,255,.85),-4px -4px 0 rgba(0,255,255,.85);font:800 12px/1.2 ui-monospace,SFMono-Regular,Consolas,monospace;text-transform:uppercase;mix-blend-mode:screen}
+    #status{bottom:16px;left:50%;transform:translateX(-50%);padding:7px 11px;pointer-events:none;white-space:nowrap}
+    #wordCounter{top:16px;right:16px;padding:7px 10px}
+    #wordCounter span{color:#fff200;text-shadow:1px 0 #ff00ff,-1px 0 #00ffff}
+    .word-badge{top:16px;left:16px;padding:7px 10px;max-width:55vw;overflow:hidden;text-overflow:ellipsis}
+    .word-badge .highlight{color:#fff;text-shadow:2px 0 #00ffff,-2px 0 #ff00ff,0 2px #fff200;font-weight:1000}
+    @media(max-width:650px){#status{display:none}.word-badge{max-width:65vw}.panel{padding:18px}}
+  </style>
+
+</head>
+
+<body>
+  <canvas id="canvas"></canvas>
+
+  <div class="word-badge" id="wordDisplay">WORD: <span class="highlight" id="currentWord">—</span></div>
+  <div id="wordCounter">WORDS: <span id="wordCount">0</span>/280</div>
+  <div id="status">🎵 Press SPACE to toggle • Click to start</div>
+
+  <div id="overlay">
+    <div class="panel">
+      <h2 style="margin-top:0">GDI // BREAKCORE // RAINBOW BLEED</h2>
+      <p class="muted">280 timed words fed through a GDI-style rainbow feedback engine.</p>
+      <ul style="color:#ccc;font-size:13px;line-height:1.8;padding-left:20px">
+        <li>Existing 280-word beat map preserved</li>
+        <li>Beat hits trigger chromatic text, tearing, feedback and marbled contour bursts</li>
+        <li>Canvas-only visuals; audio, word order and beat timings are unchanged</li>
+      </ul>
+      <button class="btn" id="startBtn">▶ EXECUTE VISUAL NOISE</button>
+      <div id="statusMsg" class="muted" style="margin-top:10px;font-size:13px">Place online_persona.mp3 in the same folder</div>
+    </div>
+  </div>
+
+  <audio id="audio" src="online_persona.mp3" preload="auto" playsinline></audio>
+
+  <script>
+    // ============================================================
+    // 280 WORDS — exactly synced to beats (added "online_persona")
+    // ============================================================
+    const WORDS = [
+      "Angry", "sad", "heartbroken", "understanding", "distance", "forgetting", "nearly", "gone",
+      "face", "no", "longer", "remembered", "good", "riddance", "temporary", "thought",
+      "missing", "you", "missed", "you", "past", "tense", "past", "reality", "new", "reality",
+      "new", "friends", "people", "change", "i", "out", "grew", "you", "you", "didn't",
+      "offer", "the", "understanding", "space", "comfort", "or", "companionship", "i",
+      "needed", "at", "one", "of", "the", "most", "vulnerable", "moments", "in", "my", "life",
+      "you", "are", "back", "want", "to", "hang", "out", "again", "after", "one", "year",
+      "one", "year", "felt", "like", "a", "second", "also", "an", "eternity", "you",
+      "didn't", "change", "i", "did", "can't", "remember", "how", "it", "used", "to", "be",
+      "i", "dont", "want", "to", "feel", "like", "an", "atom", "in", "your", "universe",
+      "again", "ever", "hold", "space", "for", "me", "so", "i", "can", "be",
+      "me", "spoons?", "HAH", "no", "not", "a", "chance", "we",
+      "neurodivergent", "spoons", "loud", "i", "mean", "what", "is", "the", "purpose",
+      "of", "something", "we", "didn't", "do", "at", "all", "together", "late", "night",
+      "drives", "workouts", "walks", "concerts", "smoked", "till", "dawn", "laughed",
+      "all", "night", "that", "was", "us", "spoons", "isn't", "us", "if", "you", "want",
+      "to", "have", "one", "last", "conversation", "it", "has_to", "be", "going_down", "topgate",
+      "the", "one", "thing", "we", "had", "together", "felt", "peaceful", "stress",
+      "lowering", "nova", "being", "funny", "us", "three", "was", "perfect", "trips", "to",
+      "j's", "glasgow", "exploring", "driving", "gossiping", "laughing", "at",
+      "everything", "that", "moved", "racing_you", "on_the_A9", "you", "are", "still", "here", "you", "never",
+      "left", "my", "mind", "time", "is", "awful", "marley", "around?", "please", "not", "spoons",
+      "yes", "lets", "catch_up", "we", "deserve", "a", "second", "chance", "you", "have",
+      "not", "been", "replaced", "you", "never", "will", "you", "are", "nathan", "after",
+      "all", "not", "n8", "not", "nathaniel", "my", "best", "friend", "was", "could", "be",
+      "again", "me", "isolated", "few", "friends", "code", "till", "3am", "sleep",
+      "night_shift", "burn", "out", "smoke", "with", "chloe", "drive", "explore", "repeat",
+      "Capgemini", "slave", "now", "tomorrow", "maybe", "your", "friend", "I", "miss", "you",
+      "do", "you?", "i", "wont", "know", "if", "you", "don't", "talk_to_me"
+    ];
+
+    console.log(`📝 Loaded ${WORDS.length} words`);
+
+    // ============================================================
+    // BEATMAP DATA — from online_persona_beats.md (280 beats)
+    // ============================================================
+    const BEAT_TIMES = [
+      17.028, 17.728, 18.292, 21.123, 21.450, 21.777, 22.144, 22.476,
+      22.847, 23.416, 23.976, 25.457, 26.769, 27.072, 27.489, 27.868,
+      28.245, 28.626, 29.165, 29.675, 32.505, 32.850, 33.188, 33.512,
+      33.882, 34.206, 34.778, 35.354, 37.148, 38.168, 38.352, 38.698,
+      39.047, 39.200, 39.587, 39.774, 40.241, 41.014, 41.186, 41.371,
+      41.556, 41.750, 41.965, 42.131, 42.307, 42.470, 42.666, 42.819,
+      43.880, 44.225, 44.575, 44.924, 45.311, 45.659, 46.211, 46.749,
+      48.526, 49.945, 51.349, 51.708, 52.077, 52.435, 52.775, 54.170,
+      54.497, 54.870, 55.227, 55.603, 56.861, 57.289, 58.330, 59.216,
+      60.706, 61.489, 62.205, 62.607, 62.975, 63.352, 63.729, 64.067,
+      64.380, 64.756, 65.115, 65.482, 65.850, 66.201, 66.578, 66.923,
+      67.260, 67.627, 67.981, 68.334, 68.690, 69.070, 69.426, 69.770,
+      70.130, 70.464, 70.841, 71.178, 72.216, 72.891, 73.663, 74.364,
+      75.453, 75.760, 76.500, 77.212, 78.298, 78.647, 79.317, 80.007,
+      80.356, 80.905, 81.479, 83.609, 83.948, 84.294, 84.651, 85.038,
+      85.345, 85.937, 86.471, 86.807, 87.511, 87.840, 88.188, 88.670,
+      89.187, 89.588, 89.922, 90.281, 90.636, 91.029, 91.585, 92.086,
+      92.727, 93.456, 94.870, 95.238, 95.618, 95.998, 96.337, 96.685,
+      97.257, 97.768, 99.498, 100.022, 100.985, 101.470, 102.370, 102.933,
+      103.420, 104.948, 106.276, 106.442, 106.820, 107.159, 107.332, 107.745,
+      107.908, 108.405, 109.181, 109.337, 109.500, 109.706, 109.885, 110.050,
+      110.236, 110.414, 110.577, 110.722, 110.928, 111.297, 111.641, 112.006,
+      112.365, 112.715, 113.073, 113.410, 113.771, 114.290, 114.831, 115.531,
+      116.232, 119.430, 119.699, 120.000, 120.283, 120.535, 120.795, 121.099,
+      121.391, 121.971, 122.360, 122.729, 123.067, 123.358, 123.667, 125.111,
+      125.461, 125.770, 126.021, 126.297, 126.589, 128.095, 128.355, 128.625,
+      128.884, 129.163, 129.446, 130.897, 131.149, 131.378, 131.630, 131.914,
+      132.198, 133.427, 133.782, 134.109, 134.444, 134.728, 135.017, 136.326,
+      136.680, 136.971, 137.263, 137.565, 137.872, 139.228, 139.625, 139.910,
+      140.192, 140.499, 140.833, 142.133, 142.766, 143.298, 143.613, 144.346,
+      144.676, 145.038, 145.831, 146.157, 146.462, 146.785, 147.120, 147.465,
+      147.845, 148.440, 148.947, 150.703, 151.313, 151.852, 152.423, 152.764,
+      153.092, 153.450, 156.344, 159.176, 162.029, 164.920, 165.072, 165.256,
+      165.411, 165.583, 165.779, 165.965, 166.128, 166.305, 166.468, 166.882,
+      167.098, 167.766, 168.162, 168.512, 171.954, 176.287, 189.532, 210.733
+    ];
+
+    // ============================================================
+    // SETUP
+    // ============================================================
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+    const audioElement = document.getElementById('audio');
+    const startBtn = document.getElementById('startBtn');
+    const overlay = document.getElementById('overlay');
+    const wordCountEl = document.getElementById('wordCount');
+    const currentWordEl = document.getElementById('currentWord');
+
+    let width, height, dpr;
+    let audioCtx, analyser, source;
+    let dataArray, bufferLength;
+    let running = false;
+    let wordIndex = 0;
+    let beatFlash = 0;
+    let currentWord = '—';
+    let visualBeatIndex = -1;
+    let glitchLatch = 0;
+    let frameNo = 0;
+
+    const feedbackCanvas = document.createElement('canvas');
+    const feedbackCtx = feedbackCanvas.getContext('2d', { alpha: false });
+
+    // ============================================================
+    // RESIZE
+    // ============================================================
+    function resize() {
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      width = window.innerWidth;
+      height = window.innerHeight;
+      canvas.width = Math.floor(width * dpr);
+      canvas.height = Math.floor(height * dpr);
+      canvas.style.width = width + 'px';
+      canvas.style.height = height + 'px';
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+      feedbackCanvas.width = canvas.width;
+      feedbackCanvas.height = canvas.height;
+      feedbackCtx.fillStyle = '#000';
+      feedbackCtx.fillRect(0, 0, feedbackCanvas.width, feedbackCanvas.height);
+    }
+    window.addEventListener('resize', resize);
+    resize();
+
+    // ============================================================
+    // AUDIO SETUP
+    // ============================================================
+    function ensureAudioContext() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        analyser = audioCtx.createAnalyser();
+        analyser.fftSize = 2048;
+        bufferLength = analyser.frequencyBinCount;
+        dataArray = new Uint8Array(bufferLength);
+      }
+      if (!source) {
+        try {
+          if (typeof audioElement.captureStream === 'function') {
+            try {
+              const stream = audioElement.captureStream();
+              source = audioCtx.createMediaStreamSource(stream);
+              source.connect(analyser);
+              analyser.connect(audioCtx.destination);
+            } catch (err) {
+              source = audioCtx.createMediaElementSource(audioElement);
+              source.connect(analyser);
+              analyser.connect(audioCtx.destination);
+            }
+          } else {
+            source = audioCtx.createMediaElementSource(audioElement);
+            source.connect(analyser);
+            analyser.connect(audioCtx.destination);
+          }
+        } catch (e) {
+          console.warn('Audio setup issue:', e);
+        }
+      }
+    }
+
+    // ============================================================
+    // BEAT DETECTION with word sync
+    // ============================================================
+    function checkBeat(currentTime) {
+      let beatHit = false;
+      while (wordIndex < BEAT_TIMES.length && BEAT_TIMES[wordIndex] < currentTime) {
+        if (wordIndex < WORDS.length) {
+          currentWord = WORDS[wordIndex];
+          currentWordEl.textContent = currentWord;
+          wordCountEl.textContent = wordIndex + 1;
+          beatFlash = 1.0;
+          glitchLatch = 1.0;
+          visualBeatIndex = wordIndex;
+          beatHit = true;
+        }
+        wordIndex++;
+      }
+      return beatHit;
+    }
+
+    // ============================================================
+    // COLOR UTILITIES
+    // ============================================================
+    function hsla(h, s, l, a) {
+      return `hsla(${h % 360}, ${s}%, ${l}%, ${a})`;
+    }
+
+    // ============================================================
+    // DRAWING FUNCTIONS — GDI / BREAKCORE / RAINBOW BLEED
+    // ============================================================
+    function hash(n) {
+      const x = Math.sin(n * 127.1 + 311.7) * 43758.5453123;
+      return x - Math.floor(x);
+    }
+
+    function drawFeedback(t, energy, beatActive) {
+      if (!frameNo) return;
+      ctx.save();
+      ctx.globalCompositeOperation = beatActive ? 'difference' : 'screen';
+      ctx.globalAlpha = 0.18 + energy * 0.16 + (beatActive ? beatFlash * 0.18 : 0);
+
+      const slices = beatActive ? 10 : 4;
+      for (let i = 0; i < slices; i++) {
+        const sy = (i / slices) * feedbackCanvas.height;
+        const sh = feedbackCanvas.height / slices + 2;
+        const phase = Math.sin(t * (2.5 + i * .21) + i * 2.3);
+        const kick = beatActive ? (hash(visualBeatIndex * 19 + i) - .5) * 110 * beatFlash : 0;
+        const dx = phase * (8 + energy * 28) + kick;
+        ctx.drawImage(
+          feedbackCanvas,
+          0, sy, feedbackCanvas.width, sh,
+          dx, (sy / feedbackCanvas.height) * height,
+          width, (sh / feedbackCanvas.height) * height + 1
+        );
+      }
+      ctx.restore();
+    }
+
+    function drawBackground(t, energy) {
+      ctx.save();
+      ctx.globalCompositeOperation = 'source-over';
+      ctx.fillStyle = `rgba(0,0,0,${0.58 - Math.min(.25, energy * .2)})`;
+      ctx.fillRect(0, 0, width, height);
+
+      const cx = width * (.5 + Math.sin(t * .37) * .12);
+      const cy = height * (.5 + Math.cos(t * .29) * .12);
+      const grad = ctx.createRadialGradient(cx, cy, 0, cx, cy, Math.max(width,height) * .74);
+      grad.addColorStop(0, hsla(t * 55, 100, 52, .33 + energy * .2));
+      grad.addColorStop(.22, hsla(t * 55 + 75, 100, 46, .19));
+      grad.addColorStop(.46, hsla(t * 55 + 170, 100, 42, .13));
+      grad.addColorStop(.72, hsla(t * 55 + 260, 100, 32, .08));
+      grad.addColorStop(1, 'rgba(0,0,0,0)');
+      ctx.fillStyle = grad;
+      ctx.fillRect(0,0,width,height);
+      ctx.restore();
+    }
+
+    function drawRainbowBleed(t, energy, beatActive) {
+      const step = Math.max(11, Math.floor(Math.min(width,height) / 70));
+      ctx.save();
+      ctx.globalCompositeOperation = 'screen';
+      ctx.globalAlpha = .82;
+
+      for (let y = -step; y < height + step; y += step) {
+        ctx.beginPath();
+        for (let x = -step; x <= width + step; x += step) {
+          const nx = x / Math.max(1,width);
+          const ny = y / Math.max(1,height);
+          const warp =
+            Math.sin(nx * 23 + t * 2.1 + Math.sin(ny * 11 - t)) * 17 +
+            Math.sin((nx + ny) * 31 - t * 3.7) * 9 +
+            Math.cos(ny * 42 + t * 1.3) * 6;
+          const kick = beatActive ? Math.sin(x * .021 + visualBeatIndex) * 22 * beatFlash : 0;
+          const yy = y + warp + kick;
+          if (x === -step) ctx.moveTo(x, yy); else ctx.lineTo(x, yy);
+        }
+        const hue = (y * .82 + t * 120 + Math.sin(y * .03 + t) * 75) % 360;
+        ctx.strokeStyle = hsla(hue, 100, 55 + energy * 22, .72);
+        ctx.lineWidth = 2.2 + energy * 2.5 + (beatActive ? beatFlash * 2.6 : 0);
+        ctx.stroke();
+      }
+
+      for (let x = 0; x < width; x += step * 2) {
+        ctx.beginPath();
+        for (let y = 0; y <= height + step; y += step) {
+          const bend = Math.sin(y * .017 - t * 2.7 + x * .009) * (20 + energy * 35) + Math.cos(y * .032 + t) * 7;
+          const xx = x + bend;
+          if (y === 0) ctx.moveTo(xx,y); else ctx.lineTo(xx,y);
+        }
+        ctx.strokeStyle = hsla(x * .7 - t * 100, 100, 58, .26 + energy * .22);
+        ctx.lineWidth = 1.1;
+        ctx.stroke();
+      }
+      ctx.restore();
+    }
+
+    function drawFrequencyBars(t, energy, beatActive) {
+      if (!analyser || !dataArray) return;
+      analyser.getByteFrequencyData(dataArray);
+      const bars = Math.min(72, Math.max(24, Math.floor(width / 16)));
+      const bw = width / bars;
+
+      ctx.save();
+      ctx.globalCompositeOperation = 'lighter';
+      for (let i = 0; i < bars; i++) {
+        const idx = Math.floor((i / bars) * Math.min(dataArray.length, 512));
+        const v = dataArray[idx] / 255;
+        const h = 8 + v * height * .34;
+        const hue = i * 11 + t * 160;
+        const wobble = Math.sin(t * 7 + i * .8) * 4;
+        ctx.fillStyle = hsla(hue, 100, 56 + v * 25, .18 + v * .7);
+        ctx.fillRect(i * bw + wobble, height - h, Math.max(1,bw * .56), h);
+        ctx.fillRect(width - i * bw - bw * .56 - wobble, 0, Math.max(1,bw * .35), h * .55);
+      }
+      ctx.restore();
+    }
+
+    function drawGDIGlitches(t, energy, beatActive) {
+      const amount = beatActive ? 22 : (energy > .18 ? 5 : 2);
+      ctx.save();
+      for (let i = 0; i < amount; i++) {
+        const seed = visualBeatIndex * 101 + i * 17 + Math.floor(t * (beatActive ? 18 : 3));
+        const x = hash(seed) * width;
+        const y = hash(seed + 2) * height;
+        const w = 18 + hash(seed + 4) * width * (beatActive ? .24 : .09);
+        const h = 3 + hash(seed + 8) * height * (beatActive ? .12 : .035);
+        const off = (hash(seed + 11) - .5) * (beatActive ? 160 : 28) * (0.3 + beatFlash);
+
+        ctx.globalAlpha = beatActive ? .32 + beatFlash * .42 : .13;
+        ctx.globalCompositeOperation = (i % 3 === 0) ? 'difference' : (i % 3 === 1 ? 'screen' : 'lighter');
+        ctx.drawImage(feedbackCanvas,
+          Math.max(0, x * dpr), Math.max(0, y * dpr), Math.max(1,w * dpr), Math.max(1,h * dpr),
+          x + off, y, w, h);
+
+        if (beatActive && i % 2 === 0) {
+          ctx.fillStyle = hsla(seed * 23 + t * 130,100,55,.33 * beatFlash);
+          ctx.fillRect(x - off * .25, y, w * .45, Math.max(2,h * .22));
+        }
+      }
+      ctx.restore();
+    }
+
+    function drawCrosshairChaos(t, energy, beatActive) {
+      const count = beatActive ? 16 : 6;
+      ctx.save();
+      ctx.globalCompositeOperation = 'difference';
+      ctx.lineWidth = 1 + beatFlash * 2;
+      for (let i=0;i<count;i++) {
+        const a = t * (.25 + i * .018) + i * 1.73;
+        const r = Math.min(width,height) * (.08 + hash(i + visualBeatIndex * 3) * .48);
+        const x = width/2 + Math.cos(a * 2.3) * r;
+        const y = height/2 + Math.sin(a * 1.7) * r;
+        const s = 5 + hash(i * 9 + visualBeatIndex) * 30 + beatFlash * 24;
+        ctx.strokeStyle = hsla(t * 80 + i * 31,100,70,.18 + energy * .35 + beatFlash * .22);
+        ctx.strokeRect(x-s,y-s,s*2,s*2);
+        ctx.beginPath(); ctx.moveTo(x-s*1.8,y);ctx.lineTo(x+s*1.8,y);ctx.moveTo(x,y-s*1.8);ctx.lineTo(x,y+s*1.8);ctx.stroke();
+      }
+      ctx.restore();
+    }
+
+    function fitWordSize(word, target) {
+      let size = target;
+      ctx.font = `1000 ${size}px Impact, "Arial Black", sans-serif`;
+      const max = width * .92;
+      const measured = ctx.measureText(word || '—').width;
+      if (measured > max) size *= max / measured;
+      return Math.max(22,size);
+    }
+
+    function drawWord(t, energy, beatActive) {
+      const beat = Math.max(0, visualBeatIndex);
+      const invert = beat % 2 === 1;
+      const bg = invert ? '#ffffff' : '#000000';
+      const fg = invert ? '#000000' : '#ffffff';
+
+      const fontFamily = invert
+        ? 'Arial Black, Impact, sans-serif'
+        : 'Courier New, Consolas, monospace';
+
+      const pulse = beatActive ? (1 + beatFlash * .14) : 1;
+      const base = Math.min(width * .105, height * .145, 112) *
+                   (1 + energy * .08) * pulse;
+      const fontSize = fitWordSize(currentWord, base);
+      const cx = width / 2;
+      const cy = height / 2;
+
+      ctx.save();
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.font = `900 ${fontSize}px ${fontFamily}`;
+
+      const metrics = ctx.measureText(currentWord || '—');
+      const padX = Math.max(22, fontSize * .24);
+      const padY = Math.max(14, fontSize * .16);
+      const boxW = Math.min(width * .94, metrics.width + padX * 2);
+      const boxH = fontSize + padY * 2;
+      const x = cx - boxW / 2;
+      const y = cy - boxH / 2;
+
+      ctx.globalCompositeOperation = 'source-over';
+      ctx.globalAlpha = .9;
+      ctx.fillStyle = invert ? '#000000' : '#ffffff';
+      ctx.fillRect(x + 8, y + 8, boxW, boxH);
+
+      ctx.globalAlpha = 1;
+      ctx.fillStyle = bg;
+      ctx.fillRect(x, y, boxW, boxH);
+
+      ctx.strokeStyle = fg;
+      ctx.lineWidth = Math.max(2, Math.round(fontSize * .025));
+      ctx.strokeRect(x, y, boxW, boxH);
+
+      ctx.fillStyle = fg;
+      ctx.globalAlpha = 1;
+      ctx.shadowColor = invert ? 'rgba(255,255,255,.35)' : 'rgba(255,255,255,.18)';
+      ctx.shadowBlur = beatActive ? 10 + beatFlash * 18 : 5;
+      ctx.fillText(currentWord || '—', cx, cy + fontSize * .015);
+      ctx.shadowBlur = 0;
+
+      if (beatActive && beatFlash > .35) {
+        ctx.globalAlpha = .75 * beatFlash;
+        ctx.strokeStyle = fg;
+        ctx.lineWidth = 2;
+        const mark = Math.max(8, fontSize * .08);
+        ctx.beginPath();
+        ctx.moveTo(x - mark, y); ctx.lineTo(x, y);
+        ctx.moveTo(x, y - mark); ctx.lineTo(x, y);
+        ctx.moveTo(x + boxW, y); ctx.lineTo(x + boxW + mark, y);
+        ctx.moveTo(x + boxW, y - mark); ctx.lineTo(x + boxW, y);
+        ctx.moveTo(x - mark, y + boxH); ctx.lineTo(x, y + boxH);
+        ctx.moveTo(x, y + boxH); ctx.lineTo(x, y + boxH + mark);
+        ctx.moveTo(x + boxW, y + boxH); ctx.lineTo(x + boxW + mark, y + boxH);
+        ctx.moveTo(x + boxW, y + boxH); ctx.lineTo(x + boxW, y + boxH + mark);
+        ctx.stroke();
+      }
+
+      ctx.restore();
+    }
+
+    function drawBeatTypography(t, beatActive) {
+      if (!beatActive || !currentWord || currentWord === '—') return;
+      const seed = Math.max(0,visualBeatIndex);
+      ctx.save();
+      ctx.globalCompositeOperation='screen';
+      ctx.textBaseline='middle';
+      for(let i=0;i<9;i++){
+        const x=hash(seed*101+i*7)*width;
+        const y=hash(seed*131+i*13)*height;
+        const fs=12+hash(seed*173+i)*Math.min(58,width*.07);
+        ctx.font=`900 ${fs}px ui-monospace,Consolas,monospace`;
+        ctx.textAlign=hash(seed+i)>.5?'left':'right';
+        ctx.globalAlpha=(.10+hash(seed*211+i)*.28)*beatFlash;
+        ctx.fillStyle=hsla(seed*47+i*39+t*190,100,66,.9);
+        ctx.save();ctx.translate(x,y);ctx.rotate((hash(seed*257+i)-.5)*1.4);ctx.fillText(currentWord.toUpperCase(),0,0);ctx.restore();
+      }
+      ctx.restore();
+    }
+
+    function drawScanlines(t, beatActive) {
+      ctx.save();
+      ctx.globalCompositeOperation='multiply';
+      ctx.fillStyle='rgba(0,0,0,.16)';
+      for(let y=(Math.floor(t*60)%4);y<height;y+=4)ctx.fillRect(0,y,width,1);
+      ctx.restore();
+
+      if(beatActive && beatFlash>.55){
+        ctx.save();ctx.globalCompositeOperation='difference';ctx.globalAlpha=.09*beatFlash;
+        ctx.fillStyle='#fff';ctx.fillRect(0,0,width,height);ctx.restore();
+      }
+    }
+
+    function captureFeedback() {
+      feedbackCtx.save();
+      feedbackCtx.globalCompositeOperation='source-over';
+      feedbackCtx.globalAlpha=.94;
+      feedbackCtx.drawImage(canvas,0,0,feedbackCanvas.width,feedbackCanvas.height);
+      feedbackCtx.restore();
+    }
+
+    // ============================================================
+    // MAIN DRAW LOOP
+    // ============================================================
+    function draw(time) {
+      if (!running) return;
+      requestAnimationFrame(draw);
+      frameNo++;
+
+      const t = time * 0.001;
+      const audioTime = audioElement.currentTime || 0;
+      const beatDetected = checkBeat(audioTime);
+      if (beatDetected) beatFlash = 1.0;
+
+      beatFlash *= 0.925;
+      glitchLatch *= 0.90;
+      if (beatFlash < 0.006) beatFlash = 0;
+      if (glitchLatch < 0.006) glitchLatch = 0;
+
+      if (analyser && dataArray) analyser.getByteFrequencyData(dataArray);
+      let energy = 0;
+      if (dataArray) {
+        let sum = 0;
+        const len = Math.min(dataArray.length, 256);
+        for (let i = 0; i < len; i++) sum += dataArray[i];
+        energy = sum / (len * 255);
+      }
+
+      const beatActive = beatFlash > 0.08;
+      drawBackground(t, energy);
+      drawFeedback(t, energy, beatActive);
+      drawRainbowBleed(t, energy, beatActive);
+      drawFrequencyBars(t, energy, beatActive);
+      drawGDIGlitches(t, energy, beatActive);
+      drawCrosshairChaos(t, energy, beatActive);
+      drawBeatTypography(t, beatActive);
+      drawWord(t, energy, beatActive);
+      drawScanlines(t, beatActive);
+
+      ctx.save();
+      ctx.globalCompositeOperation='screen';
+      ctx.fillStyle='rgba(255,255,255,.38)';
+      ctx.font='10px ui-monospace,Consolas,monospace';
+      ctx.textAlign='left';
+      ctx.fillText(`GDI//BREAKCORE  ${Math.round(energy*100)}%  WORD ${wordIndex}/${WORDS.length}  ${audioTime.toFixed(2)}s`, 12, height - 12);
+      ctx.restore();
+
+      captureFeedback();
+    }
+
+    // ============================================================
+    // CONTROLS
+    // ============================================================
+    function startShow() {
+      ensureAudioContext();
+      if (audioCtx && audioCtx.state === 'suspended') {
+        audioCtx.resume().catch(() => {});
+      }
+
+      startBtn.disabled = true;
+      startBtn.textContent = 'Starting…';
+
+      const playPromise = audioElement.play();
+      if (playPromise && playPromise.catch) {
+        playPromise.then(() => {
+          document.getElementById('statusMsg').textContent = '▶ Playing...';
+          startBtn.disabled = false;
+          startBtn.textContent = '▶ Playing';
+          if (!running) {
+            running = true;
+            overlay.style.display = 'none';
+            requestAnimationFrame(draw);
+          }
+        }).catch((err) => {
+          console.error('Playback failed:', err);
+          document.getElementById('statusMsg').textContent = '⚠️ Playback failed: ' + (err.message || 'Check audio file');
+          startBtn.disabled = false;
+          startBtn.textContent = '▶ Retry';
+        });
+      } else {
+        startBtn.disabled = false;
+        startBtn.textContent = '▶ Playing';
+        if (!running) {
+          running = true;
+          overlay.style.display = 'none';
+          requestAnimationFrame(draw);
+        }
+      }
+    }
+
+    startBtn.addEventListener('click', startShow);
+
+    document.addEventListener('click', () => {
+      if (!running && !overlay.style.display.includes('none')) {
+        startShow();
+      }
+    });
+
+    window.addEventListener('keydown', (e) => {
+      if (e.code === 'Space') {
+        e.preventDefault();
+        if (audioElement.paused) {
+          audioElement.play();
+          if (!running) startShow();
+        } else {
+          audioElement.pause();
+        }
+      }
+    });
+
+    audioElement.addEventListener('play', () => {
+      ensureAudioContext();
+      if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume().catch(() => {});
+      if (!running) {
+        running = true;
+        overlay.style.display = 'none';
+        requestAnimationFrame(draw);
+      }
+      startBtn.textContent = '▶ Playing';
+    });
+
+    audioElement.addEventListener('pause', () => {
+      startBtn.textContent = '⏸ Paused';
+    });
+
+    audioElement.addEventListener('error', () => {
+      overlay.style.display = 'flex';
+      document.getElementById('statusMsg').textContent = '❌ Audio file not found. Place online_persona.mp3 in the same folder.';
+    });
+
+    // ============================================================
+    // INIT
+    // ============================================================
+    resize();
+    currentWordEl.textContent = '—';
+    wordCountEl.textContent = '0';
+
+    console.log(`🎵 GDI Visualizer loaded — ${WORDS.length} words, ${BEAT_TIMES.length} beats`);
+    console.log('📁 Place online_persona.mp3 in the same folder');
+  </script>
+
+</body>
+
+</html>
