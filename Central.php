@@ -1119,7 +1119,7 @@ Central.php                  PHP DASHBOARD</div>
                 11 => "layer11.mp3",
                 12 => "layer12.mp3",
                 13 => "layer13.mp3",
-                14 => "online_persona.mp3"
+                14 => "mini_nathan.mp3"
             ];
             foreach ($display_database as $layer_key => $data): 
                 $pad = str_pad($layer_index, 2, "0", STR_PAD_LEFT);
@@ -1383,7 +1383,7 @@ Type 'help' or 'layer <1-14>' to switch layers & trigger audio clips.
             if (match) {
                 winampLayer = parseInt(match[1], 10);
                 updateWinampTrack();
-            } else if (filename === 'online_persona.mp3') {
+            } else if (filename === 'online_persona.mp3' || filename === 'mini_nathan.mp3') {
                 winampLayer = 14;
                 updateWinampTrack();
             }
@@ -1449,7 +1449,7 @@ Type 'help' or 'layer <1-14>' to switch layers & trigger audio clips.
 
         function cycleWinampTrack() {
             winampLayer = winampLayer >= 14 ? 1 : winampLayer + 1;
-            const filename = (winampLayer === 14) ? 'online_persona.mp3' : 'layer' + String(winampLayer).padStart(2, '0') + '.mp3';
+            const filename = (winampLayer === 14) ? 'mini_nathan.mp3' : 'layer' + String(winampLayer).padStart(2, '0') + '.mp3';
             playLayerAudio(filename);
         }
 
@@ -1489,7 +1489,7 @@ Type 'help' or 'layer <1-14>' to switch layers & trigger audio clips.
                     11: "layer11.mp3",
                     12: "layer12.mp3",
                     13: "layer13.mp3",
-                    14: "online_persona.mp3"
+                    14: "mini_nathan.mp3"
                 };
 
                 switch (cmd) {
@@ -1611,10 +1611,7 @@ Type 'help' or 'layer <1-14>' to switch layers & trigger audio clips.
         }
 
         function triggerNathanAction() {
-            playLayerAudio('mini_nathan.mp3');
-            setTimeout(() => {
-                window.location.href = 'understand.php';
-            }, 300);
+            window.location.href = 'understand.php';
         }
 
         // Layer 14 Canvas GDI Breakcore Visualizer
