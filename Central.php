@@ -178,26 +178,18 @@ $user_database = [
         "Gemini_Live_Frames" => "Android Gemini Live sessions captured — frame_0..frame_7 PNG sequences per conversation zip",
         "Corrupt_WAV_Layer" => "corrupt_wav/ — primary archive node. Wavfiles: synthesized AI voice responses. Docs: extracted artifacts.",
         "System_Message" => "Present day, present time... Hahahaha."
-    ],
-    "Layer 14 // NATHAN" => [
-        "Layer_Name" => "NATHAN",
-        "Identity" => "Primary Peer Tether",
-        "Aesthetic" => "GDI Breakcore // Rainbow Bleed Feedback Node",
-        "Track_Relay" => "online_persona.mp3",
-        "Visualizer_Gateway" => "understand.php",
-        "Message" => "Present day, present time... HEY."
     ]
 ];
 
 $display_database = $user_database;
-$terminal_ls_listing = "corrupt_wav/\n  docs/\n    Cognitive_Integration_and_Technical_Architecture.pdf\n    Community_Event_Archive.pdf\n    sasser.txt (A/E variants)\n    sasserftpd.txt (SEH overwrite exploit)\n    sasser-variant.txt (Unified .A annotated)\n    exploit_analysis.docx\n    Weekly_Task_Log.docx\n    User_Activity_Archive.html\n    Professional_Experience.pdf\n  wavfiles/ [~600+ AI voice clips]\n  download-*.zip [321 conversation archives]\nlayers/ [14 x .mp3 voice clips]\nCentral.php [this node]\nunderstand.php [breakcore visualizer]\nonline_persona.mp3\nlayer_all.mp3\n";
+$terminal_ls_listing = "corrupt_wav/\n  docs/\n    Cognitive_Integration_and_Technical_Architecture.pdf\n    Community_Event_Archive.pdf\n    sasser.txt (A/E variants)\n    sasserftpd.txt (SEH overwrite exploit)\n    sasser-variant.txt (Unified .A annotated)\n    exploit_analysis.docx\n    Weekly_Task_Log.docx\n    User_Activity_Archive.html\n    Professional_Experience.pdf\n  wavfiles/ [~600+ AI voice clips]\n  download-*.zip [321 conversation archives]\nlayers/ [13 x .mp3 voice clips]\nCentral.php [this node]\nunderstand.php [breakcore visualizer]\nonline_persona.mp3\nlayer_all.mp3\n";
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Navi / Copeland OS 4.92 // 14 Layers of Lain</title>
+    <title>Navi / Copeland OS 4.92 // 13 Visible Layers of Lain</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=VT323&display=swap" rel="stylesheet">
@@ -1192,22 +1184,13 @@ Central.php                  PHP DASHBOARD</div>
                 <?php elseif ($idx === 13): // ECHO ?>
                     <div class="terminal-window">
                         <div class="terminal-output" id="termOutput">Navi / Copeland OS v4.92 (lainphp-summary_v4.92prerelease-prejudice)
-Connected to 14-Layer Wired Gateway (127.0.0.1:8000).
-Takeout Recovery Archive: 4,818 Gemini prompts integrated into 14 Layers.
+Connected to 13-Layer Wired Gateway (127.0.0.1:8000).
+Takeout Recovery Archive: 4,818 Gemini prompts integrated into visible Layers.
 Protocol7 DSL loaded. Type 'help' or 'dsl' for command forms.
 </div>
                         <div class="cmd-line">
                             <span class="prompt">lain@dsl-unix:~$</span>
                             <input type="text" class="cmd-input" id="cmdInput" autofocus placeholder="Type command here..." onkeydown="handleCmd(event)">
-                        </div>
-                    </div>
-                <?php elseif ($idx === 14): // NATHAN ?>
-                    <div class="layer-14-container">
-                        <canvas id="layer14Canvas" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1;"></canvas>
-                        <div class="rainbow-bleed-overlay"></div>
-                        <button class="layer-14-btn" onclick="triggerNathanAction()">hey</button>
-                        <div style="position:relative;z-index:10;margin-top:20px;font-family:var(--font-mono);font-size:0.95rem;color:#fff;text-shadow:2px 2px 0 #000;background:rgba(0,0,0,0.7);padding:6px 14px;border:1px solid #ff00ff;">
-                            [GDI // BREAKCORE // RAINBOW BLEED FEEDBACK NODE] &bull; CLICK HEY TO LAUNCH UNDERSTAND VISUALIZER
                         </div>
                     </div>
                 <?php endif; ?>
@@ -1479,9 +1462,9 @@ Protocol7 DSL loaded. Type 'help' or 'dsl' for command forms.
             14: "mini_nathan.mp3"
         };
 
-        const dslHelpText = `Protocol7 DSL Manual\n  connect wired                 - Open a simulated Wired session\n  layer <1-14>                  - Switch layer and trigger voice audio\n  layer.set(<1-14>)             - DSL alias for layer selection\n  theme <green|amber|cyan|white> - Change CRT phosphor palette\n  theme.set(<palette>)          - DSL alias for theme selection\n  audio <on|off>                - Toggle layer audio playback\n  audio.enable() / audio.mute() - DSL aliases for audio state\n  rain <low|medium|high|storm>  - Set matrix rain density\n  render rain <level>           - DSL alias for rain density\n  voice nathan                  - Trigger Layer 14 voice relay\n  protocol7 trace psyche        - Trace route across the 14 layers\n  wired.status()                - Print gateway status\n  dsl                           - Display this manual\n  help                          - Display all shell commands\n`;
+        const dslHelpText = `Protocol7 DSL Manual\n  connect wired                 - Open a simulated Wired session\n  layer <1-13>                  - Switch visible layer and trigger voice audio\n  layer.set(<1-13>)             - DSL alias for layer selection\n  theme <green|amber|cyan|white> - Change CRT phosphor palette\n  theme.set(<palette>)          - DSL alias for theme selection\n  audio <on|off>                - Toggle layer audio playback\n  audio.enable() / audio.mute() - DSL aliases for audio state\n  rain <low|medium|high|storm>  - Set matrix rain density\n  render rain <level>           - DSL alias for rain density\n  voice nathan                  - Trigger standalone Nathan voice relay\n  protocol7 trace psyche        - Trace route across the visible layers\n  wired.status()                - Print gateway status\n  dsl                           - Display this manual\n  help                          - Display all shell commands\n`;
 
-        const shellHelpText = `Available Commands:\n  help                     - Display this manual\n  dsl                      - Display Protocol7 DSL forms\n  layer <1-14>             - Switch to Layer and trigger voice audio\n  theme <green|amber|cyan|white> - Change CRT phosphor palette\n  audio <on|off>           - Toggle layer audio playback\n  rain <low|medium|high|storm> - Change matrix rain density\n  clear                    - Clear shell screen\n  ls                       - List archive filesystem nodes\n  nms                      - Display No Man's Sky gold refining table\n  whois lain               - Query Wired identity records\n  ping wired               - Send ICMP packets through the terminal\n  traceroute psyche        - Trace route across the 14 layers\n  connect wired            - Start Protocol7 session handshake\n  protocol7 trace psyche   - DSL trace alias\n  wired.status()           - Print gateway status\n  voice nathan             - Trigger Layer 14 voice relay\n  fortune                  - Print a recovered fortune cookie\n  guestbook                - Jump to guestbook node\n  winamp                   - Jump to NAVI AMP playlist\n  screensaver              - Toggle scanline darkness pulse\n  reboot                   - Replay dial-up boot sequence\n`;
+        const shellHelpText = `Available Commands:\n  help                     - Display this manual\n  dsl                      - Display Protocol7 DSL forms\n  layer <1-13>             - Switch visible layer and trigger voice audio\n  theme <green|amber|cyan|white> - Change CRT phosphor palette\n  audio <on|off>           - Toggle layer audio playback\n  rain <low|medium|high|storm> - Change matrix rain density\n  clear                    - Clear shell screen\n  ls                       - List archive filesystem nodes\n  nms                      - Display No Man's Sky gold refining table\n  whois lain               - Query Wired identity records\n  ping wired               - Send ICMP packets through the terminal\n  traceroute psyche        - Trace route across the visible layers\n  connect wired            - Start Protocol7 session handshake\n  protocol7 trace psyche   - DSL trace alias\n  wired.status()           - Print gateway status\n  voice nathan             - Trigger standalone Nathan voice relay\n  fortune                  - Print a recovered fortune cookie\n  guestbook                - Jump to guestbook node\n  winamp                   - Jump to NAVI AMP playlist\n  screensaver              - Toggle scanline darkness pulse\n  reboot                   - Replay dial-up boot sequence\n`;
 
         function normalizeDsl(rawCmd) {
             const cleaned = rawCmd.toLowerCase().replace(/[;,]+/g, ' ').replace(/\s+/g, ' ').trim();
@@ -1558,13 +1541,13 @@ Protocol7 DSL loaded. Type 'help' or 'dsl' for command forms.
 
                 case 'layer':
                     const num = parseInt(arg, 10);
-                    if (num >= 1 && num <= 14) {
+                    if (num >= 1 && num <= 13) {
                         const btns = document.querySelectorAll('.layer-nav-btn');
                         const targetBtn = btns[num - 1];
                         selectLayer(num, mp3Map[num], targetBtn);
                         outputElem.innerText += suUnlocked ? `[SUCCESS] Switched to Layer ${num.toString().padStart(2, '0')}. Playing audio...\n` : `[SUCCESS] Switched to filtered Layer ${num.toString().padStart(2, '0')}.\n`;
                     } else {
-                        outputElem.innerText += `Usage: layer <1-14> or layer.set(<1-14>)\n`;
+                        outputElem.innerText += `Usage: layer <1-13> or layer.set(<1-13>)\n`;
                     }
                     break;
 
@@ -1611,8 +1594,10 @@ Protocol7 DSL loaded. Type 'help' or 'dsl' for command forms.
 
                 case 'voice':
                     if (arg === 'nathan') {
-                        selectLayer(14, mp3Map[14], document.querySelectorAll('.layer-nav-btn')[13]);
-                        outputElem.innerText += `[VOICE] Nathan relay opened on Layer 14.\n`;
+                        playLayerAudio('mini_nathan.mp3');
+                        winampLayer = 14;
+                        updateWinampTrack();
+                        outputElem.innerText += `[VOICE] Standalone Nathan relay opened.\n`;
                     } else {
                         outputElem.innerText += `Usage: voice nathan\n`;
                     }

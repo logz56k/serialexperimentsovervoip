@@ -1,29 +1,29 @@
 # Serial Experiments Over VoIP
-### Navi / Copeland OS 4.92 — 14 Layers of Lain
+### Navi / Copeland OS 4.92 — 13 Visible Layers of Lain
 
 > *"Present day, present time... Hahahaha."*
 
-A CRT phosphor terminal dashboard built in PHP, integrating a 14-layer personal OS architecture recovered from a 4,818-prompt Gemini Takeout archive.
+A CRT phosphor terminal dashboard built in PHP, integrating a visible 13-layer personal OS architecture recovered from a 4,818-prompt Gemini Takeout archive.
 
 ---
 
 ## Features
 
-- **14 Layer Architecture** — Each layer maps a domain of consciousness (WEIRD, PSYCHE, PROTOCOL, ECHO, NATHAN, etc.)
+- **13 Visible Layer Architecture** — Each layer maps a domain of consciousness (WEIRD, PSYCHE, PROTOCOL, ECHO, etc.)
 - **CRT Phosphor Themes** — Green / Amber / Cyan / White with scanline overlay & vignette
 - **Matrix Rain Canvas** — Katakana/Latin rain, resize-safe, `aria-hidden`
 - **Layer Audio** — Per-layer MP3 voice clips, audio toggle, whitelist-validated paths
 - **Terminal Emulator** — Layer 13 ECHO shell with `help`, `layer`, `theme`, `audio`, `clear`, `ls`, `nms` commands
-- **GDI Breakcore Visualizer** — Layer 14 NATHAN & `understand.php` rainbow bleed engine
+- **GDI Breakcore Visualizer** — Standalone `understand.php` rainbow bleed engine
 - **No Man's Sky Gold Refining Table** — Pulled from archive data (`nms` command)
 - **Gemini Takeout Integrated** — 4,818 prompts parsed into layer data fields
 
 ## Structure
 
 ```
-Central.php          — Main PHP dashboard (all 14 layers)
+Central.php          — Main PHP dashboard (13 visible layers)
 understand.php       — GDI Breakcore Visualizer (Understand)
-online_persona.mp3   — Audio track & Layer 14 relay
+online_persona.mp3   — Audio track & standalone relay
 layers/              — 13 x per-layer MP3 voice clips
 layer_all.mp3        — Full combined audio track
 ```
@@ -43,16 +43,16 @@ php -S localhost:8000
 |---------|-------------|
 | `dsl` | Show Protocol7 DSL command forms |
 | `connect wired` | Open a simulated Wired session |
-| `layer <1-14>` | Switch layer & trigger voice clip |
-| `layer.set(<1-14>)` | DSL alias for layer switching |
+| `layer <1-13>` | Switch visible layer & trigger voice clip |
+| `layer.set(<1-13>)` | DSL alias for layer switching |
 | `theme <green\|amber\|cyan\|white>` | Change phosphor palette |
 | `theme.set(<palette>)` | DSL alias for theme switching |
 | `audio <on\|off>` | Toggle layer audio |
 | `audio.enable()` / `audio.mute()` | DSL aliases for audio state |
 | `rain <low\|medium\|high\|storm>` | Change Matrix rain density |
 | `render rain <level>` | DSL alias for rain density |
-| `voice nathan` | Open the Layer 14 voice relay |
-| `protocol7 trace psyche` | DSL trace across the 14 layers |
+| `voice nathan` | Open the standalone Nathan voice relay |
+| `protocol7 trace psyche` | DSL trace across the visible layers |
 | `wired.status()` | Print current gateway status |
 | `ls` | List archive filesystem nodes |
 | `nms` | No Man's Sky gold refining yield table |
