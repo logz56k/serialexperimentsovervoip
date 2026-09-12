@@ -41,9 +41,19 @@ php -S localhost:8000
 
 | Command | Description |
 |---------|-------------|
+| `dsl` | Show Protocol7 DSL command forms |
+| `connect wired` | Open a simulated Wired session |
 | `layer <1-14>` | Switch layer & trigger voice clip |
+| `layer.set(<1-14>)` | DSL alias for layer switching |
 | `theme <green\|amber\|cyan\|white>` | Change phosphor palette |
+| `theme.set(<palette>)` | DSL alias for theme switching |
 | `audio <on\|off>` | Toggle layer audio |
+| `audio.enable()` / `audio.mute()` | DSL aliases for audio state |
+| `rain <low\|medium\|high\|storm>` | Change Matrix rain density |
+| `render rain <level>` | DSL alias for rain density |
+| `voice nathan` | Open the Layer 14 voice relay |
+| `protocol7 trace psyche` | DSL trace across the 14 layers |
+| `wired.status()` | Print current gateway status |
 | `ls` | List archive filesystem nodes |
 | `nms` | No Man's Sky gold refining yield table |
 | `clear` | Clear shell |

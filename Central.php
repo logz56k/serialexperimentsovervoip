@@ -1194,7 +1194,7 @@ Central.php                  PHP DASHBOARD</div>
                         <div class="terminal-output" id="termOutput">Navi / Copeland OS v4.92 (lainphp-summary_v4.92prerelease-prejudice)
 Connected to 14-Layer Wired Gateway (127.0.0.1:8000).
 Takeout Recovery Archive: 4,818 Gemini prompts integrated into 14 Layers.
-Type 'help' or 'layer <1-14>' to switch layers & trigger audio clips.
+Protocol7 DSL loaded. Type 'help' or 'dsl' for command forms.
 </div>
                         <div class="cmd-line">
                             <span class="prompt">lain@dsl-unix:~$</span>
@@ -1246,6 +1246,8 @@ Type 'help' or 'layer <1-14>' to switch layers & trigger audio clips.
         const fontSize = 15;
         let columns;
         let drops;
+        let rainIntensity = 0.975;
+        let rainFade = 0.06;
         const katakana = 'ｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜﾝABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
 
         function resizeCanvas() {
@@ -1259,7 +1261,7 @@ Type 'help' or 'layer <1-14>' to switch layers & trigger audio clips.
         window.addEventListener('resize', resizeCanvas);
 
         function drawRain() {
-            ctx.fillStyle = 'rgba(0, 0, 0, 0.06)';
+            ctx.fillStyle = `rgba(0, 0, 0, ${rainFade})`;
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
             const computedPhosphor = getComputedStyle(document.body).getPropertyValue('--phosphor').trim() || '#0f3';
@@ -1269,7 +1271,7 @@ Type 'help' or 'layer <1-14>' to switch layers & trigger audio clips.
             for (let i = 0; i < drops.length; i++) {
                 const char = katakana.charAt(Math.floor(Math.random() * katakana.length));
                 ctx.fillText(char, i * fontSize, drops[i] * fontSize);
-                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                if (drops[i] * fontSize > canvas.height && Math.random() > rainIntensity) {
                     drops[i] = 0;
                 }
                 drops[i]++;
@@ -1460,154 +1462,237 @@ Type 'help' or 'layer <1-14>' to switch layers & trigger audio clips.
             setTimeout(() => { outputElem.scrollTop = outputElem.scrollHeight; }, 0);
         }
 
-        function handleCmd(event) {
-            if (event.key === 'Enter') {
-                const inputElem = document.getElementById('cmdInput');
-                const outputElem = document.getElementById('termOutput');
-                // Sanitize input — strip HTML special chars before display
-                const rawCmd = inputElem.value.replace(/[<>&"']/g, '').trim();
-                inputElem.value = '';
+        const mp3Map = {
+            1: "layer01.mp3",
+            2: "layer02.mp3",
+            3: "layer03.mp3",
+            4: "layer04.mp3",
+            5: "layer05.mp3",
+            6: "layer06.mp3",
+            7: "layer07.mp3",
+            8: "layer08.mp3",
+            9: "layer09.mp3",
+            10: "layer10.mp3",
+            11: "layer11.mp3",
+            12: "layer12.mp3",
+            13: "layer13.mp3",
+            14: "mini_nathan.mp3"
+        };
 
-                if (!rawCmd) return;
+        const dslHelpText = `Protocol7 DSL Manual\n  connect wired                 - Open a simulated Wired session\n  layer <1-14>                  - Switch layer and trigger voice audio\n  layer.set(<1-14>)             - DSL alias for layer selection\n  theme <green|amber|cyan|white> - Change CRT phosphor palette\n  theme.set(<palette>)          - DSL alias for theme selection\n  audio <on|off>                - Toggle layer audio playback\n  audio.enable() / audio.mute() - DSL aliases for audio state\n  rain <low|medium|high|storm>  - Set matrix rain density\n  render rain <level>           - DSL alias for rain density\n  voice nathan                  - Trigger Layer 14 voice relay\n  protocol7 trace psyche        - Trace route across the 14 layers\n  wired.status()                - Print gateway status\n  dsl                           - Display this manual\n  help                          - Display all shell commands\n`;
 
-                outputElem.innerText += '\nlain@dsl-unix:~$ ' + rawCmd + '\n';
-                const parts = rawCmd.split(' ');
-                const cmd = parts[0].toLowerCase();
-                const arg = parts[1] ? parts[1].toLowerCase() : '';
+        const shellHelpText = `Available Commands:\n  help                     - Display this manual\n  dsl                      - Display Protocol7 DSL forms\n  layer <1-14>             - Switch to Layer and trigger voice audio\n  theme <green|amber|cyan|white> - Change CRT phosphor palette\n  audio <on|off>           - Toggle layer audio playback\n  rain <low|medium|high|storm> - Change matrix rain density\n  clear                    - Clear shell screen\n  ls                       - List archive filesystem nodes\n  nms                      - Display No Man's Sky gold refining table\n  whois lain               - Query Wired identity records\n  ping wired               - Send ICMP packets through the terminal\n  traceroute psyche        - Trace route across the 14 layers\n  connect wired            - Start Protocol7 session handshake\n  protocol7 trace psyche   - DSL trace alias\n  wired.status()           - Print gateway status\n  voice nathan             - Trigger Layer 14 voice relay\n  fortune                  - Print a recovered fortune cookie\n  guestbook                - Jump to guestbook node\n  winamp                   - Jump to NAVI AMP playlist\n  screensaver              - Toggle scanline darkness pulse\n  reboot                   - Replay dial-up boot sequence\n`;
 
-                const mp3Map = {
-                    1: "layer01.mp3",
-                    2: "layer02.mp3",
-                    3: "layer03.mp3",
-                    4: "layer04.mp3",
-                    5: "layer05.mp3",
-                    6: "layer06.mp3",
-                    7: "layer07.mp3",
-                    8: "layer08.mp3",
-                    9: "layer09.mp3",
-                    10: "layer10.mp3",
-                    11: "layer11.mp3",
-                    12: "layer12.mp3",
-                    13: "layer13.mp3",
-                    14: "mini_nathan.mp3"
-                };
+        function normalizeDsl(rawCmd) {
+            const cleaned = rawCmd.toLowerCase().replace(/[;,]+/g, ' ').replace(/\s+/g, ' ').trim();
+            const callMatch = cleaned.match(/^([a-z0-9]+)\.([a-z0-9_]+)\(([^()]*)\)$/);
 
-                switch (cmd) {
-                    case 'help':
-                        outputElem.innerText += `Available Commands:\n  help                     - Display this manual\n  layer <1-14>             - Switch to Layer & trigger voice audio\n  theme <green|amber|cyan|white> - Change CRT phosphor palette\n  audio <on|off>           - Toggle layer audio playback\n  clear                    - Clear shell screen\n  ls                       - List archive filesystem nodes\n  nms                      - Display No Man's Sky gold refining table\n  whois lain               - Query Wired identity records\n  ping wired               - Send ICMP packets through the terminal\n  traceroute psyche        - Trace route across the 14 layers\n  fortune                  - Print a recovered fortune cookie\n  guestbook                - Jump to guestbook node\n  winamp                   - Jump to NAVI AMP playlist\n  screensaver              - Toggle scanline darkness pulse\n  reboot                   - Replay dial-up boot sequence\n`;
-                        break;
+            if (callMatch) {
+                const [, objectName, methodName, rawArg] = callMatch;
+                const arg = rawArg.replace(/['"]/g, '').trim();
+                const objectCall = objectName + '.' + methodName;
 
-                    case 'layer':
-                        const num = parseInt(arg, 10);
-                        if (num >= 1 && num <= 14) {
-                            const btns = document.querySelectorAll('.layer-nav-btn');
-                            const targetBtn = btns[num - 1];
-                            selectLayer(num, mp3Map[num], targetBtn);
-                            outputElem.innerText += suUnlocked ? `[SUCCESS] Switched to Layer ${num.toString().padStart(2, '0')}. Playing audio...\n` : `[SUCCESS] Switched to filtered Layer ${num.toString().padStart(2, '0')}.\n`;
-                        } else {
-                            outputElem.innerText += `Usage: layer <1-14>\n`;
-                        }
-                        break;
-
-                    case 'theme':
-                        if (['green', 'amber', 'cyan', 'white'].includes(arg)) {
-                            const btns = document.querySelectorAll('.theme-btn');
-                            const targetBtn = Array.from(btns).find(b => b.innerText.toLowerCase() === arg);
-                            setTheme(arg, targetBtn);
-                            outputElem.innerText += `[THEME] Phosphor palette updated to ${arg.toUpperCase()}.\n`;
-                        } else {
-                            outputElem.innerText += `Usage: theme <green|amber|cyan|white>\n`;
-                        }
-                        break;
-
-                    case 'audio':
-                        if (arg === 'on') {
-                            if (!audioEnabled) toggleAudio();
-                            outputElem.innerText += `[AUDIO] Layer Audio voice playback enabled.\n`;
-                        } else if (arg === 'off') {
-                            if (audioEnabled) toggleAudio();
-                            outputElem.innerText += `[AUDIO] Layer Audio muted.\n`;
-                        } else {
-                            outputElem.innerText += `Usage: audio <on|off>\n`;
-                        }
-                        break;
-
-                    case 'clear':
-                        outputElem.innerText = `Navi / Copeland OS v4.92 (lainphp-summary_v4.92prerelease-prejudice)\n`;
-                        break;
-
-                    case 'ls':
-                        outputElem.innerText += terminalLsListing;
-                        break;
-
-                    case 'nms':
-                        outputElem.innerText += `-- No Man's Sky Gold Refining Yield Table --\n  Lemmium (x1)              = 125 Gold  [OPTIMAL]\n  Magno-Gold (x1)           = 125 Gold  [OPTIMAL]\n  Grantine (x1)             = 125 Gold  [OPTIMAL]\n  Ferrite+O2+Emeril         = 10  Gold\n  Faecium + Pugneum         = 2   Gold\n  Mordite + Pugneum         = 1   Gold\n  Faecium + Residual Goop   = 1   Gold\n[ROUTE] Stack Lemmium/Magno-Gold/Grantine for peak 125:1 efficiency.\n`;
-                        break;
-
-                    case 'whois':
-                        if (arg === 'lain') {
-                            outputElem.innerText += `Domain: lain.wired\nRegistrar: Copeland OS Network Solutions\nStatus: EVERYONE IS CONNECTED\nUpdated: present day, present time\n`;
-                        } else {
-                            outputElem.innerText += `Usage: whois lain\n`;
-                        }
-                        break;
-
-                    case 'ping':
-                        if (arg === 'wired') {
-                            outputElem.innerText += `PING wired (127.0.0.13): 56 data bytes\n64 bytes from wired: icmp_seq=0 ttl=64 time=13.37 ms\n64 bytes from wired: icmp_seq=1 ttl=64 time=9.92 ms\n64 bytes from wired: icmp_seq=2 ttl=64 time=4.92 ms\n--- wired ping statistics ---\n3 packets transmitted, 3 received, 0.0% packet loss\n`;
-                        } else {
-                            outputElem.innerText += `Usage: ping wired\n`;
-                        }
-                        break;
-
-                    case 'traceroute':
-                        if (arg === 'psyche') {
-                            outputElem.innerText += `traceroute to psyche.layer03 (13 hops max)\n 1  weird.gateway       4.818 ms\n 2  girls.relay         7.026 ms\n 3  psyche.layer03      13.000 ms\nTrace complete. Signal resonance nominal.\n`;
-                        } else {
-                            outputElem.innerText += `Usage: traceroute psyche\n`;
-                        }
-                        break;
-
-                    case 'fortune':
-                        const fortunes = [
-                            'No matter where you go, everyone is connected.',
-                            'A modem handshake is just a spell with a baud rate.',
-                            'The archive remembers what the browser forgot.',
-                            'Best viewed in 1024x768, but still alive in the Wired.'
-                        ];
-                        outputElem.innerText += fortunes[Math.floor(Math.random() * fortunes.length)] + `\n`;
-                        break;
-
-                    case 'guestbook':
-                        document.getElementById('guestbook').scrollIntoView({ behavior: 'smooth', block: 'center' });
-                        outputElem.innerText += `[GUESTBOOK] Jumping to wired transmission log.\n`;
-                        break;
-
-                    case 'winamp':
-                        document.getElementById('winamp').scrollIntoView({ behavior: 'smooth', block: 'center' });
-                        outputElem.innerText += `[NAVI AMP] Playlist panel focused.\n`;
-                        break;
-
-                    case 'screensaver':
-                        toggleScanlines();
-                        outputElem.innerText += `[SCREENSAVER] CRT scanline state toggled.\n`;
-                        break;
-
-                    case 'reboot':
-                        document.getElementById('bootLog').innerText = 'Initializing modem...';
-                        document.getElementById('bootOverlay').classList.remove('hidden');
-                        runBootSequence();
-                        outputElem.innerText += `[REBOOT] Dial-up gateway sequence replaying.\n`;
-                        break;
-
-                    default:
-                        outputElem.innerText += `Command not recognized: '${cmd}'. Type 'help' for manual. Try: help, layer, theme, audio, clear, ls, nms, fortune\n`;
-                        break;
-                }
-
-                // Use setTimeout to ensure innerText paint completes before scrolling
-                setTimeout(() => { outputElem.scrollTop = outputElem.scrollHeight; }, 0);
+                if (objectCall === 'layer.set') return { cmd: 'layer', args: [arg] };
+                if (objectCall === 'theme.set') return { cmd: 'theme', args: [arg] };
+                if (objectCall === 'audio.enable') return { cmd: 'audio', args: ['on'] };
+                if (objectCall === 'audio.mute' || objectCall === 'audio.disable') return { cmd: 'audio', args: ['off'] };
+                if (objectCall === 'rain.set' || objectCall === 'render.rain') return { cmd: 'rain', args: [arg] };
+                if (objectCall === 'wired.status') return { cmd: 'status', args: [] };
+                if (objectCall === 'protocol7.trace') return { cmd: 'traceroute', args: [arg || 'psyche'] };
             }
+
+            const parts = cleaned.split(' ').filter(Boolean);
+            if (parts[0] === 'connect' && parts[1] === 'wired') return { cmd: 'connect', args: ['wired'] };
+            if (parts[0] === 'render' && parts[1] === 'rain') return { cmd: 'rain', args: [parts[2] || 'medium'] };
+            if (parts[0] === 'protocol7' && parts[1] === 'trace') return { cmd: 'traceroute', args: [parts[2] || 'psyche'] };
+            if (parts[0] === 'trace' && parts[1] === 'psyche') return { cmd: 'traceroute', args: ['psyche'] };
+            if (parts[0] === 'voice' && parts[1] === 'nathan') return { cmd: 'voice', args: ['nathan'] };
+            if (parts[0] === 'boot' && parts[1] === 'navi') return { cmd: 'reboot', args: [] };
+            if (parts[0] === 'wired' && parts[1] === 'status') return { cmd: 'status', args: [] };
+
+            return { cmd: parts[0] || '', args: parts.slice(1) };
+        }
+
+        function setRainMode(mode) {
+            const modes = {
+                low: { threshold: 0.992, fade: 0.09, label: 'LOW' },
+                medium: { threshold: 0.975, fade: 0.06, label: 'MEDIUM' },
+                high: { threshold: 0.955, fade: 0.04, label: 'HIGH' },
+                storm: { threshold: 0.925, fade: 0.025, label: 'STORM' }
+            };
+            const selected = modes[mode];
+            if (!selected) return false;
+            rainIntensity = selected.threshold;
+            rainFade = selected.fade;
+            return selected.label;
+        }
+
+        function printGatewayStatus(outputElem) {
+            const activeLayer = String(winampLayer).padStart(2, '0') + ' // ' + layerNames[winampLayer - 1];
+            outputElem.innerText += `[WIRED]\n  session: connected\n  active_layer: ${activeLayer}\n  audio: ${audioEnabled ? 'enabled' : 'muted'}\n  cursor_fx: ${cursorFxOn ? 'online' : 'offline'}\n  scanlines: ${scanlinesOn ? 'online' : 'offline'}\n  parser: Protocol7 DSL allowlist\n`;
+        }
+
+        function handleCmd(event) {
+            if (event.key !== 'Enter') return;
+
+            const inputElem = document.getElementById('cmdInput');
+            const outputElem = document.getElementById('termOutput');
+            const rawCmd = inputElem.value.replace(/[<>&"']/g, '').trim();
+            inputElem.value = '';
+
+            if (!rawCmd) return;
+
+            outputElem.innerText += '\nlain@dsl-unix:~$ ' + rawCmd + '\n';
+            const parsed = normalizeDsl(rawCmd);
+            const cmd = parsed.cmd;
+            const arg = parsed.args[0] ? parsed.args[0].toLowerCase() : '';
+
+            switch (cmd) {
+                case 'help':
+                    outputElem.innerText += shellHelpText;
+                    break;
+
+                case 'dsl':
+                    outputElem.innerText += dslHelpText;
+                    break;
+
+                case 'layer':
+                    const num = parseInt(arg, 10);
+                    if (num >= 1 && num <= 14) {
+                        const btns = document.querySelectorAll('.layer-nav-btn');
+                        const targetBtn = btns[num - 1];
+                        selectLayer(num, mp3Map[num], targetBtn);
+                        outputElem.innerText += suUnlocked ? `[SUCCESS] Switched to Layer ${num.toString().padStart(2, '0')}. Playing audio...\n` : `[SUCCESS] Switched to filtered Layer ${num.toString().padStart(2, '0')}.\n`;
+                    } else {
+                        outputElem.innerText += `Usage: layer <1-14> or layer.set(<1-14>)\n`;
+                    }
+                    break;
+
+                case 'theme':
+                    if (['green', 'amber', 'cyan', 'white'].includes(arg)) {
+                        const btns = document.querySelectorAll('.theme-btn');
+                        const targetBtn = Array.from(btns).find(b => b.innerText.toLowerCase() === arg);
+                        setTheme(arg, targetBtn);
+                        outputElem.innerText += `[THEME] Phosphor palette updated to ${arg.toUpperCase()}.\n`;
+                    } else {
+                        outputElem.innerText += `Usage: theme <green|amber|cyan|white> or theme.set(<palette>)\n`;
+                    }
+                    break;
+
+                case 'audio':
+                    if (arg === 'on') {
+                        if (!audioEnabled) toggleAudio();
+                        outputElem.innerText += `[AUDIO] Layer Audio voice playback enabled.\n`;
+                    } else if (arg === 'off') {
+                        if (audioEnabled) toggleAudio();
+                        outputElem.innerText += `[AUDIO] Layer Audio muted.\n`;
+                    } else {
+                        outputElem.innerText += `Usage: audio <on|off>, audio.enable(), or audio.mute()\n`;
+                    }
+                    break;
+
+                case 'rain':
+                    const rainLabel = setRainMode(arg);
+                    if (rainLabel) {
+                        outputElem.innerText += `[RENDER] Matrix rain density set to ${rainLabel}.\n`;
+                    } else {
+                        outputElem.innerText += `Usage: rain <low|medium|high|storm> or render rain <level>\n`;
+                    }
+                    break;
+
+                case 'connect':
+                    outputElem.innerText += `Opening Protocol7 carrier...\nResolving wired://lain.local/layers\nHandshake accepted. Everyone is connected.\n`;
+                    printGatewayStatus(outputElem);
+                    break;
+
+                case 'status':
+                    printGatewayStatus(outputElem);
+                    break;
+
+                case 'voice':
+                    if (arg === 'nathan') {
+                        selectLayer(14, mp3Map[14], document.querySelectorAll('.layer-nav-btn')[13]);
+                        outputElem.innerText += `[VOICE] Nathan relay opened on Layer 14.\n`;
+                    } else {
+                        outputElem.innerText += `Usage: voice nathan\n`;
+                    }
+                    break;
+
+                case 'clear':
+                    outputElem.innerText = `Navi / Copeland OS v4.92 (lainphp-summary_v4.92prerelease-prejudice)\nProtocol7 DSL loaded. Type 'help' or 'dsl' for command forms.\n`;
+                    break;
+
+                case 'ls':
+                    outputElem.innerText += terminalLsListing;
+                    break;
+
+                case 'nms':
+                    outputElem.innerText += `-- No Man's Sky Gold Refining Yield Table --\n  Lemmium (x1)              = 125 Gold  [OPTIMAL]\n  Magno-Gold (x1)           = 125 Gold  [OPTIMAL]\n  Grantine (x1)             = 125 Gold  [OPTIMAL]\n  Ferrite+O2+Emeril         = 10  Gold\n  Faecium + Pugneum         = 2   Gold\n  Mordite + Pugneum         = 1   Gold\n  Faecium + Residual Goop   = 1   Gold\n[ROUTE] Stack Lemmium/Magno-Gold/Grantine for peak 125:1 efficiency.\n`;
+                    break;
+
+                case 'whois':
+                    if (arg === 'lain') {
+                        outputElem.innerText += `Domain: lain.wired\nRegistrar: Copeland OS Network Solutions\nStatus: EVERYONE IS CONNECTED\nUpdated: present day, present time\n`;
+                    } else {
+                        outputElem.innerText += `Usage: whois lain\n`;
+                    }
+                    break;
+
+                case 'ping':
+                    if (arg === 'wired') {
+                        outputElem.innerText += `PING wired (127.0.0.13): 56 data bytes\n64 bytes from wired: icmp_seq=0 ttl=64 time=13.37 ms\n64 bytes from wired: icmp_seq=1 ttl=64 time=9.92 ms\n64 bytes from wired: icmp_seq=2 ttl=64 time=4.92 ms\n--- wired ping statistics ---\n3 packets transmitted, 3 received, 0.0% packet loss\n`;
+                    } else {
+                        outputElem.innerText += `Usage: ping wired\n`;
+                    }
+                    break;
+
+                case 'traceroute':
+                    if (arg === 'psyche') {
+                        outputElem.innerText += `traceroute to psyche.layer03 (13 hops max)\n 1  weird.gateway       4.818 ms\n 2  girls.relay         7.026 ms\n 3  psyche.layer03      13.000 ms\nTrace complete. Signal resonance nominal.\n`;
+                    } else {
+                        outputElem.innerText += `Usage: traceroute psyche or protocol7 trace psyche\n`;
+                    }
+                    break;
+
+                case 'fortune':
+                    const fortunes = [
+                        'No matter where you go, everyone is connected.',
+                        'A modem handshake is just a spell with a baud rate.',
+                        'The archive remembers what the browser forgot.',
+                        'Best viewed in 1024x768, but still alive in the Wired.',
+                        'A small language is safest when it knows what it cannot say.'
+                    ];
+                    outputElem.innerText += fortunes[Math.floor(Math.random() * fortunes.length)] + `\n`;
+                    break;
+
+                case 'guestbook':
+                    document.getElementById('guestbook').scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    outputElem.innerText += `[GUESTBOOK] Jumping to wired transmission log.\n`;
+                    break;
+
+                case 'winamp':
+                    document.getElementById('winamp').scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    outputElem.innerText += `[NAVI AMP] Playlist panel focused.\n`;
+                    break;
+
+                case 'screensaver':
+                    toggleScanlines();
+                    outputElem.innerText += `[SCREENSAVER] CRT scanline state toggled.\n`;
+                    break;
+
+                case 'reboot':
+                    document.getElementById('bootLog').innerText = 'Initializing modem...';
+                    document.getElementById('bootOverlay').classList.remove('hidden');
+                    runBootSequence();
+                    outputElem.innerText += `[REBOOT] Dial-up gateway sequence replaying.\n`;
+                    break;
+
+                default:
+                    outputElem.innerText += `Command not recognized: '${cmd}'. Type 'help' for shell commands or 'dsl' for Protocol7 forms.\n`;
+                    break;
+            }
+
+            setTimeout(() => { outputElem.scrollTop = outputElem.scrollHeight; }, 0);
         }
 
         function triggerNathanAction() {
