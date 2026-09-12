@@ -19,3 +19,6 @@ debug.log
 # Runtime local PHP data
 hit_counter.txt
 guestbook_entries.json
+
+# Local-only operational notes for agents
+.agent-private/
